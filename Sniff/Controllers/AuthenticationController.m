@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  AuthenticationController.m
 //  Sniff
 //
 //  Created by Razvan Balint on 21/07/15.
 //  Copyright (c) 2015 Razvan Balint. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AuthenticationController.h"
 
-@interface ViewController : UIViewController
-
+@implementation AuthenticationController
 
 @end
-
