@@ -10,4 +10,19 @@
 
 @implementation User
 
+- (void)setUserType:(UserType)userType {
+    _userType = userType;
+    
+    switch (userType) {
+        case UserType_Default:
+            break;
+            
+        case UserType_Company:
+            break;
+            
+        default:
+            break;
+    }
+}
+
 @end

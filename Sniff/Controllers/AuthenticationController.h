@@ -7,7 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
+
+@class AuthenticationController;
+
+typedef void(^AuthenticationControllerCompletionHandler)(BOOL success, NSString *message, AuthenticationController *completion);
 
 @interface AuthenticationController : NSObject
+
+@property (nonatomic, strong) User *loggedUser;
+
++ (instancetype)sharedInstance;
+- (void)setLoggedUser:(User *)loggedUser;
+- (void)registerUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion;
+- (void)loginUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler) completion;
+- (void)logout;
 
 @end

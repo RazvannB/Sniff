@@ -1,15 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LoggedUserView">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are logged in as" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpt-Tz-pjA">
+                    <rect key="frame" x="8" y="8" width="234" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="jhi-NI-LtM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AYD-D6-FoS">
+                    <rect key="frame" x="0.0" y="37" width="250" height="63"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOo-b2-BRq">
+                            <rect key="frame" x="8" y="8" width="234" height="47"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <size key="titleShadowOffset" width="2" height="2"/>
+                            <state key="normal">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="YOo-b2-BRq" firstAttribute="leading" secondItem="AYD-D6-FoS" secondAttribute="leading" constant="8" id="Aqt-hD-z5P"/>
+                        <constraint firstAttribute="height" constant="63" id="OmS-1T-W46"/>
+                        <constraint firstItem="YOo-b2-BRq" firstAttribute="top" secondItem="AYD-D6-FoS" secondAttribute="top" constant="8" id="WSP-wa-ie6"/>
+                        <constraint firstAttribute="centerY" secondItem="YOo-b2-BRq" secondAttribute="centerY" id="dUM-Jh-9Wh"/>
+                        <constraint firstAttribute="trailing" secondItem="YOo-b2-BRq" secondAttribute="trailing" constant="8" id="iHs-E3-2Ri"/>
+                        <constraint firstAttribute="centerX" secondItem="YOo-b2-BRq" secondAttribute="centerX" id="jii-QQ-Jrp"/>
+                        <constraint firstAttribute="bottom" secondItem="YOo-b2-BRq" secondAttribute="bottom" constant="8" id="ySS-UJ-fYq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0098275041170000008" green="0.60305499939999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="cpt-Tz-pjA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="QKA-1C-njd"/>
+                <constraint firstItem="AYD-D6-FoS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="evh-7l-HF6"/>
+                <constraint firstAttribute="bottom" secondItem="AYD-D6-FoS" secondAttribute="bottom" id="gza-kW-ZXi"/>
+                <constraint firstAttribute="trailing" secondItem="cpt-Tz-pjA" secondAttribute="trailing" constant="8" id="teh-sc-fqQ"/>
+                <constraint firstAttribute="trailing" secondItem="AYD-D6-FoS" secondAttribute="trailing" id="uxt-cK-owP"/>
+                <constraint firstItem="cpt-Tz-pjA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="v0w-bc-sle"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="loggedUser" destination="YOo-b2-BRq" id="vvP-Mg-6v5"/>
+                <outlet property="messageLabel" destination="cpt-Tz-pjA" id="1yC-at-3Rc"/>
+            </connections>
+            <point key="canvasLocation" x="497" y="260"/>
         </view>
     </objects>
 </document>

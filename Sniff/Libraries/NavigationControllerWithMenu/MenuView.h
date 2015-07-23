@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MenuView : UIView
+@interface MenuView : UIView <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *menuItemsArray;
+
+- (id)initWithFrame:(CGRect)frame;
 
 @end

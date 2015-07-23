@@ -10,4 +10,43 @@
 
 @implementation AuthenticationController
 
++ (instancetype)sharedInstance {
+    static AuthenticationController *instance = nil;
+    
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        
+        instance = [[AuthenticationController alloc] init];
+        
+    });
+    return instance;
+}
+
+- (User *)loggedUser {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *encodedObject = [defaults objectForKey:@"loggedUserKey"];
+    User *user = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+    return user;
+}
+
+- (void)setLoggedUser:(User *)loggedUser {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:loggedUser];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"loggedUserKey"];
+    [defaults synchronize];
+}
+
+- (void)registerUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion {
+    
+}
+
+- (void)loginUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler) completion {
+    
+}
+
+- (void)logout {
+    
+}
+
 @end
