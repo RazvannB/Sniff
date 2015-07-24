@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuView.h"
 
 @interface NavigationControllerWithMenu : UINavigationController
+
+@property (nonatomic, strong) MenuView *menuView;
+@property (nonatomic, strong) UIBarButtonItem *menuButton;
+
++ (NavigationControllerWithMenu *)newInstance;
 
 @end

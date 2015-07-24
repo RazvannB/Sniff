@@ -19,6 +19,10 @@
     return self;
 }
 
+- (void)presentWithAnimation:(BOOL)animated completion:(MenuViewCompletionHandler)completion {
+    
+}
+
 #pragma mark - UITabelViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
