@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "NavigationControllerWithMenu.h"
 
 @interface AppDelegate ()
 
@@ -16,11 +17,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
     self.viewController = [[HomepageVC alloc] initWithNibName:@"HomepageVC" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    NavigationControllerWithMenu *navController = [[NavigationControllerWithMenu alloc] init];
+    navController = [navController initWithRootViewController:self.viewController];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

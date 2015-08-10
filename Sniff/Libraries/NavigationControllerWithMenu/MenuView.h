@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoggedUserView.h"
 
 @class MenuView;
 
@@ -19,14 +20,17 @@ typedef void(^MenuViewCompletionHandler)();
 
 @end
 
-@interface MenuView : UIView <UITableViewDataSource, UITableViewDelegate>
+@interface MenuView : UIView <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) LoggedUserView *loggedUserView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UIView *shadowView;
 @property (nonatomic, strong) NSArray *menuItemsArray;
 
 @property (nonatomic) id <MenuViewDelegate> delegate;
 
-- (id)initWithFrame:(CGRect)frame;
-- (void)presentWithAnimation:(BOOL)animated completion:(MenuViewCompletionHandler)completion;
++ (MenuView*)newInstance;
+- (void)presentWithAnimation;
+- (void)dismissMenuView;
 
 @end

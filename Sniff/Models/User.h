@@ -18,9 +18,12 @@ typedef enum {
 @property (nonatomic) UserType userType;
 
 @property (nonatomic, strong) NSString *id;
-@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *first_name;
+@property (nonatomic, strong) NSString *last_name;
 @property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) NSString *password;
 
 - (void)setUserType:(UserType)userType;
++ (User*)initWithDictionary:(NSDictionary*)dictionary;
 
 @end

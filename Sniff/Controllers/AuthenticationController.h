@@ -18,7 +18,7 @@ typedef void(^AuthenticationControllerCompletionHandler)(BOOL success, NSString 
 @property (nonatomic, strong) User *loggedUser;
 
 + (instancetype)sharedInstance;
-- (void)setLoggedUser:(User *)loggedUser;
+- (void)setLoggedUserWithDictionary:(NSDictionary*)dictionary;
 - (void)registerUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion;
 - (void)loginUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler) completion;
 - (void)logout;

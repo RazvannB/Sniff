@@ -7,8 +7,9 @@
 //
 
 #import "HomepageVC.h"
+#import "NavigationControllerWithMenu.h"
 
-@interface HomepageVC ()
+@interface HomepageVC () <MenuViewDelegate>
 
 @end
 
@@ -16,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
 }
 
 - (void)didReceiveMemoryWarning {

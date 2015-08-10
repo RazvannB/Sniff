@@ -8,11 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LoggedUserViewDelegate <NSObject>
+
+- (void)loginButtonPressed;
+
+@end
+
 @interface LoggedUserView : UIView
 
 @property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 @property (nonatomic, weak) IBOutlet UIButton *loggedUser;
 
+@property (nonatomic) id<LoggedUserViewDelegate> delegate;
+
 - (id)initWithFrame:(CGRect)frame;
+- (IBAction)loginButtonPresed:(id)sender;
 
 @end

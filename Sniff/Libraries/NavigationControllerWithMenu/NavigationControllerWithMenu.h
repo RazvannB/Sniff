@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) MenuView *menuView;
 @property (nonatomic, strong) UIBarButtonItem *menuButton;
-
-+ (NavigationControllerWithMenu *)newInstance;
+@property (nonatomic, assign) BOOL showingSideMenu;
 
 @end

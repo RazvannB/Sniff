@@ -19,7 +19,7 @@
 - (id)initWithServerRequestType:(ServerRequestType)serverRequestType {
     if (self = [super init]) {
         _serverRequestType = serverRequestType;
-        _serverURL = @"";
+        _serverURL = @"http://sniff.as-mi.ro/services/";
     }
     return self;
 }
@@ -40,17 +40,16 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
     [manager POST:self.functionURL
        parameters:self.parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
               if ([responseObject isKindOfClass:[NSDictionary class]]) {
-                  if ([responseObject[@"success"] boolValue]) {
-                      self.response = responseObject;
-                  }
-                  self.responseData = responseObject[@"extras"];
-                  self.responseMessage = _responseData[@"msg"];
+                  self.responseData = responseObject;
+              } else if ([responseObject isKindOfClass:[NSArray class]]) {
+                  self.response = responseObject;
               } else {
                   self.responseMessage = @"Invalid server response!";
                   self.response = nil;
@@ -93,9 +92,11 @@
 - (NSString *)functionURL {
     switch (self.serverRequestType) {
         case ServerRequestType_Login:
-            return [self.serverURL stringByAppendingString:@"login"];
+            return [self.serverURL stringByAppendingString:@"login.php"];
         case ServerRequestType_Register:
-            return [self.serverURL stringByAppendingString:@"register"];
+            return [self.serverURL stringByAppendingString:@"registerMobile.php"];
+        case ServerRequestType_GetPublicEvents:
+            return [self.serverURL stringByAppendingString:@"getPublicEvents.php"];
 
         default:
             break;

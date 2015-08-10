@@ -13,8 +13,6 @@
 		E521F6AF1B5DA9E5006AA29B /* SniffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6AE1B5DA9E5006AA29B /* SniffTests.m */; };
 		E521F6C01B5DAB3F006AA29B /* HomepageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6BE1B5DAB3F006AA29B /* HomepageVC.m */; };
 		E521F6C11B5DAB3F006AA29B /* HomepageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E521F6BF1B5DAB3F006AA29B /* HomepageVC.xib */; };
-		E521F6C51B5DADAC006AA29B /* AuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6C31B5DADAC006AA29B /* AuthenticationVC.m */; };
-		E521F6C61B5DADAC006AA29B /* AuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E521F6C41B5DADAC006AA29B /* AuthenticationVC.xib */; };
 		E521F6CA1B5DADD4006AA29B /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6C81B5DADD4006AA29B /* LoginVC.m */; };
 		E521F6CB1B5DADD4006AA29B /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E521F6C91B5DADD4006AA29B /* LoginVC.xib */; };
 		E54D447B1B5ED2970066231E /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = E54D447A1B5ED2970066231E /* MenuView.m */; };
@@ -33,6 +31,11 @@
 		E54D44AB1B5EDE8A0066231E /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E54D44A11B5EDE8A0066231E /* AFURLResponseSerialization.m */; };
 		E54D44AC1B5EDE8A0066231E /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E54D44A31B5EDE8A0066231E /* AFURLSessionManager.m */; };
 		E54D44AF1B5EDEE20066231E /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E54D44AE1B5EDEE20066231E /* ServerRequest.m */; };
+		E57B592C1B79145400E4425D /* EventsTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E57B592A1B79145400E4425D /* EventsTableVC.m */; };
+		E57B592D1B79145400E4425D /* EventsTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E57B592B1B79145400E4425D /* EventsTableVC.xib */; };
+		E57B59301B791C8900E4425D /* EventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E57B592F1B791C8900E4425D /* EventsController.m */; };
+		E59B7A691B793FA00006C950 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = E59B7A681B793FA00006C950 /* Event.m */; };
+		E5DF0EBA1B77F66F004E5573 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */; };
 		E5E939D21B5EE9D700F1EA92 /* NavigationControllerWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */; };
 /* End PBXBuildFile section */
 
@@ -59,9 +62,6 @@
 		E521F6BD1B5DAB3F006AA29B /* HomepageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomepageVC.h; path = ViewControllers/HomepageVC.h; sourceTree = "<group>"; };
 		E521F6BE1B5DAB3F006AA29B /* HomepageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomepageVC.m; path = ViewControllers/HomepageVC.m; sourceTree = "<group>"; };
 		E521F6BF1B5DAB3F006AA29B /* HomepageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomepageVC.xib; path = ViewControllers/HomepageVC.xib; sourceTree = "<group>"; };
-		E521F6C21B5DADAC006AA29B /* AuthenticationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AuthenticationVC.h; path = ViewControllers/AuthenticationVC.h; sourceTree = "<group>"; };
-		E521F6C31B5DADAC006AA29B /* AuthenticationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AuthenticationVC.m; path = ViewControllers/AuthenticationVC.m; sourceTree = "<group>"; };
-		E521F6C41B5DADAC006AA29B /* AuthenticationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AuthenticationVC.xib; path = ViewControllers/AuthenticationVC.xib; sourceTree = "<group>"; };
 		E521F6C71B5DADD4006AA29B /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginVC.h; path = ViewControllers/LoginVC.h; sourceTree = "<group>"; };
 		E521F6C81B5DADD4006AA29B /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginVC.m; path = ViewControllers/LoginVC.m; sourceTree = "<group>"; };
 		E521F6C91B5DADD4006AA29B /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginVC.xib; path = ViewControllers/LoginVC.xib; sourceTree = "<group>"; };
@@ -96,6 +96,15 @@
 		E54D44A31B5EDE8A0066231E /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = Libraries/AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		E54D44AD1B5EDEE20066231E /* ServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerRequest.h; path = Libraries/ServerRequest.h; sourceTree = "<group>"; };
 		E54D44AE1B5EDEE20066231E /* ServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerRequest.m; path = Libraries/ServerRequest.m; sourceTree = "<group>"; };
+		E57B59291B79145400E4425D /* EventsTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsTableVC.h; path = ViewControllers/EventsTableVC.h; sourceTree = "<group>"; };
+		E57B592A1B79145400E4425D /* EventsTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsTableVC.m; path = ViewControllers/EventsTableVC.m; sourceTree = "<group>"; };
+		E57B592B1B79145400E4425D /* EventsTableVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventsTableVC.xib; path = ViewControllers/EventsTableVC.xib; sourceTree = "<group>"; };
+		E57B592E1B791C8900E4425D /* EventsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsController.h; path = Controllers/EventsController.h; sourceTree = "<group>"; };
+		E57B592F1B791C8900E4425D /* EventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsController.m; path = Controllers/EventsController.m; sourceTree = "<group>"; };
+		E59B7A671B793FA00006C950 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Models/Event.h; sourceTree = "<group>"; };
+		E59B7A681B793FA00006C950 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = Models/Event.m; sourceTree = "<group>"; };
+		E5DF0EB81B77F66F004E5573 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E5E939D01B5EE9D700F1EA92 /* NavigationControllerWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationControllerWithMenu.h; path = Libraries/NavigationControllerWithMenu/NavigationControllerWithMenu.h; sourceTree = "<group>"; };
 		E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationControllerWithMenu.m; path = Libraries/NavigationControllerWithMenu/NavigationControllerWithMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +192,8 @@
 			children = (
 				E54D448D1B5EDA730066231E /* User.h */,
 				E54D448E1B5EDA730066231E /* User.m */,
+				E59B7A671B793FA00006C950 /* Event.h */,
+				E59B7A681B793FA00006C950 /* Event.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -200,12 +211,12 @@
 				E521F6BD1B5DAB3F006AA29B /* HomepageVC.h */,
 				E521F6BE1B5DAB3F006AA29B /* HomepageVC.m */,
 				E521F6BF1B5DAB3F006AA29B /* HomepageVC.xib */,
-				E521F6C21B5DADAC006AA29B /* AuthenticationVC.h */,
-				E521F6C31B5DADAC006AA29B /* AuthenticationVC.m */,
-				E521F6C41B5DADAC006AA29B /* AuthenticationVC.xib */,
 				E521F6C71B5DADD4006AA29B /* LoginVC.h */,
 				E521F6C81B5DADD4006AA29B /* LoginVC.m */,
 				E521F6C91B5DADD4006AA29B /* LoginVC.xib */,
+				E57B59291B79145400E4425D /* EventsTableVC.h */,
+				E57B592A1B79145400E4425D /* EventsTableVC.m */,
+				E57B592B1B79145400E4425D /* EventsTableVC.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -215,6 +226,8 @@
 			children = (
 				E54D448A1B5ED9C30066231E /* AuthenticationController.h */,
 				E54D448B1B5ED9C30066231E /* AuthenticationController.m */,
+				E57B592E1B791C8900E4425D /* EventsController.h */,
+				E57B592F1B791C8900E4425D /* EventsController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -225,6 +238,7 @@
 				E54D44AD1B5EDEE20066231E /* ServerRequest.h */,
 				E54D44AE1B5EDEE20066231E /* ServerRequest.m */,
 				E54D44721B5ECF9B0066231E /* NavigationControllerWithMenu */,
+				E5DF0EB71B77F66F004E5573 /* MBProgressHud */,
 				E54D44901B5EDE390066231E /* AFNetworking */,
 			);
 			name = Libraries;
@@ -269,6 +283,16 @@
 				E54D44A31B5EDE8A0066231E /* AFURLSessionManager.m */,
 			);
 			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		E5DF0EB71B77F66F004E5573 /* MBProgressHud */ = {
+			isa = PBXGroup;
+			children = (
+				E5DF0EB81B77F66F004E5573 /* MBProgressHUD.h */,
+				E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHud;
+			path = Libraries/MBProgressHud;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,8 +375,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E57B592D1B79145400E4425D /* EventsTableVC.xib in Resources */,
 				E521F6C11B5DAB3F006AA29B /* HomepageVC.xib in Resources */,
-				E521F6C61B5DADAC006AA29B /* AuthenticationVC.xib in Resources */,
 				E54D447F1B5ED2CF0066231E /* MenuView.xib in Resources */,
 				E54D44891B5ED8270066231E /* LoggedUserView.xib in Resources */,
 				E521F6CB1B5DADD4006AA29B /* LoginVC.xib in Resources */,
@@ -378,16 +402,19 @@
 				E54D448F1B5EDA730066231E /* User.m in Sources */,
 				E54D44A81B5EDE8A0066231E /* AFSecurityPolicy.m in Sources */,
 				E54D44871B5ED8120066231E /* LoggedUserView.m in Sources */,
+				E57B59301B791C8900E4425D /* EventsController.m in Sources */,
 				E54D44A51B5EDE8A0066231E /* AFHTTPRequestOperationManager.m in Sources */,
 				E521F6981B5DA9E5006AA29B /* AppDelegate.m in Sources */,
 				E5E939D21B5EE9D700F1EA92 /* NavigationControllerWithMenu.m in Sources */,
+				E5DF0EBA1B77F66F004E5573 /* MBProgressHUD.m in Sources */,
+				E59B7A691B793FA00006C950 /* Event.m in Sources */,
 				E521F6C01B5DAB3F006AA29B /* HomepageVC.m in Sources */,
 				E521F6CA1B5DADD4006AA29B /* LoginVC.m in Sources */,
 				E54D448C1B5ED9C30066231E /* AuthenticationController.m in Sources */,
 				E54D44AC1B5EDE8A0066231E /* AFURLSessionManager.m in Sources */,
 				E54D44AB1B5EDE8A0066231E /* AFURLResponseSerialization.m in Sources */,
-				E521F6C51B5DADAC006AA29B /* AuthenticationVC.m in Sources */,
 				E521F6951B5DA9E5006AA29B /* main.m in Sources */,
+				E57B592C1B79145400E4425D /* EventsTableVC.m in Sources */,
 				E54D44AF1B5EDEE20066231E /* ServerRequest.m in Sources */,
 				E54D44AA1B5EDE8A0066231E /* AFURLRequestSerialization.m in Sources */,
 				E54D44A71B5EDE8A0066231E /* AFNetworkReachabilityManager.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "AuthenticationController.h"
+#import "ServerRequest.h"
 
 @implementation AuthenticationController
 
@@ -30,7 +31,8 @@
     return user;
 }
 
-- (void)setLoggedUser:(User *)loggedUser {
+- (void)setLoggedUserWithDictionary:(NSDictionary*)dictionary {
+    User *loggedUser = [User initWithDictionary:dictionary];    
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:loggedUser];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:encodedObject forKey:@"loggedUserKey"];
@@ -38,11 +40,43 @@
 }
 
 - (void)registerUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_Register];
+    [request addValue:user.first_name forParameter:@"nume"];
+    [request addValue:user.last_name forParameter:@"prenume"];
+    [request addValue:user.email forParameter:@"email"];
+    [request addValue:user.password forParameter:@"pass1"];
     
+    [request post:^(ServerRequest *serverRequest) {
+        [[AuthenticationController sharedInstance] setLoggedUserWithDictionary:serverRequest.responseData];
+        user.id = serverRequest.responseData[@"id"];
+        user.first_name = serverRequest.responseData[@"first_name"];
+        user.last_name = serverRequest.responseData[@"last_name"];
+        user.email = serverRequest.responseData[@"email"];
+        [AuthenticationController sharedInstance].loggedUser = user;
+        
+        if (completion) {
+            completion(YES, @"You have successfully registered", self);
+        }
+    }];
 }
 
 - (void)loginUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler) completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_Login];
+    [request addValue:user.email forParameter:@"email"];
+    [request addValue:user.password forParameter:@"pass"];
     
+    [request post:^(ServerRequest *serverRequest) {
+        [[AuthenticationController sharedInstance] setLoggedUserWithDictionary:serverRequest.responseData];
+        user.id = serverRequest.responseData[@"id"];
+        user.first_name = serverRequest.responseData[@"first_name"];
+        user.last_name = serverRequest.responseData[@"last_name"];
+        user.email = serverRequest.responseData[@"email"];
+        [AuthenticationController sharedInstance].loggedUser = user;
+        
+        if (completion) {
+            completion(YES, @"You have successfully logged in", self);
+        }
+     }];
 }
 
 - (void)logout {

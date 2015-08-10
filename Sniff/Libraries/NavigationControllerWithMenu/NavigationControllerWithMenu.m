@@ -8,42 +8,30 @@
 
 #import "NavigationControllerWithMenu.h"
 #import "HomepageVC.h"
+#import "LoginVC.h"
+#import "EventsTableVC.h"
 
-@interface NavigationControllerWithMenu () <MenuViewDelegate>
+@interface NavigationControllerWithMenu () <MenuViewDelegate, LoggedUserViewDelegate>
 
 @end
 
 @implementation NavigationControllerWithMenu
 
-+ (NavigationControllerWithMenu *)newInstance {
-    NavigationControllerWithMenu *navCtrl = [[NavigationControllerWithMenu alloc] initWithRootViewController:[[HomepageVC alloc] init]];
-    return navCtrl;
-}
-
 - (id)initWithRootViewController:(UIViewController *)rootViewController {
     self = [super initWithRootViewController:rootViewController];
     if (self) {
         rootViewController.navigationItem.leftBarButtonItem = self.menuButton;
-        
     }
     return self;
 }
 
-//- (MenuView *)menuView {
-//    if (!_menuView) {
-//        _menuView = [MenuView newInstanceWithItems:@[[CriteriaItem withType:CriteriaItemType_menu
-//                                                                      title:@"My Workbooks"
-//                                                                      items:nil
-//                                                              selectedValue:[DashboardViewController class]],
-//                                                     [CriteriaItem withType:CriteriaItemType_menu
-//                                                                      title:@"Browse"
-//                                                                      items:nil
-//                                                              selectedValue:[BrowseVC class]]]];
-//        _menuView.delegate = self;
-//        _menuView.profileHeaderView.delegate = self;
-//    }
-//    return _menuView;
-//}
+- (MenuView *)menuView {
+    if (!_menuView) {
+        _menuView = [MenuView newInstance];
+        _menuView.delegate = self;
+    }
+    return _menuView;
+}
 
 - (UIBarButtonItem *)menuButton {
     if (!_menuButton) {
@@ -57,18 +45,63 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginButtonPressed) name:@"LoginButtonPressedNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn) name:@"UserSuccessfullyLoggedInNotification" object:nil];
 }
 
 - (void)menuButtonPressed:(id)sender {
-    
+    self.showingSideMenu = YES;
+    [self.menuView presentWithAnimation];
+}
+
+- (void)loginButtonPressed {
+    [self.menuView dismissMenuView];
+    LoginVC *login = [[LoginVC alloc] init];
+    [self pushViewController:login animated:YES];
+}
+
+- (void)userLoggedIn {
+    HomepageVC *homepage = [[HomepageVC alloc] init];
+    homepage.navigationItem.leftBarButtonItem = self.menuButton;
+    [self setViewControllers:@[homepage] animated:YES];
+    self.menuView = nil;
+    [self.menuView reloadInputViews];
 }
 
 #pragma mark - MenuViewDelegate
 
 - (void)menuView:(MenuView *)menuView selectedMenuItemAtIndex:(NSInteger)menuIndex {
-    [self.menuView presentWithAnimation:YES completion:nil];
-    
+    switch (menuIndex) {
+        case 0: {
+            HomepageVC *homepage = [[HomepageVC alloc] init];
+            homepage.navigationItem.leftBarButtonItem = self.menuButton;
+            [self setViewControllers:@[homepage] animated:YES];
+            break;
+        }
+            
+        case 1:{
+            EventsTableVC *events = [[EventsTableVC alloc] init];
+            events.navigationItem.title = @"Events";
+            events.navigationItem.leftBarButtonItem = self.menuButton;
+            [self setViewControllers:@[events] animated:YES];
+            break;
+        }
+            
+        case 2: {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:nil forKey:@"loggedUserKey"];
+            [defaults synchronize];
+            HomepageVC *homepage = [[HomepageVC alloc] init];
+            homepage.navigationItem.leftBarButtonItem = self.menuButton;
+            [self setViewControllers:@[homepage] animated:YES];
+            self.menuView = nil;
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 @end

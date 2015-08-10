@@ -8,19 +8,62 @@
 
 #import "MenuView.h"
 #import "LoggedUserView.h"
+#import "AuthenticationController.h"
 
 @implementation MenuView
 
-- (id)initWithFrame:(CGRect)frame {
-    if (self = [super init]) {
-        [self addSubview:[[NSBundle mainBundle] loadNibNamed:@"MenuView" owner:self options:nil][0]];
-        self.frame = frame;
-    }
-    return self;
++ (MenuView*)newInstance {
+    MenuView *menuView = [[NSBundle mainBundle] loadNibNamed:@"MenuView" owner:nil options:nil][0];
+    return menuView;
 }
 
-- (void)presentWithAnimation:(BOOL)animated completion:(MenuViewCompletionHandler)completion {
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.frame = [UIScreen mainScreen].nativeBounds;
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource:self];
+    self.frame = CGRectMake(-self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
+    self.tableView.contentInset = UIEdgeInsetsMake(22, 0, 0, 0);
+    [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
     
+    [self.shadowView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                       action:@selector(dismissMenuView)]];
+}
+
+- (NSArray *)menuItemsArray {
+    _menuItemsArray = [NSArray alloc];
+    if ([AuthenticationController sharedInstance].loggedUser) {
+        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Homepage", @"Events", @"Log out"]];
+    } else {
+        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Homepage", @"Events"]];
+    }
+    
+    return _menuItemsArray;
+}
+
+- (void)presentWithAnimation {
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    [keyWindow addSubview:self];
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         
+                         self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+                     } completion:^(BOOL finished) {
+                         [self.shadowView setAlpha:0.5];
+                         [self layoutSubviews];
+                     }];
+}
+
+- (void)dismissMenuView {
+    [self.shadowView setAlpha:0];
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         
+                         self.frame = CGRectMake(-self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
+                     } completion:^(BOOL finished) {
+                         
+                         [self removeFromSuperview];
+                     }];
 }
 
 #pragma mark - UITabelViewDataSource
@@ -38,14 +81,20 @@
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return nil;
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {    
+    self.loggedUserView = [[LoggedUserView alloc] initWithFrame:CGRectMake(0, 0, 250, 100)];
+    self.loggedUserView = [[NSBundle mainBundle] loadNibNamed:@"LoggedUserView" owner:nil options:nil][0];
+    
+    return self.loggedUserView;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if ([self.delegate respondsToSelector:@selector(menuView:selectedMenuItemAtIndex:)]) {
+        [self dismissMenuView];
+        [self.delegate menuView:self selectedMenuItemAtIndex:indexPath.row];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
