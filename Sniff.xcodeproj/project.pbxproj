@@ -35,8 +35,16 @@
 		E57B592D1B79145400E4425D /* EventsTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E57B592B1B79145400E4425D /* EventsTableVC.xib */; };
 		E57B59301B791C8900E4425D /* EventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E57B592F1B791C8900E4425D /* EventsController.m */; };
 		E59B7A691B793FA00006C950 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = E59B7A681B793FA00006C950 /* Event.m */; };
+		E5DAE6931B8274AF0021CD2B /* ButtonsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAE6911B8274AF0021CD2B /* ButtonsTVC.m */; };
+		E5DAE6941B8274AF0021CD2B /* ButtonsTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DAE6921B8274AF0021CD2B /* ButtonsTVC.xib */; };
 		E5DF0EBA1B77F66F004E5573 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */; };
 		E5E939D21B5EE9D700F1EA92 /* NavigationControllerWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */; };
+		E5FAB7C21B7A70AA00BB8BE8 /* EventInfoTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAB7C01B7A70AA00BB8BE8 /* EventInfoTableVC.m */; };
+		E5FAB7C31B7A70AA00BB8BE8 /* EventInfoTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5FAB7C11B7A70AA00BB8BE8 /* EventInfoTableVC.xib */; };
+		E5FAB7C71B7A70EE00BB8BE8 /* EventTextTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAB7C51B7A70EE00BB8BE8 /* EventTextTVC.m */; };
+		E5FAB7C81B7A70EE00BB8BE8 /* EventTextTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5FAB7C61B7A70EE00BB8BE8 /* EventTextTVC.xib */; };
+		E5FAB7CC1B7A710700BB8BE8 /* EventImageTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAB7CA1B7A710700BB8BE8 /* EventImageTVC.m */; };
+		E5FAB7CD1B7A710700BB8BE8 /* EventImageTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5FAB7CB1B7A710700BB8BE8 /* EventImageTVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,10 +111,22 @@
 		E57B592F1B791C8900E4425D /* EventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsController.m; path = Controllers/EventsController.m; sourceTree = "<group>"; };
 		E59B7A671B793FA00006C950 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Models/Event.h; sourceTree = "<group>"; };
 		E59B7A681B793FA00006C950 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = Models/Event.m; sourceTree = "<group>"; };
+		E5DAE6901B8274AF0021CD2B /* ButtonsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonsTVC.h; path = Views/ButtonsTVC.h; sourceTree = "<group>"; };
+		E5DAE6911B8274AF0021CD2B /* ButtonsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonsTVC.m; path = Views/ButtonsTVC.m; sourceTree = "<group>"; };
+		E5DAE6921B8274AF0021CD2B /* ButtonsTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonsTVC.xib; path = Views/ButtonsTVC.xib; sourceTree = "<group>"; };
 		E5DF0EB81B77F66F004E5573 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E5E939D01B5EE9D700F1EA92 /* NavigationControllerWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationControllerWithMenu.h; path = Libraries/NavigationControllerWithMenu/NavigationControllerWithMenu.h; sourceTree = "<group>"; };
 		E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationControllerWithMenu.m; path = Libraries/NavigationControllerWithMenu/NavigationControllerWithMenu.m; sourceTree = "<group>"; };
+		E5FAB7BF1B7A70AA00BB8BE8 /* EventInfoTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventInfoTableVC.h; path = ViewControllers/EventInfoTableVC.h; sourceTree = "<group>"; };
+		E5FAB7C01B7A70AA00BB8BE8 /* EventInfoTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventInfoTableVC.m; path = ViewControllers/EventInfoTableVC.m; sourceTree = "<group>"; };
+		E5FAB7C11B7A70AA00BB8BE8 /* EventInfoTableVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventInfoTableVC.xib; path = ViewControllers/EventInfoTableVC.xib; sourceTree = "<group>"; };
+		E5FAB7C41B7A70EE00BB8BE8 /* EventTextTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTextTVC.h; path = Views/EventTextTVC.h; sourceTree = "<group>"; };
+		E5FAB7C51B7A70EE00BB8BE8 /* EventTextTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTextTVC.m; path = Views/EventTextTVC.m; sourceTree = "<group>"; };
+		E5FAB7C61B7A70EE00BB8BE8 /* EventTextTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventTextTVC.xib; path = Views/EventTextTVC.xib; sourceTree = "<group>"; };
+		E5FAB7C91B7A710700BB8BE8 /* EventImageTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventImageTVC.h; path = Views/EventImageTVC.h; sourceTree = "<group>"; };
+		E5FAB7CA1B7A710700BB8BE8 /* EventImageTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventImageTVC.m; path = Views/EventImageTVC.m; sourceTree = "<group>"; };
+		E5FAB7CB1B7A710700BB8BE8 /* EventImageTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventImageTVC.xib; path = Views/EventImageTVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +221,15 @@
 		E521F6B91B5DAA21006AA29B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E5FAB7C41B7A70EE00BB8BE8 /* EventTextTVC.h */,
+				E5FAB7C51B7A70EE00BB8BE8 /* EventTextTVC.m */,
+				E5FAB7C61B7A70EE00BB8BE8 /* EventTextTVC.xib */,
+				E5FAB7C91B7A710700BB8BE8 /* EventImageTVC.h */,
+				E5FAB7CA1B7A710700BB8BE8 /* EventImageTVC.m */,
+				E5FAB7CB1B7A710700BB8BE8 /* EventImageTVC.xib */,
+				E5DAE6901B8274AF0021CD2B /* ButtonsTVC.h */,
+				E5DAE6911B8274AF0021CD2B /* ButtonsTVC.m */,
+				E5DAE6921B8274AF0021CD2B /* ButtonsTVC.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -217,6 +246,9 @@
 				E57B59291B79145400E4425D /* EventsTableVC.h */,
 				E57B592A1B79145400E4425D /* EventsTableVC.m */,
 				E57B592B1B79145400E4425D /* EventsTableVC.xib */,
+				E5FAB7BF1B7A70AA00BB8BE8 /* EventInfoTableVC.h */,
+				E5FAB7C01B7A70AA00BB8BE8 /* EventInfoTableVC.m */,
+				E5FAB7C11B7A70AA00BB8BE8 /* EventInfoTableVC.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -377,10 +409,14 @@
 			files = (
 				E57B592D1B79145400E4425D /* EventsTableVC.xib in Resources */,
 				E521F6C11B5DAB3F006AA29B /* HomepageVC.xib in Resources */,
+				E5FAB7CD1B7A710700BB8BE8 /* EventImageTVC.xib in Resources */,
 				E54D447F1B5ED2CF0066231E /* MenuView.xib in Resources */,
 				E54D44891B5ED8270066231E /* LoggedUserView.xib in Resources */,
 				E521F6CB1B5DADD4006AA29B /* LoginVC.xib in Resources */,
+				E5FAB7C81B7A70EE00BB8BE8 /* EventTextTVC.xib in Resources */,
 				E521F6A01B5DA9E5006AA29B /* Images.xcassets in Resources */,
+				E5FAB7C31B7A70AA00BB8BE8 /* EventInfoTableVC.xib in Resources */,
+				E5DAE6941B8274AF0021CD2B /* ButtonsTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +436,7 @@
 			files = (
 				E54D44A91B5EDE8A0066231E /* AFURLConnectionOperation.m in Sources */,
 				E54D448F1B5EDA730066231E /* User.m in Sources */,
+				E5DAE6931B8274AF0021CD2B /* ButtonsTVC.m in Sources */,
 				E54D44A81B5EDE8A0066231E /* AFSecurityPolicy.m in Sources */,
 				E54D44871B5ED8120066231E /* LoggedUserView.m in Sources */,
 				E57B59301B791C8900E4425D /* EventsController.m in Sources */,
@@ -410,12 +447,15 @@
 				E59B7A691B793FA00006C950 /* Event.m in Sources */,
 				E521F6C01B5DAB3F006AA29B /* HomepageVC.m in Sources */,
 				E521F6CA1B5DADD4006AA29B /* LoginVC.m in Sources */,
+				E5FAB7CC1B7A710700BB8BE8 /* EventImageTVC.m in Sources */,
+				E5FAB7C21B7A70AA00BB8BE8 /* EventInfoTableVC.m in Sources */,
 				E54D448C1B5ED9C30066231E /* AuthenticationController.m in Sources */,
 				E54D44AC1B5EDE8A0066231E /* AFURLSessionManager.m in Sources */,
 				E54D44AB1B5EDE8A0066231E /* AFURLResponseSerialization.m in Sources */,
 				E521F6951B5DA9E5006AA29B /* main.m in Sources */,
 				E57B592C1B79145400E4425D /* EventsTableVC.m in Sources */,
 				E54D44AF1B5EDEE20066231E /* ServerRequest.m in Sources */,
+				E5FAB7C71B7A70EE00BB8BE8 /* EventTextTVC.m in Sources */,
 				E54D44AA1B5EDE8A0066231E /* AFURLRequestSerialization.m in Sources */,
 				E54D44A71B5EDE8A0066231E /* AFNetworkReachabilityManager.m in Sources */,
 				E54D447B1B5ED2970066231E /* MenuView.m in Sources */,

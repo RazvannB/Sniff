@@ -13,7 +13,11 @@
 typedef enum {
     ServerRequestType_Login,
     ServerRequestType_Register,
-    ServerRequestType_GetPublicEvents
+    ServerRequestType_GetPublicEvents,
+    ServerRequestType_GetEventInfo,
+    ServerRequestType_GetApprovedFeedback,
+    ServerRequestType_GetSchedule,
+    ServerRequestType_SendFeedback
 } ServerRequestType;
 
 typedef void(^ServerRequestCompletion)(ServerRequest *serverRequest);

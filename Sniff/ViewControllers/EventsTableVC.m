@@ -16,6 +16,7 @@ alpha:1.0]
 #import "EventsController.h"
 #import "MBProgressHUD.h"
 #import "Event.h"
+#import "EventInfoTableVC.h"
 
 @interface EventsTableVC ()
 
@@ -42,7 +43,6 @@ alpha:1.0]
             [progressHud hide:YES];
         }
     }];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,8 +50,7 @@ alpha:1.0]
     // Dispose of any resources that can be recreated.
 }
 
-- (UIImage *)imageWithColor:(UIColor *)color
-{
+- (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(8.0f, 8.0f, 59.0f, 59.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -68,10 +67,8 @@ alpha:1.0]
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
     return [self.eventsArray count];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
@@ -89,7 +86,9 @@ alpha:1.0]
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    EventInfoTableVC *eventInfo = [[EventInfoTableVC alloc] init];
+    [eventInfo initWithEvent:self.eventsArray[indexPath.row]];
+    [self.navigationController pushViewController:eventInfo animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

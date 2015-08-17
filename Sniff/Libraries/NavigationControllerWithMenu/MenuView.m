@@ -32,7 +32,7 @@
 
 - (NSArray *)menuItemsArray {
     _menuItemsArray = [NSArray alloc];
-    if ([AuthenticationController sharedInstance].loggedUser) {
+    if ([AuthenticationController sharedInstance].loggedUser.id) {
         _menuItemsArray = [_menuItemsArray initWithArray:@[@"Homepage", @"Events", @"Log out"]];
     } else {
         _menuItemsArray = [_menuItemsArray initWithArray:@[@"Homepage", @"Events"]];

@@ -39,6 +39,7 @@
 - (void)post:(ServerRequestCompletion)completion {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
@@ -63,7 +64,7 @@
               self.responseData = nil;
               self.response = nil;
               self.responseMessage = [NSString stringWithFormat:@"Request failed! %@", error.localizedDescription];
-
+              
               if (completion){
                   completion(self);
               }
@@ -81,10 +82,28 @@
     [manager GET:self.functionURL
       parameters:self.parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
+             if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                 self.responseData = responseObject;
+             } else if ([responseObject isKindOfClass:[NSArray class]]) {
+                 self.response = responseObject;
+             } else {
+                 self.responseMessage = @"Invalid server response!";
+                 self.response = nil;
+                 self.responseData = nil;
+             }
+             if (completion){
+                 completion(self);
+             }
+
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             self.responseData = nil;
+             self.response = nil;
+             self.responseMessage = [NSString stringWithFormat:@"Request failed! %@", error.localizedDescription];
              
+             if (completion){
+                 completion(self);
+             }
          }
      ];
 }
@@ -97,6 +116,14 @@
             return [self.serverURL stringByAppendingString:@"registerMobile.php"];
         case ServerRequestType_GetPublicEvents:
             return [self.serverURL stringByAppendingString:@"getPublicEvents.php"];
+        case ServerRequestType_GetEventInfo:
+            return [self.serverURL stringByAppendingString:@"getEventInfo.php"];
+        case ServerRequestType_GetApprovedFeedback:
+            return [self.serverURL stringByAppendingString:@"getAprovedFeedback.php"];
+        case ServerRequestType_GetSchedule:
+            return [self.serverURL stringByAppendingString:@"getSchandule.php"];
+        case ServerRequestType_SendFeedback:
+            return [self.serverURL stringByAppendingString:@"trimiteFeedback.php"];
 
         default:
             break;

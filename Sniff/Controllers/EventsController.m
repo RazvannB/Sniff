@@ -8,6 +8,7 @@
 
 #import "EventsController.h"
 #import "ServerRequest.h"
+#import "AuthenticationController.h"
 
 @implementation EventsController
 
@@ -32,6 +33,62 @@
         
         if (completion) {
             completion(YES, @"Events retrieved", self);
+        }
+    }];
+}
+
+- (void)getInfoForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_GetEventInfo];
+    [request addValue:event.id forParameter:@"id"];
+    
+    [request post:^(ServerRequest *serverRequest) {
+        self.infoDictionary = [[NSDictionary alloc] initWithDictionary:serverRequest.response[0]];
+        
+        if (completion) {
+            completion(YES, @"Event info retrieved", self);
+        }
+    }];
+}
+
+- (void)getFeedbackForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_GetApprovedFeedback];
+    [request addValue:event.id forParameter:@"id"];
+    
+    [request post:^(ServerRequest *serverRequest) {
+        self.feedbackDictionary = [[NSDictionary alloc] initWithDictionary:serverRequest.response[0]];
+        
+        if (completion) {
+            completion(YES, @"Event info retrieved", self);
+        }
+    }];
+}
+
+- (void)sendFeedbackForEvent:(Event*)event message:(NSString*)message completion:(EventsControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_SendFeedback];
+    [request addValue:event.id forParameter:@"id"];
+    [request addValue:message forParameter:@"msg"];
+    NSString *username = @"";
+    if ([AuthenticationController sharedInstance].loggedUser.id) {
+        username = [AuthenticationController sharedInstance].loggedUser.first_name;
+    }
+    [request addValue:username forParameter:@"user"];
+
+    [request post:^(ServerRequest *serverRequest) {
+        
+        if (completion) {
+            completion(YES, @"Event feedback sent", self);
+        }
+    }];
+}
+
+- (void)getScheduleForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_GetSchedule];
+    [request addValue:event.id forParameter:@"id"];
+    
+    [request post:^(ServerRequest *serverRequest) {
+        
+        if (completion) {
+            completion(YES, @"Event schedule retrieved", self);
         }
     }];
 }

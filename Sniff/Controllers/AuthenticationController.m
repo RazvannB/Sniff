@@ -48,11 +48,6 @@
     
     [request post:^(ServerRequest *serverRequest) {
         [[AuthenticationController sharedInstance] setLoggedUserWithDictionary:serverRequest.responseData];
-        user.id = serverRequest.responseData[@"id"];
-        user.first_name = serverRequest.responseData[@"first_name"];
-        user.last_name = serverRequest.responseData[@"last_name"];
-        user.email = serverRequest.responseData[@"email"];
-        [AuthenticationController sharedInstance].loggedUser = user;
         
         if (completion) {
             completion(YES, @"You have successfully registered", self);
@@ -67,11 +62,6 @@
     
     [request post:^(ServerRequest *serverRequest) {
         [[AuthenticationController sharedInstance] setLoggedUserWithDictionary:serverRequest.responseData];
-        user.id = serverRequest.responseData[@"id"];
-        user.first_name = serverRequest.responseData[@"first_name"];
-        user.last_name = serverRequest.responseData[@"last_name"];
-        user.email = serverRequest.responseData[@"email"];
-        [AuthenticationController sharedInstance].loggedUser = user;
         
         if (completion) {
             completion(YES, @"You have successfully logged in", self);

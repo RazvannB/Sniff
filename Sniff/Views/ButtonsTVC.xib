@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonsTVC" id="KGk-i7-Jjw" customClass="ButtonsTVC">
+            <rect key="frame" x="0.0" y="0.0" width="388" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="schedule" translatesAutoresizingMaskIntoConstraints="NO" id="ZrA-Ju-PMV">
+                        <rect key="frame" x="33" y="12" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="NqF-cx-ya3"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDX-k5-B8Y">
+                        <rect key="frame" x="66" y="8" width="100" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="J5b-Ua-gWP"/>
+                        </constraints>
+                        <state key="normal" title="Schedule">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="schedulePressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jYx-9f-ns4"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-zC-VDQ">
+                        <rect key="frame" x="280" y="8" width="100" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="d0l-v8-WEu"/>
+                        </constraints>
+                        <state key="normal" title="Feedback">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="feedbackPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="m1E-IW-9Np"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feedback" translatesAutoresizingMaskIntoConstraints="NO" id="KG7-gl-3Iw">
+                        <rect key="frame" x="247" y="12" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="NPX-Q0-iI9"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tDX-k5-B8Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="BHH-hC-5Qn"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ZrA-Ju-PMV" secondAttribute="bottom" constant="4" id="Msg-oE-4hr"/>
+                    <constraint firstItem="Hkb-zC-VDQ" firstAttribute="leading" secondItem="KG7-gl-3Iw" secondAttribute="trailing" constant="8" symbolic="YES" id="Nc0-8h-wEx"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="KG7-gl-3Iw" secondAttribute="bottom" constant="4" id="SPa-6L-0Cn"/>
+                    <constraint firstItem="tDX-k5-B8Y" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="VE2-z9-Ooc"/>
+                    <constraint firstItem="tDX-k5-B8Y" firstAttribute="leading" secondItem="ZrA-Ju-PMV" secondAttribute="trailing" constant="8" id="XhB-xL-5P2"/>
+                    <constraint firstItem="Hkb-zC-VDQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="aC5-mC-FiV"/>
+                    <constraint firstItem="Hkb-zC-VDQ" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="dv1-GA-Pp6"/>
+                    <constraint firstItem="ZrA-Ju-PMV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="lTe-wT-dKc"/>
+                    <constraint firstItem="ZrA-Ju-PMV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="25" id="mwy-QD-KdE"/>
+                    <constraint firstItem="KG7-gl-3Iw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="ol1-Pw-c9q"/>
+                    <constraint firstItem="Hkb-zC-VDQ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="rOa-La-9Md"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="313" y="194"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="feedback" width="24" height="24"/>
+        <image name="schedule" width="24" height="24"/>
+    </resources>
+</document>
