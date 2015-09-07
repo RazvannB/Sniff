@@ -11,10 +11,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="phr-Zd-r7s">
-                    <rect key="frame" x="0.0" y="0.0" width="250" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="250" id="Trz-ir-7Ss"/>
+                        <constraint firstAttribute="width" constant="200" id="Trz-ir-7Ss"/>
                     </constraints>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -23,7 +23,7 @@
                     </connections>
                 </tableView>
                 <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYq-sy-CN5">
-                    <rect key="frame" x="250" y="0.0" width="350" height="600"/>
+                    <rect key="frame" x="200" y="0.0" width="400" height="600"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>

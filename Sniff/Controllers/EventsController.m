@@ -9,6 +9,7 @@
 #import "EventsController.h"
 #import "ServerRequest.h"
 #import "AuthenticationController.h"
+#import "ScheduleEvent.h"
 
 @implementation EventsController
 
@@ -86,7 +87,12 @@
     [request addValue:event.id forParameter:@"id"];
     
     [request post:^(ServerRequest *serverRequest) {
-        
+        NSMutableArray *scheduleMutableArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *scheduleDictionary in serverRequest.response) {
+            ScheduleEvent *event = [[ScheduleEvent alloc] initWithDictionary:scheduleDictionary];
+            [scheduleMutableArray addObject:event];
+        }
+        self.scheduleArray = scheduleMutableArray;
         if (completion) {
             completion(YES, @"Event schedule retrieved", self);
         }

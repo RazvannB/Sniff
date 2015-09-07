@@ -32,7 +32,6 @@ alpha:1.0]
     
     [[EventsController sharedInstance] getPublicEventsWithCompletion:^(BOOL success, NSString *message, EventsController *completion) {
         if (success) {
-            [progressHud hide:YES];
             self.eventsArray = [[NSMutableArray alloc] init];
             for (NSDictionary *eventDictionary in completion.eventsArray) {
                 Event *event = [Event initWithDictionary:eventDictionary];
@@ -40,8 +39,13 @@ alpha:1.0]
             }
             [self.tableView reloadData];
         } else {
-            [progressHud hide:YES];
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:@"There was an error retrieving events"
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
         }
+        [progressHud hide:YES];
     }];
 }
 
@@ -74,11 +78,12 @@ alpha:1.0]
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
-        Event *event = self.eventsArray[indexPath.row];
-        cell.textLabel.text = event.project_name;
-        int colorHEX = [[event.color stringByReplacingOccurrencesOfString:@"#" withString:@""] intValue];
-        cell.imageView.image = [self imageWithColor:UIColorFromRGB(colorHEX)];
     }
+    Event *event = self.eventsArray[indexPath.row];
+    cell.textLabel.text = event.project_name;
+    int colorHEX = [[event.color stringByReplacingOccurrencesOfString:@"#" withString:@""] intValue];
+    cell.imageView.image = [self imageWithColor:UIColorFromRGB(colorHEX)];
+    
     return cell;
 }
 

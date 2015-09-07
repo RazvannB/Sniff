@@ -11,6 +11,10 @@
 #import "EventImageTVC.h"
 #import "EventsController.h"
 #import "ButtonsTVC.h"
+#import "MBProgressHUD.h"
+#import "ScheduleTableVC.h"
+#import "AuthenticationController.h"
+#import "FeedbackTableVC.h"
 
 @interface EventInfoTableVC () <ButtonsTVCDelegate>
 
@@ -26,10 +30,22 @@
     [super viewDidLoad];
     self.navigationItem.title = self.event.project_name;
     
+    MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    progressHud.labelText = @"Retrieving event info...";
+    
     [[EventsController sharedInstance] getInfoForEvent:self.event
                                             completion:^(BOOL success, NSString *message, EventsController *completion) {
-                                                self.infoDictionary = [[NSDictionary alloc] initWithDictionary:completion.infoDictionary];
-                                                [self.tableView reloadData];
+                                                if (success) {
+                                                    self.infoDictionary = [[NSDictionary alloc] initWithDictionary:completion.infoDictionary];
+                                                    [self.tableView reloadData];
+                                                } else {
+                                                    [[[UIAlertView alloc] initWithTitle:nil
+                                                                                message:@"There was an error retrieving this event's info"
+                                                                               delegate:nil
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil] show];
+                                                }
+                                                [progressHud hide:YES];
                                             }];
 }
 
@@ -49,11 +65,13 @@
 #pragma mark - ButtonsTVCDelegate
 
 - (void)scheduleButtonPressed {
-    
+    ScheduleTableVC *schedule = [[ScheduleTableVC alloc] initWithEvent:self.event];
+    [self.navigationController pushViewController:schedule animated:YES];
 }
 
 - (void)feedbackButtonPressed {
-    
+    FeedbackTableVC *feedback = [[FeedbackTableVC alloc] init];
+    [self.navigationController pushViewController:feedback animated:YES];
 }
 
 #pragma mark - Table view data source
@@ -107,8 +125,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 3) {
         // location
-    } else if (indexPath.row == 5) {
-        // fb page
+    } else if (indexPath.row == 4) {
+        if ([self.infoDictionary[@"FbPage"] class] != [NSNull class] &&
+            [self.infoDictionary[@"FbPage"] length]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.infoDictionary[@"FbPage"]]];
+        }
     }
 }
 
