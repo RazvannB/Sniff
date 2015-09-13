@@ -15,7 +15,7 @@ typedef void(^EventsControllerCompletionHandler)(BOOL success, NSString *message
 
 @interface EventsController : NSObject
 
-@property (nonatomic, strong) NSArray *eventsArray;
+@property (nonatomic, strong) NSMutableArray *eventsArray;
 @property (nonatomic, strong) NSDictionary *infoDictionary;
 @property (nonatomic, strong) NSArray *feedbackArray;
 @property (nonatomic, strong) NSArray *scheduleArray;

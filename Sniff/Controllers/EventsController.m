@@ -30,8 +30,11 @@
     ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_GetPublicEvents];
     
     [request post:^(ServerRequest *serverRequest) {
-        self.eventsArray = [[NSArray alloc] initWithArray:serverRequest.response];
-        
+        self.eventsArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *eventDictionary in serverRequest.response) {
+            Event *event = [Event initWithDictionary:eventDictionary];
+            [self.eventsArray addObject:event];
+        }
         if (completion) {
             completion(YES, @"Events retrieved", self);
         }
@@ -44,7 +47,6 @@
     
     [request post:^(ServerRequest *serverRequest) {
         self.infoDictionary = [[NSDictionary alloc] initWithDictionary:serverRequest.response[0]];
-        
         if (completion) {
             completion(YES, @"Event info retrieved", self);
         }
@@ -56,7 +58,7 @@
     [request addValue:event.id forParameter:@"id"];
     
     [request post:^(ServerRequest *serverRequest) {
-        
+
         if (completion) {
             completion(YES, @"Event info retrieved", self);
         }

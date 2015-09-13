@@ -24,22 +24,27 @@ alpha:1.0]
 
 @implementation EventsTableVC
 
+BOOL isCheckingOnlineForEvents;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
 }
 
 - (NSMutableArray *)eventsArray {
-    _eventsArray = [[NSMutableArray alloc] initWithArray:[EventsController sharedInstance].eventsArray];
     if (!_eventsArray || ![_eventsArray count]) {
-        [self checkServerForUpdatesWithIndicator:YES];
+        _eventsArray = [[NSMutableArray alloc] initWithArray:[EventsController sharedInstance].eventsArray];
+        if ((!_eventsArray || ![_eventsArray count]) && !isCheckingOnlineForEvents) {
+            [self checkServerForUpdatesWithIndicator:YES];
+        }
     } else {
-        [self checkServerForUpdatesWithIndicator:NO];
+
     }
     return _eventsArray;
 }
 
 - (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
+    isCheckingOnlineForEvents = YES;
     MBProgressHUD *progressHud;
     if (indicator) {
         progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
@@ -48,11 +53,7 @@ alpha:1.0]
     
     [[EventsController sharedInstance] getPublicEventsWithCompletion:^(BOOL success, NSString *message, EventsController *completion) {
         if (success) {
-            self.eventsArray = [[NSMutableArray alloc] init];
-            for (NSDictionary *eventDictionary in completion.eventsArray) {
-                Event *event = [Event initWithDictionary:eventDictionary];
-                [self.eventsArray addObject:event];
-            }
+
             [self.tableView reloadData];
         } else {
             [[[UIAlertView alloc] initWithTitle:nil
@@ -64,6 +65,7 @@ alpha:1.0]
         if (indicator) {
             [progressHud hide:YES];
         }
+        isCheckingOnlineForEvents = NO;
     }];
 }
 

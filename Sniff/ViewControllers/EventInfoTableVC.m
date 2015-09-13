@@ -22,6 +22,8 @@
 
 @implementation EventInfoTableVC
 
+BOOL isCheckingOnlineForInfo;
+
 - (void)initWithEvent:(Event*)event {
     self.event = event;
 }
@@ -32,16 +34,19 @@
 }
 
 - (NSDictionary *)infoDictionary {
-    _infoDictionary = [EventsController sharedInstance].infoDictionary;
     if (!_infoDictionary || ![_infoDictionary count]) {
-        [self checkServerForUpdatesWithIndicator:YES];
+        _infoDictionary = [EventsController sharedInstance].infoDictionary;
+        if ((!_infoDictionary || ![_infoDictionary count]) && !isCheckingOnlineForInfo) {
+            [self checkServerForUpdatesWithIndicator:YES];
+        }
     } else {
-        [self checkServerForUpdatesWithIndicator:NO];
+
     }
     return _infoDictionary;
 }
 
 - (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
+    isCheckingOnlineForInfo = YES;
     MBProgressHUD *progressHud;
     if (indicator) {
         progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
@@ -51,7 +56,6 @@
     [[EventsController sharedInstance] getInfoForEvent:self.event
                                             completion:^(BOOL success, NSString *message, EventsController *completion) {
                                                 if (success) {
-                                                    self.infoDictionary = [[NSDictionary alloc] initWithDictionary:completion.infoDictionary];
                                                     [self.tableView reloadData];
                                                 } else {
                                                     [[[UIAlertView alloc] initWithTitle:nil
@@ -63,6 +67,7 @@
                                                 if (indicator) {
                                                     [progressHud hide:YES];
                                                 }
+                                                isCheckingOnlineForInfo = NO;
                                             }];
 }
 

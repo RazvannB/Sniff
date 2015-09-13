@@ -17,6 +17,8 @@
 
 @implementation ScheduleTableVC
 
+BOOL isCheckingOnlineForSchedule;
+
 - (id)initWithEvent:(Event *)event {
     if (self = [super init]) {
         self.event = event;
@@ -31,26 +33,40 @@
 }
 
 - (NSArray *)scheduleArray {
-    if (!_scheduleArray) {
-        MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-        progressHud.labelText = @"Retrieving schedule...";
-        
-        [[EventsController sharedInstance] getScheduleForEvent:self.event
-                                                    completion:^(BOOL success, NSString *message, EventsController *completion) {
-                                                        if (success) {
-                                                            self.scheduleArray = completion.scheduleArray;
-                                                            [self.tableView reloadData];
-                                                        } else {
-                                                            [[[UIAlertView alloc] initWithTitle:nil
-                                                                                        message:@"There was an error retrieving this event's schedule"
-                                                                                       delegate:nil
-                                                                              cancelButtonTitle:@"OK"
-                                                                              otherButtonTitles:nil] show];
-                                                        }
-                                                        [progressHud hide:YES];
-                                                    }];
+    if (!_scheduleArray || ![_scheduleArray count]) {
+        self.scheduleArray = [EventsController sharedInstance].scheduleArray;
+        if ((!_scheduleArray || ![_scheduleArray count]) && !isCheckingOnlineForSchedule) {
+            [self checkServerForUpdatesWithIndicator:YES];
+        }
     }
     return _scheduleArray;
+}
+
+- (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
+    isCheckingOnlineForSchedule = YES;
+    MBProgressHUD *progressHud;
+    if (indicator) {
+        progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        progressHud.labelText = @"Retrieving schedule...";
+    }
+    
+    [[EventsController sharedInstance] getScheduleForEvent:self.event
+                                                completion:^(BOOL success, NSString *message, EventsController *completion) {
+                                                    if (success) {
+                                                        
+                                                        [self.tableView reloadData];
+                                                    } else {
+                                                        [[[UIAlertView alloc] initWithTitle:nil
+                                                                                    message:@"There was an error retrieving this event's schedule"
+                                                                                   delegate:nil
+                                                                          cancelButtonTitle:@"OK"
+                                                                          otherButtonTitles:nil] show];
+                                                    }
+                                                    if (indicator) {
+                                                        [progressHud hide:YES];
+                                                    }
+                                                    isCheckingOnlineForSchedule = NO;
+                                                }];
 }
 
 - (NSDate*)getHourFromString:(NSString*)string {

@@ -18,6 +18,8 @@
 
 @implementation FeedbackTableVC
 
+BOOL isCheckingOnlineForFeedback;
+
 - (id)initWithEvent:(Event *)event {
     if (self = [super init]) {
         self.event = event;
@@ -31,16 +33,17 @@
 }
 
 - (NSArray *)feedbackArray {
-    _feedbackArray = [EventsController sharedInstance].feedbackArray;
     if (!_feedbackArray || ![_feedbackArray count]) {
-        [self checkServerForUpdatesWithIndicator:YES];
-    } else {
-        [self checkServerForUpdatesWithIndicator:NO];
+        _feedbackArray = [EventsController sharedInstance].feedbackArray;
+        if ((!_feedbackArray || ![_feedbackArray count]) && !isCheckingOnlineForFeedback) {
+            [self checkServerForUpdatesWithIndicator:YES];
+        }
     }
     return _feedbackArray;
 }
 
 - (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
+    isCheckingOnlineForFeedback = YES;
     MBProgressHUD *progressHud;
     if (indicator) {
         progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
@@ -50,12 +53,13 @@
     [[EventsController sharedInstance] getFeedbackForEvent:self.event
                                                 completion:^(BOOL success, NSString *message, EventsController *completion) {
                                                     if (success) {
-                                                        _feedbackArray = completion.feedbackArray;
+                                                        [self.tableView reloadData];
                                                     }
                                                     
                                                     if (indicator) {
                                                         [progressHud hide:YES];
                                                     }
+                                                    isCheckingOnlineForFeedback = NO;
                                                 }];
 }
 
