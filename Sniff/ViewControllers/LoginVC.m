@@ -27,15 +27,35 @@
     [self.loginButton setTitle:@"Submit" forState:UIControlStateNormal];
     self.firstNameHeightConstraint.constant = 0;
     self.lastNameHeightConstraint.constant = 0;
+    self.imageBottomLoginConstraint.priority = 999;
     [self.view layoutIfNeeded];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDismiss:) name:UIKeyboardWillHideNotification object:nil];
+    
+    self.loginButton.layer.cornerRadius = 7.5;
+    self.registerButton.layer.cornerRadius = 7.5;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    switch (self.loginType) {
+        case LoginType_Login:
+            self.passwordWidthConstraint.constant = self.view.frame.size.width - 16;
+            self.confirmPasswordWidthConstraint.constant = 0;
+            break;
+            
+        case LoginType_Register:
+            self.passwordWidthConstraint.constant = self.view.frame.size.width/2 - 12;
+            self.confirmPasswordWidthConstraint.constant = self.view.frame.size.width/2 - 12;
+            break;
+            
+        default:
+            break;
+    }
+
+    [self.view layoutIfNeeded];
 }
 
 - (IBAction)loginButtonPressed:(id)sender {
@@ -71,6 +91,8 @@
             self.loginType = LoginType_Login;
             [self.registerButton setTitle:@"Register" forState:UIControlStateNormal];
             [self.loginButton setTitle:@"Submit" forState:UIControlStateNormal];
+            self.imageBottomLoginConstraint.priority = 999;
+            [self.view layoutIfNeeded];
             break;
         }
             
@@ -91,6 +113,8 @@
             self.loginType = LoginType_Register;
             [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
             [self.registerButton setTitle:@"Submit" forState:UIControlStateNormal];
+            self.imageBottomLoginConstraint.priority = 997;
+            [self.view layoutIfNeeded];
             break;
         }
             
@@ -100,6 +124,22 @@
             user.last_name = self.last_name.text;
             user.email = self.email.text;
             user.password = self.password.text;
+            
+            if (![user.password length] || ![self.confirmPassword.text length] || ![user.first_name length] || ![user.last_name length] || ![user.email length]) {
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:@"Please fill in all the fields"
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles: nil] show];
+                return;
+            } else if (![user.password isEqualToString:self.confirmPassword.text]) {
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:@"The two passwords do not match"
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles: nil] show];
+                return;
+            }
             
             MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
             progressHud.labelText = @"Register...";

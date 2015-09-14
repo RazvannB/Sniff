@@ -18,4 +18,16 @@
     return self;
 }
 
+- (IBAction)feedbackButtonTouched:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(sendFeedbackWithRating:Comment:)]) {
+        [self.delegate sendFeedbackWithRating:self.userVote Comment:self.commentView.text];
+    }
+}
+
+#pragma mark - CustomRatingSliderDelegate
+
+- (void)rateValueChangedForSlider:(CustomRatingSlider *)slider {
+    self.userVote = slider.value;
+}
+
 @end

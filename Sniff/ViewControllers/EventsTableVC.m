@@ -27,8 +27,24 @@ alpha:1.0]
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    progressHud.labelText = @"Retrieving events...";
+}
+
+- (NSMutableArray *)eventsArray {
+    _eventsArray = [[NSMutableArray alloc] initWithArray:[EventsController sharedInstance].eventsArray];
+    if (!_eventsArray || ![_eventsArray count]) {
+        [self checkServerForUpdatesWithIndicator:YES];
+    } else {
+        [self checkServerForUpdatesWithIndicator:NO];
+    }
+    return _eventsArray;
+}
+
+- (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
+    MBProgressHUD *progressHud;
+    if (indicator) {
+        progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        progressHud.labelText = @"Retrieving events...";
+    }
     
     [[EventsController sharedInstance] getPublicEventsWithCompletion:^(BOOL success, NSString *message, EventsController *completion) {
         if (success) {
@@ -45,13 +61,10 @@ alpha:1.0]
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil] show];
         }
-        [progressHud hide:YES];
+        if (indicator) {
+            [progressHud hide:YES];
+        }
     }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color {
@@ -86,7 +99,6 @@ alpha:1.0]
     
     return cell;
 }
-
 
 #pragma mark - Table view delegate
 

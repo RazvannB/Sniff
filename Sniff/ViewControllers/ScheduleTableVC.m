@@ -104,9 +104,12 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.isMovingFromParentViewController) {
+        [EventsController sharedInstance].scheduleArray = nil;
+    }
 }
 
 #pragma mark - Table view data source

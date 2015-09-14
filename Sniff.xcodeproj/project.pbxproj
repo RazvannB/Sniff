@@ -51,6 +51,7 @@
 		E5DF0EBA1B77F66F004E5573 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */; };
 		E5E939D21B5EE9D700F1EA92 /* NavigationControllerWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */; };
 		E5F57B5D1B9E3999000E4247 /* CustomRatingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F57B5C1B9E3999000E4247 /* CustomRatingSlider.m */; };
+		E5F57B601B9E3999000E4247 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F57B5F1B9E3999000E4247 /* Feedback.m */; };
 		E5FAB7C21B7A70AA00BB8BE8 /* EventInfoTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAB7C01B7A70AA00BB8BE8 /* EventInfoTableVC.m */; };
 		E5FAB7C31B7A70AA00BB8BE8 /* EventInfoTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5FAB7C11B7A70AA00BB8BE8 /* EventInfoTableVC.xib */; };
 		E5FAB7C71B7A70EE00BB8BE8 /* EventTextTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAB7C51B7A70EE00BB8BE8 /* EventTextTVC.m */; };
@@ -149,6 +150,8 @@
 		E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationControllerWithMenu.m; path = Libraries/NavigationControllerWithMenu/NavigationControllerWithMenu.m; sourceTree = "<group>"; };
 		E5F57B5B1B9E3999000E4247 /* CustomRatingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomRatingSlider.h; path = Libraries/Rating/CustomRatingSlider.h; sourceTree = "<group>"; };
 		E5F57B5C1B9E3999000E4247 /* CustomRatingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomRatingSlider.m; path = Libraries/Rating/CustomRatingSlider.m; sourceTree = "<group>"; };
+		E5F57B5E1B9E3999000E4247 /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Feedback.h; path = Models/Feedback.h; sourceTree = "<group>"; };
+		E5F57B5F1B9E3999000E4247 /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Feedback.m; path = Models/Feedback.m; sourceTree = "<group>"; };
 		E5FAB7BF1B7A70AA00BB8BE8 /* EventInfoTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventInfoTableVC.h; path = ViewControllers/EventInfoTableVC.h; sourceTree = "<group>"; };
 		E5FAB7C01B7A70AA00BB8BE8 /* EventInfoTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventInfoTableVC.m; path = ViewControllers/EventInfoTableVC.m; sourceTree = "<group>"; };
 		E5FAB7C11B7A70AA00BB8BE8 /* EventInfoTableVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventInfoTableVC.xib; path = ViewControllers/EventInfoTableVC.xib; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 				E59B7A681B793FA00006C950 /* Event.m */,
 				E5DB97C91B83C0F30030482A /* ScheduleEvent.h */,
 				E5DB97CA1B83C0F30030482A /* ScheduleEvent.m */,
+				E5F57B5E1B9E3999000E4247 /* Feedback.h */,
+				E5F57B5F1B9E3999000E4247 /* Feedback.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 				E5DAE6931B8274AF0021CD2B /* ButtonsTVC.m in Sources */,
 				E54D44A81B5EDE8A0066231E /* AFSecurityPolicy.m in Sources */,
 				E54D44871B5ED8120066231E /* LoggedUserView.m in Sources */,
+				E5F57B601B9E3999000E4247 /* Feedback.m in Sources */,
 				E57B59301B791C8900E4425D /* EventsController.m in Sources */,
 				E54D44A51B5EDE8A0066231E /* AFHTTPRequestOperationManager.m in Sources */,
 				E521F6981B5DA9E5006AA29B /* AppDelegate.m in Sources */,

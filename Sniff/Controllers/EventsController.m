@@ -56,7 +56,6 @@
     [request addValue:event.id forParameter:@"id"];
     
     [request post:^(ServerRequest *serverRequest) {
-        self.feedbackDictionary = [[NSDictionary alloc] initWithDictionary:serverRequest.response[0]];
         
         if (completion) {
             completion(YES, @"Event info retrieved", self);

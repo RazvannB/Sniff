@@ -7,24 +7,80 @@
 //
 
 #import "FeedbackTableVC.h"
+#import "EventsController.h"
+#import "MBProgressHUD.h"
+#import "Feedback.h"
+#import "FeedbackTVC.h"
 
-@interface FeedbackTableVC ()
+@interface FeedbackTableVC () <FeedbackFooterViewDelegate>
 
 @end
 
 @implementation FeedbackTableVC
 
+- (id)initWithEvent:(Event *)event {
+    if (self = [super init]) {
+        self.event = event;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.footerView = [[FeedbackFooterView alloc] init];
-//    self.footerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 170);
-//    self.tableView.tableFooterView = self.footerView;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSArray *)feedbackArray {
+    _feedbackArray = [EventsController sharedInstance].feedbackArray;
+    if (!_feedbackArray || ![_feedbackArray count]) {
+        [self checkServerForUpdatesWithIndicator:YES];
+    } else {
+        [self checkServerForUpdatesWithIndicator:NO];
+    }
+    return _feedbackArray;
+}
+
+- (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
+    MBProgressHUD *progressHud;
+    if (indicator) {
+        progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        progressHud.labelText = @"Retrieving feedback...";
+    }
+    
+    [[EventsController sharedInstance] getFeedbackForEvent:self.event
+                                                completion:^(BOOL success, NSString *message, EventsController *completion) {
+                                                    if (success) {
+                                                        _feedbackArray = completion.feedbackArray;
+                                                    }
+                                                    
+                                                    if (indicator) {
+                                                        [progressHud hide:YES];
+                                                    }
+                                                }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.isMovingFromParentViewController) {
+        [EventsController sharedInstance].feedbackArray = nil;
+    }
+}
+
+#pragma mark - FeedbackFooterViewDelegate
+
+- (void)sendFeedbackWithRating:(int)ratingValue Comment:(NSString *)comment {
+    MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    progressHud.labelText = @"Sending feedback...";
+    
+    [[EventsController sharedInstance] sendFeedbackForEvent:self.event
+                                                    message:comment
+                                                 completion:^(BOOL success, NSString *message, EventsController *completion) {
+                                                     if (success) {
+                                                         
+                                                     }
+                                                     [progressHud hide:YES];
+                                                 }];
 }
 
 #pragma mark - Table view data source
@@ -35,8 +91,11 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"" forIndexPath:indexPath];
-    
+    static NSString *cellIdentifier = @"FeedbackTVC";
+    FeedbackTVC *cell = (FeedbackTVC*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    if (cell == nil) {
+        
+    }
     
     return cell;
 }

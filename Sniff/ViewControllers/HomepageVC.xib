@@ -13,6 +13,20 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oana_stamate" translatesAutoresizingMaskIntoConstraints="NO" id="GcF-hb-VW9">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="GcF-hb-VW9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BPt-pC-lwU"/>
+                <constraint firstItem="GcF-hb-VW9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Wue-aB-wnC"/>
+                <constraint firstAttribute="bottom" secondItem="GcF-hb-VW9" secondAttribute="bottom" id="iUs-sw-eqt"/>
+                <constraint firstAttribute="trailing" secondItem="GcF-hb-VW9" secondAttribute="trailing" id="jau-6R-ayF"/>
+            </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="oana_stamate" width="1333" height="2000"/>
+    </resources>
 </document>

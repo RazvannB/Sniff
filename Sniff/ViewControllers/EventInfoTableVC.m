@@ -29,9 +29,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = self.event.project_name;
-    
-    MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    progressHud.labelText = @"Retrieving event info...";
+}
+
+- (NSDictionary *)infoDictionary {
+    _infoDictionary = [EventsController sharedInstance].infoDictionary;
+    if (!_infoDictionary || ![_infoDictionary count]) {
+        [self checkServerForUpdatesWithIndicator:YES];
+    } else {
+        [self checkServerForUpdatesWithIndicator:NO];
+    }
+    return _infoDictionary;
+}
+
+- (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
+    MBProgressHUD *progressHud;
+    if (indicator) {
+        progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        progressHud.labelText = @"Retrieving event info...";
+    }
     
     [[EventsController sharedInstance] getInfoForEvent:self.event
                                             completion:^(BOOL success, NSString *message, EventsController *completion) {
@@ -45,13 +60,10 @@
                                                                       cancelButtonTitle:@"OK"
                                                                       otherButtonTitles:nil] show];
                                                 }
-                                                [progressHud hide:YES];
+                                                if (indicator) {
+                                                    [progressHud hide:YES];
+                                                }
                                             }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (id)dequeCellIdentifier:(NSString *)cellIdentifier {
@@ -70,8 +82,16 @@
 }
 
 - (void)feedbackButtonPressed {
-    FeedbackTableVC *feedback = [[FeedbackTableVC alloc] init];
+    FeedbackTableVC *feedback = [[FeedbackTableVC alloc] initWithEvent:self.event];
     [self.navigationController pushViewController:feedback animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.isMovingFromParentViewController) {
+        [EventsController sharedInstance].infoDictionary = nil;
+    }
 }
 
 #pragma mark - Table view data source
