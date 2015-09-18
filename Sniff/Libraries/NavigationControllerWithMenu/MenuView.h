@@ -17,6 +17,7 @@ typedef void(^MenuViewCompletionHandler)();
 
 @optional
 - (void)menuView:(MenuView *)menuView selectedMenuItemAtIndex:(NSInteger)menuIndex;
+- (void)menuViewDidDismiss;
 
 @end
 

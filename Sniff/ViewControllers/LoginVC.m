@@ -11,7 +11,7 @@
 #import "ServerRequest.h"
 #import "AuthenticationController.h"
 #import "MBProgressHUD.h"
-#import "HomepageVC.h"
+#import "EventsTableVC.h"
 
 @interface LoginVC () <UITextFieldDelegate>
 
@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.loginType = LoginType_Login;
-    [self.loginButton setTitle:@"Submit" forState:UIControlStateNormal];
+    [self.loginButton setTitle:@"Trimite" forState:UIControlStateNormal];
     self.firstNameHeightConstraint.constant = 0;
     self.lastNameHeightConstraint.constant = 0;
     self.imageBottomLoginConstraint.priority = 999;
@@ -66,7 +66,7 @@
             user.password = self.password.text;
             
             MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-            progressHud.labelText = @"Logging in...";
+            progressHud.labelText = @"Autentificare...";
             
             [[AuthenticationController sharedInstance] loginUser:user
                                                   withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
@@ -89,8 +89,8 @@
                                  [self.view layoutIfNeeded];
                              }];
             self.loginType = LoginType_Login;
-            [self.registerButton setTitle:@"Register" forState:UIControlStateNormal];
-            [self.loginButton setTitle:@"Submit" forState:UIControlStateNormal];
+            [self.registerButton setTitle:@"Inregistrare" forState:UIControlStateNormal];
+            [self.loginButton setTitle:@"Trimite" forState:UIControlStateNormal];
             self.imageBottomLoginConstraint.priority = 999;
             [self.view layoutIfNeeded];
             break;
@@ -111,8 +111,8 @@
                                  [self.view layoutIfNeeded];
                              }];
             self.loginType = LoginType_Register;
-            [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
-            [self.registerButton setTitle:@"Submit" forState:UIControlStateNormal];
+            [self.loginButton setTitle:@"Autentificare" forState:UIControlStateNormal];
+            [self.registerButton setTitle:@"Trimite" forState:UIControlStateNormal];
             self.imageBottomLoginConstraint.priority = 997;
             [self.view layoutIfNeeded];
             break;
@@ -127,14 +127,14 @@
             
             if (![user.password length] || ![self.confirmPassword.text length] || ![user.first_name length] || ![user.last_name length] || ![user.email length]) {
                 [[[UIAlertView alloc] initWithTitle:nil
-                                            message:@"Please fill in all the fields"
+                                            message:@"Te rog sa completezi toate campurile"
                                            delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles: nil] show];
                 return;
             } else if (![user.password isEqualToString:self.confirmPassword.text]) {
                 [[[UIAlertView alloc] initWithTitle:nil
-                                            message:@"The two passwords do not match"
+                                            message:@"Cele doua parole nu se potrivesc"
                                            delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles: nil] show];
@@ -142,7 +142,7 @@
             }
             
             MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-            progressHud.labelText = @"Register...";
+            progressHud.labelText = @"Inregistrare...";
             
             [[AuthenticationController sharedInstance] registerUser:user
                                                      withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {

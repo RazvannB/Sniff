@@ -30,18 +30,18 @@
                 NSDate *dateFromString = [formatter dateFromString:self.infoDictionary[@"start_date"]];
                 [formatter setDateFormat:@"dd.MM.yyyy"];
                 NSString *stringFromDate = [formatter stringFromDate:dateFromString];
-                self.textview.text = [NSString stringWithFormat:@"Date: %@", stringFromDate];
+                self.textview.text = [NSString stringWithFormat:@"Data: %@", stringFromDate];
             } else {
-                self.textview.text = @"No date availbale";
+                self.textview.text = @"Nicio data disponibila momentan";
             }
             break;
         }
             
         case EventTextType_Location:
             if ([self.infoDictionary[@"address"] class] != [NSNull class]) {
-                self.textview.text = [NSString stringWithFormat:@"Location: %@", self.infoDictionary[@"address"]];
+                self.textview.text = [NSString stringWithFormat:@"Locatie: %@", self.infoDictionary[@"address"]];
             } else {
-                self.textview.text = @"No location availbale";
+                self.textview.text = @"Nicio locatie disponibila momentan";
             }
             break;
             
@@ -49,7 +49,7 @@
             if ([self.infoDictionary[@"description"] class] != [NSNull class]) {
                 self.textview.text = [NSString stringWithFormat:@"%@", self.infoDictionary[@"description"]];
             } else {
-                self.textview.text = @"No description availbale";
+                self.textview.text = @"Nicio descriere disponibila momentan";
             }
             break;
             
@@ -57,9 +57,8 @@
             if ([self.infoDictionary[@"FbPage"] class] != [NSNull class]) {
                 self.textview.text = self.infoDictionary[@"FbPage"];
             } else {
-                self.textview.text = @"No link availbale";
+                self.textview.text = @"Niciun link disponibil momentan";
             }
-            self.textview.textColor = [UIColor blueColor];
             self.textview.textAlignment = NSTextAlignmentCenter;
             break;
             

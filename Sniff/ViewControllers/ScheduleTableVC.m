@@ -29,7 +29,7 @@ BOOL isCheckingOnlineForSchedule;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Schedule";
+    self.navigationItem.title = @"Program";
 }
 
 - (NSArray *)scheduleArray {
@@ -47,7 +47,7 @@ BOOL isCheckingOnlineForSchedule;
     MBProgressHUD *progressHud;
     if (indicator) {
         progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-        progressHud.labelText = @"Retrieving schedule...";
+        progressHud.labelText = @"Se descarca programul...";
     }
     
     [[EventsController sharedInstance] getScheduleForEvent:self.event
@@ -57,7 +57,7 @@ BOOL isCheckingOnlineForSchedule;
                                                         [self.tableView reloadData];
                                                     } else {
                                                         [[[UIAlertView alloc] initWithTitle:nil
-                                                                                    message:@"There was an error retrieving this event's schedule"
+                                                                                    message:@"Este o problema cu descarcarea programului"
                                                                                    delegate:nil
                                                                           cancelButtonTitle:@"OK"
                                                                           otherButtonTitles:nil] show];
@@ -142,6 +142,7 @@ BOOL isCheckingOnlineForSchedule;
     ScheduleEvent *currentScheduleEvent = self.scheduleDictionarySorted[[self.scheduleDictionarySorted allKeys][indexPath.section]][indexPath.row];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     cell.textLabel.text = [NSString stringWithFormat:@"%@-%@ %@", currentScheduleEvent.start_hour, currentScheduleEvent.end_hour, currentScheduleEvent.desc];
+    cell.backgroundColor = [UIColor colorWithRed:12.0f/255.0f green:24.0f/255.0f blue:36.0f/255.0f alpha:1];
     return cell;
 }
 

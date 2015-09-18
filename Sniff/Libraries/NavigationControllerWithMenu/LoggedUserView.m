@@ -22,13 +22,13 @@
     [super awakeFromNib];
 
     if ([AuthenticationController sharedInstance].loggedUser.id) {
-        self.backgroundColor = [UIColor colorWithRed:3/255.0f green:154/255.0f blue:255/255.0f alpha:1];
-        self.messageLabel.text = @"You are logged in as";
+        self.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:150.0f/255.0f blue:0.0f/255.0f alpha:1];
+        self.messageLabel.text = @"Sunteti autentificat ca";
         [self.loggedUser setTitle:[AuthenticationController sharedInstance].loggedUser.first_name forState:UIControlStateNormal];
     } else {
         self.backgroundColor = [UIColor lightGrayColor];
-        self.messageLabel.text = @"You are not logged in";
-        [self.loggedUser setTitle:@"Log in" forState:UIControlStateNormal];
+        self.messageLabel.text = @"Nu sunteti autentificat";
+        [self.loggedUser setTitle:@"Autentificare" forState:UIControlStateNormal];
         [self.loggedUser addTarget:self action:@selector(loginButtonPresed:) forControlEvents:UIControlEventTouchUpInside];
     }
 }

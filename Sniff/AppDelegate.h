@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HomepageVC.h"
+#import "LoginVC.h"
+#import "EventsTableVC.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) HomepageVC *viewController;
+@property (strong, nonatomic) UIViewController *viewController;
+@property (strong, nonatomic) LoginVC *loginViewController;
+@property (strong, nonatomic) EventsTableVC *eventsViewController;
 
 @end
 

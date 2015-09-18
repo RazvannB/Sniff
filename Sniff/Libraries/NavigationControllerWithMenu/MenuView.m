@@ -9,6 +9,8 @@
 #import "MenuView.h"
 #import "LoggedUserView.h"
 #import "AuthenticationController.h"
+#import "MenuViewCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation MenuView
 
@@ -28,14 +30,19 @@
     
     [self.shadowView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                        action:@selector(dismissMenuView)]];
+    
+    self.tableView.layer.masksToBounds = NO;
+    self.tableView.layer.shadowOffset = CGSizeMake(20, 0);
+    self.tableView.layer.shadowRadius = 10;
+    self.tableView.layer.shadowOpacity = 0.5;
 }
 
 - (NSArray *)menuItemsArray {
     _menuItemsArray = [NSArray alloc];
     if ([AuthenticationController sharedInstance].loggedUser.id) {
-        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Homepage", @"Events", @"Log out"]];
+        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Arata-mi evenimentele", @"Iesire din cont"]];
     } else {
-        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Homepage", @"Events"]];
+        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Arata-mi evenimentele"]];
     }
     
     return _menuItemsArray;
@@ -44,7 +51,7 @@
 - (void)presentWithAnimation {
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
     [keyWindow addSubview:self];
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.1
                      animations:^{
                          
                          self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
@@ -56,9 +63,11 @@
 
 - (void)dismissMenuView {
     [self.shadowView setAlpha:0];
+    if ([self.delegate respondsToSelector:@selector(menuViewDidDismiss)]) {
+        [self.delegate menuViewDidDismiss];
+    }
     [UIView animateWithDuration:0.2
                      animations:^{
-                         
                          self.frame = CGRectMake(-self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
                      } completion:^(BOOL finished) {
                          
@@ -73,11 +82,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
+    static NSString *cellIdentifier = @"MenuViewCell";
+    MenuViewCell *cell = (MenuViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
+        cell = [[MenuViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[NSBundle mainBundle] loadNibNamed:@"MenuViewCell" owner:self options:nil][0];
     }    
-    cell.textLabel.text = self.menuItemsArray[indexPath.row];
+    [cell titleLabel].text = self.menuItemsArray[indexPath.row];
     return cell;
 }
 

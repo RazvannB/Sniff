@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "NavigationControllerWithMenu.h"
+#import "AuthenticationController.h"
 
 @interface AppDelegate ()
 
@@ -15,9 +16,15 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.viewController = [[HomepageVC alloc] initWithNibName:@"HomepageVC" bundle:nil];
+    if ([AuthenticationController sharedInstance].loggedUser) {
+        self.eventsViewController = [[EventsTableVC alloc] init];
+        self.viewController = self.eventsViewController;
+    } else {
+        self.loginViewController = [[LoginVC alloc] init];
+        self.viewController = self.loginViewController;
+    }
+    
     NavigationControllerWithMenu *navController = [[NavigationControllerWithMenu alloc] init];
     navController = [navController initWithRootViewController:self.viewController];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

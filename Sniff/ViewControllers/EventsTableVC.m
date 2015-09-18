@@ -17,8 +17,9 @@ alpha:1.0]
 #import "MBProgressHUD.h"
 #import "Event.h"
 #import "EventInfoTableVC.h"
+#import "EventsListTVC.h"
 
-@interface EventsTableVC ()
+@interface EventsTableVC () <UIActionSheetDelegate>
 
 @end
 
@@ -29,6 +30,11 @@ BOOL isCheckingOnlineForEvents;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"Evenimente";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sorteaza"
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(chooseSort)];
 }
 
 - (NSMutableArray *)eventsArray {
@@ -48,7 +54,7 @@ BOOL isCheckingOnlineForEvents;
     MBProgressHUD *progressHud;
     if (indicator) {
         progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-        progressHud.labelText = @"Retrieving events...";
+        progressHud.labelText = @"Se cauta evenimentele...";
     }
     
     [[EventsController sharedInstance] getPublicEventsWithCompletion:^(BOOL success, NSString *message, EventsController *completion) {
@@ -57,7 +63,7 @@ BOOL isCheckingOnlineForEvents;
             [self.tableView reloadData];
         } else {
             [[[UIAlertView alloc] initWithTitle:nil
-                                        message:@"There was an error retrieving events"
+                                        message:@"Este o problema cu descarcarea evenimentelor"
                                        delegate:nil
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil] show];
@@ -67,6 +73,14 @@ BOOL isCheckingOnlineForEvents;
         }
         isCheckingOnlineForEvents = NO;
     }];
+}
+
+- (void)chooseSort {
+    [[[UIActionSheet alloc] initWithTitle:@"Alege o categorie"
+                                 delegate:self
+                        cancelButtonTitle:@"Inapoi"
+                   destructiveButtonTitle:nil
+                        otherButtonTitles:@"Toate categoriile", @"Educational", @"Concurs", nil] showInView:self.view];
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color {
@@ -83,6 +97,35 @@ BOOL isCheckingOnlineForEvents;
     return image;
 }
 
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSPredicate *predicate;
+    BOOL shouldFilter = YES;
+    switch (buttonIndex) {
+        case 0:
+            predicate = [NSPredicate predicateWithFormat:@"categoryName contains %@", @""];
+            break;
+        
+        case 1:
+            predicate = [NSPredicate predicateWithFormat:@"categoryName like %@", @"Educational"];
+            break;
+            
+        case 2:
+            predicate = [NSPredicate predicateWithFormat:@"categoryName like %@", @"Concurs"];
+            break;
+            
+        default:
+            shouldFilter = NO;
+            break;
+    }
+    
+    if (shouldFilter) {
+        [self.eventsArray filteredArrayUsingPredicate:predicate];
+        [self.tableView reloadData];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -90,15 +133,15 @@ BOOL isCheckingOnlineForEvents;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
+    static NSString *cellIdentifier = @"EventsListTVC";
+    id cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
+        cell = [[EventsListTVC alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[NSBundle mainBundle] loadNibNamed:@"EventsListTVC" owner:self options:nil][0];
     }
-    Event *event = self.eventsArray[indexPath.row];
-    cell.textLabel.text = event.project_name;
-    int colorHEX = [[event.color stringByReplacingOccurrencesOfString:@"#" withString:@""] intValue];
-    cell.imageView.image = [self imageWithColor:UIColorFromRGB(colorHEX)];
-    
+    [cell setEvent:self.eventsArray[indexPath.row]];
+
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
@@ -111,7 +154,7 @@ BOOL isCheckingOnlineForEvents;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 75;
+    return [EventsListTVC height];
 }
 
 @end

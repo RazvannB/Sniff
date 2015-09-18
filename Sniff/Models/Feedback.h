@@ -10,4 +10,8 @@
 
 @interface Feedback : NSObject
 
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSNumber *rating;
+@property (nonatomic, strong) NSString *comment;
+
 @end

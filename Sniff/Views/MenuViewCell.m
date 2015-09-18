@@ -1,14 +1,14 @@
 //
-//  FeedbackTVC.m
+//  MenuViewCell.m
 //  Sniff
 //
-//  Created by Razvan Balint on 27/08/15.
+//  Created by Razvan Balint on 18/09/15.
 //  Copyright (c) 2015 Razvan Balint. All rights reserved.
 //
 
-#import "FeedbackTVC.h"
+#import "MenuViewCell.h"
 
-@implementation FeedbackTVC
+@implementation MenuViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -18,10 +18,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
-+ (CGFloat)height {
-    return 0;
 }
 
 @end

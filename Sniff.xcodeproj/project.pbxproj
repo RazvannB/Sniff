@@ -11,8 +11,6 @@
 		E521F6981B5DA9E5006AA29B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6971B5DA9E5006AA29B /* AppDelegate.m */; };
 		E521F6A01B5DA9E5006AA29B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E521F69F1B5DA9E5006AA29B /* Images.xcassets */; };
 		E521F6AF1B5DA9E5006AA29B /* SniffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6AE1B5DA9E5006AA29B /* SniffTests.m */; };
-		E521F6C01B5DAB3F006AA29B /* HomepageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6BE1B5DAB3F006AA29B /* HomepageVC.m */; };
-		E521F6C11B5DAB3F006AA29B /* HomepageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E521F6BF1B5DAB3F006AA29B /* HomepageVC.xib */; };
 		E521F6CA1B5DADD4006AA29B /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6C81B5DADD4006AA29B /* LoginVC.m */; };
 		E521F6CB1B5DADD4006AA29B /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E521F6C91B5DADD4006AA29B /* LoginVC.xib */; };
 		E53BD60B1B8F964100D64CF3 /* FeedbackTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E53BD6091B8F964100D64CF3 /* FeedbackTableVC.m */; };
@@ -48,6 +46,10 @@
 		E5DB97CB1B83C0F30030482A /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DB97CA1B83C0F30030482A /* ScheduleEvent.m */; };
 		E5DB97D41B83CCC90030482A /* CommentTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DB97D21B83CCC90030482A /* CommentTVC.m */; };
 		E5DB97D51B83CCC90030482A /* CommentTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DB97D31B83CCC90030482A /* CommentTVC.xib */; };
+		E5DC43771BACA20A00419B86 /* EventsListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DC43751BACA20A00419B86 /* EventsListTVC.m */; };
+		E5DC43781BACA20A00419B86 /* EventsListTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DC43761BACA20A00419B86 /* EventsListTVC.xib */; };
+		E5DC437C1BACA7E700419B86 /* MenuViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DC437A1BACA7E700419B86 /* MenuViewCell.m */; };
+		E5DC437D1BACA7E700419B86 /* MenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DC437B1BACA7E700419B86 /* MenuViewCell.xib */; };
 		E5DF0EBA1B77F66F004E5573 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */; };
 		E5E939D21B5EE9D700F1EA92 /* NavigationControllerWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */; };
 		E5F57B5D1B9E3999000E4247 /* CustomRatingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F57B5C1B9E3999000E4247 /* CustomRatingSlider.m */; };
@@ -80,9 +82,6 @@
 		E521F6A81B5DA9E5006AA29B /* SniffTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SniffTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E521F6AD1B5DA9E5006AA29B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E521F6AE1B5DA9E5006AA29B /* SniffTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SniffTests.m; sourceTree = "<group>"; };
-		E521F6BD1B5DAB3F006AA29B /* HomepageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomepageVC.h; path = ViewControllers/HomepageVC.h; sourceTree = "<group>"; };
-		E521F6BE1B5DAB3F006AA29B /* HomepageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomepageVC.m; path = ViewControllers/HomepageVC.m; sourceTree = "<group>"; };
-		E521F6BF1B5DAB3F006AA29B /* HomepageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomepageVC.xib; path = ViewControllers/HomepageVC.xib; sourceTree = "<group>"; };
 		E521F6C71B5DADD4006AA29B /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginVC.h; path = ViewControllers/LoginVC.h; sourceTree = "<group>"; };
 		E521F6C81B5DADD4006AA29B /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginVC.m; path = ViewControllers/LoginVC.m; sourceTree = "<group>"; };
 		E521F6C91B5DADD4006AA29B /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginVC.xib; path = ViewControllers/LoginVC.xib; sourceTree = "<group>"; };
@@ -144,6 +143,12 @@
 		E5DB97D11B83CCC90030482A /* CommentTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentTVC.h; path = Views/CommentTVC.h; sourceTree = "<group>"; };
 		E5DB97D21B83CCC90030482A /* CommentTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentTVC.m; path = Views/CommentTVC.m; sourceTree = "<group>"; };
 		E5DB97D31B83CCC90030482A /* CommentTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentTVC.xib; path = Views/CommentTVC.xib; sourceTree = "<group>"; };
+		E5DC43741BACA20A00419B86 /* EventsListTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsListTVC.h; path = Views/EventsListTVC.h; sourceTree = "<group>"; };
+		E5DC43751BACA20A00419B86 /* EventsListTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsListTVC.m; path = Views/EventsListTVC.m; sourceTree = "<group>"; };
+		E5DC43761BACA20A00419B86 /* EventsListTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventsListTVC.xib; path = Views/EventsListTVC.xib; sourceTree = "<group>"; };
+		E5DC43791BACA7E700419B86 /* MenuViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewCell.h; path = Views/MenuViewCell.h; sourceTree = "<group>"; };
+		E5DC437A1BACA7E700419B86 /* MenuViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewCell.m; path = Views/MenuViewCell.m; sourceTree = "<group>"; };
+		E5DC437B1BACA7E700419B86 /* MenuViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuViewCell.xib; path = Views/MenuViewCell.xib; sourceTree = "<group>"; };
 		E5DF0EB81B77F66F004E5573 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E5E939D01B5EE9D700F1EA92 /* NavigationControllerWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationControllerWithMenu.h; path = Libraries/NavigationControllerWithMenu/NavigationControllerWithMenu.h; sourceTree = "<group>"; };
@@ -259,6 +264,9 @@
 		E521F6B91B5DAA21006AA29B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E5DC43741BACA20A00419B86 /* EventsListTVC.h */,
+				E5DC43751BACA20A00419B86 /* EventsListTVC.m */,
+				E5DC43761BACA20A00419B86 /* EventsListTVC.xib */,
 				E5FAB7C41B7A70EE00BB8BE8 /* EventTextTVC.h */,
 				E5FAB7C51B7A70EE00BB8BE8 /* EventTextTVC.m */,
 				E5FAB7C61B7A70EE00BB8BE8 /* EventTextTVC.xib */,
@@ -284,9 +292,6 @@
 		E521F6BA1B5DAA2B006AA29B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				E521F6BD1B5DAB3F006AA29B /* HomepageVC.h */,
-				E521F6BE1B5DAB3F006AA29B /* HomepageVC.m */,
-				E521F6BF1B5DAB3F006AA29B /* HomepageVC.xib */,
 				E521F6C71B5DADD4006AA29B /* LoginVC.h */,
 				E521F6C81B5DADD4006AA29B /* LoginVC.m */,
 				E521F6C91B5DADD4006AA29B /* LoginVC.xib */,
@@ -338,6 +343,9 @@
 				E54D44791B5ED2970066231E /* MenuView.h */,
 				E54D447A1B5ED2970066231E /* MenuView.m */,
 				E54D447E1B5ED2CF0066231E /* MenuView.xib */,
+				E5DC43791BACA7E700419B86 /* MenuViewCell.h */,
+				E5DC437A1BACA7E700419B86 /* MenuViewCell.m */,
+				E5DC437B1BACA7E700419B86 /* MenuViewCell.xib */,
 				E54D44851B5ED8120066231E /* LoggedUserView.h */,
 				E54D44861B5ED8120066231E /* LoggedUserView.m */,
 				E54D44881B5ED8270066231E /* LoggedUserView.xib */,
@@ -470,9 +478,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5DC43781BACA20A00419B86 /* EventsListTVC.xib in Resources */,
 				E5DB97C81B83AF010030482A /* ScheduleTableVC.xib in Resources */,
 				E57B592D1B79145400E4425D /* EventsTableVC.xib in Resources */,
-				E521F6C11B5DAB3F006AA29B /* HomepageVC.xib in Resources */,
+				E5DC437D1BACA7E700419B86 /* MenuViewCell.xib in Resources */,
 				E5FAB7CD1B7A710700BB8BE8 /* EventImageTVC.xib in Resources */,
 				E54D447F1B5ED2CF0066231E /* MenuView.xib in Resources */,
 				E54D44891B5ED8270066231E /* LoggedUserView.xib in Resources */,
@@ -509,6 +518,7 @@
 				E54D44A81B5EDE8A0066231E /* AFSecurityPolicy.m in Sources */,
 				E54D44871B5ED8120066231E /* LoggedUserView.m in Sources */,
 				E5F57B601B9E3999000E4247 /* Feedback.m in Sources */,
+				E5DC437C1BACA7E700419B86 /* MenuViewCell.m in Sources */,
 				E57B59301B791C8900E4425D /* EventsController.m in Sources */,
 				E54D44A51B5EDE8A0066231E /* AFHTTPRequestOperationManager.m in Sources */,
 				E521F6981B5DA9E5006AA29B /* AppDelegate.m in Sources */,
@@ -516,7 +526,6 @@
 				E5DF0EBA1B77F66F004E5573 /* MBProgressHUD.m in Sources */,
 				E59B7A691B793FA00006C950 /* Event.m in Sources */,
 				E5DB97D41B83CCC90030482A /* CommentTVC.m in Sources */,
-				E521F6C01B5DAB3F006AA29B /* HomepageVC.m in Sources */,
 				E521F6CA1B5DADD4006AA29B /* LoginVC.m in Sources */,
 				E5FAB7CC1B7A710700BB8BE8 /* EventImageTVC.m in Sources */,
 				E53BD6151B8F970700D64CF3 /* FeedbackTVC.m in Sources */,
@@ -530,6 +539,7 @@
 				E54D44AF1B5EDEE20066231E /* ServerRequest.m in Sources */,
 				E5FAB7C71B7A70EE00BB8BE8 /* EventTextTVC.m in Sources */,
 				E5F57B5D1B9E3999000E4247 /* CustomRatingSlider.m in Sources */,
+				E5DC43771BACA20A00419B86 /* EventsListTVC.m in Sources */,
 				E5DB97C71B83AF010030482A /* ScheduleTableVC.m in Sources */,
 				E54D44AA1B5EDE8A0066231E /* AFURLRequestSerialization.m in Sources */,
 				E54D44A71B5EDE8A0066231E /* AFNetworkReachabilityManager.m in Sources */,

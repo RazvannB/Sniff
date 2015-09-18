@@ -30,6 +30,11 @@ BOOL isCheckingOnlineForFeedback;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([self.feedbackArray count]) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+    
+    self.navigationItem.title = @"Feedback";
 }
 
 - (NSArray *)feedbackArray {
@@ -47,7 +52,7 @@ BOOL isCheckingOnlineForFeedback;
     MBProgressHUD *progressHud;
     if (indicator) {
         progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-        progressHud.labelText = @"Retrieving feedback...";
+        progressHud.labelText = @"Se descarca feeddback-ul...";
     }
     
     [[EventsController sharedInstance] getFeedbackForEvent:self.event
@@ -71,11 +76,19 @@ BOOL isCheckingOnlineForFeedback;
     }
 }
 
+- (id)dequeCellIdentifier:(NSString *)cellIdentifier {
+    id cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil][0];
+    }
+    return cell;
+}
+
 #pragma mark - FeedbackFooterViewDelegate
 
 - (void)sendFeedbackWithRating:(int)ratingValue Comment:(NSString *)comment {
     MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    progressHud.labelText = @"Sending feedback...";
+    progressHud.labelText = @"Se trimite feedback-ul...";
     
     [[EventsController sharedInstance] sendFeedbackForEvent:self.event
                                                     message:comment
@@ -90,22 +103,26 @@ BOOL isCheckingOnlineForFeedback;
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [self.feedbackArray count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"FeedbackTVC";
-    FeedbackTVC *cell = (FeedbackTVC*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        
-    }
+    id cell;
+    cell = [self dequeCellIdentifier:cellIdentifier];
+    
+    Feedback *feedback = self.feedbackArray[indexPath.row];
+    [cell nameLabel].text = feedback.name;
+    [[cell slider] setValue:[feedback.rating floatValue] animated:YES withCallback:NO];
+    [cell commentView].text = feedback.comment;
     
     return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     self.footerView = [[FeedbackFooterView alloc] init];
+    self.footerView.delegate = self;
     return self.footerView;
 }
 

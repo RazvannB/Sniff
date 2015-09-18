@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSString *last_name;
 @property (nonatomic, strong) NSString *color;
 @property (nonatomic, strong) NSString *FbPage;
+@property (nonatomic, strong) NSString *DiffDate;
 
 + (Event*)initWithDictionary:(NSDictionary*)dictionary;
 

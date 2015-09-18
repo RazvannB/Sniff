@@ -50,7 +50,7 @@ BOOL isCheckingOnlineForInfo;
     MBProgressHUD *progressHud;
     if (indicator) {
         progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-        progressHud.labelText = @"Retrieving event info...";
+        progressHud.labelText = @"Se descarca informatiile...";
     }
     
     [[EventsController sharedInstance] getInfoForEvent:self.event
@@ -59,7 +59,7 @@ BOOL isCheckingOnlineForInfo;
                                                     [self.tableView reloadData];
                                                 } else {
                                                     [[[UIAlertView alloc] initWithTitle:nil
-                                                                                message:@"There was an error retrieving this event's info"
+                                                                                message:@"Este o problema cu descarcarea informatiilor"
                                                                                delegate:nil
                                                                       cancelButtonTitle:@"OK"
                                                                       otherButtonTitles:nil] show];
@@ -111,7 +111,6 @@ BOOL isCheckingOnlineForInfo;
         switch (indexPath.row) {
             case 0:
                 cell = [self dequeCellIdentifier:@"EventImageTVC"];
-                [[cell imageview] setImage:[UIImage imageNamed:@"black"]];
                 break;
                 
             case 1:
@@ -142,6 +141,8 @@ BOOL isCheckingOnlineForInfo;
                 break;
         }
     }
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 

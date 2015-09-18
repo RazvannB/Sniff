@@ -24,6 +24,7 @@
     event.location_name = dictionary[@"location_name"];
     event.color = dictionary[@"color"];
     event.FbPage = dictionary[@"FbPage"];
+    event.DiffDate = dictionary[@"DiffDate"];
     return event;
 }
 

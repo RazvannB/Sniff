@@ -16,6 +16,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="schedule" translatesAutoresizingMaskIntoConstraints="NO" id="ZrA-Ju-PMV">
                         <rect key="frame" x="33" y="12" width="25" height="25"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="NqF-cx-ya3"/>
                         </constraints>
@@ -25,7 +26,8 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="J5b-Ua-gWP"/>
                         </constraints>
-                        <state key="normal" title="Schedule">
+                        <state key="normal" title="Program">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -38,6 +40,7 @@
                             <constraint firstAttribute="width" constant="100" id="d0l-v8-WEu"/>
                         </constraints>
                         <state key="normal" title="Feedback">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -46,11 +49,13 @@
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feedback" translatesAutoresizingMaskIntoConstraints="NO" id="KG7-gl-3Iw">
                         <rect key="frame" x="247" y="12" width="25" height="25"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="NPX-Q0-iI9"/>
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" red="0.047058823529411764" green="0.094117647058823528" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="tDX-k5-B8Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="BHH-hC-5Qn"/>
                     <constraint firstAttribute="bottomMargin" secondItem="ZrA-Ju-PMV" secondAttribute="bottom" constant="4" id="Msg-oE-4hr"/>

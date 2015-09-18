@@ -14,10 +14,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wCs-sZ-WnJ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wCs-sZ-WnJ">
                         <rect key="frame" x="8" y="8" width="304" height="183"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" red="0.047058823530000002" green="0.094117647060000004" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="wCs-sZ-WnJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="1IU-db-7zS"/>
                     <constraint firstAttribute="centerX" secondItem="wCs-sZ-WnJ" secondAttribute="centerX" id="6UC-je-jLF"/>
