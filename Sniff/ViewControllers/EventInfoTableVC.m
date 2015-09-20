@@ -15,8 +15,12 @@
 #import "ScheduleTableVC.h"
 #import "AuthenticationController.h"
 #import "FeedbackTableVC.h"
+#import "JoinButtonsView.h"
+#import "LoginVC.h"
+#import "ParticipantsVC.h"
+#import <MapKit/MapKit.h>
 
-@interface EventInfoTableVC () <ButtonsTVCDelegate>
+@interface EventInfoTableVC () <ButtonsTVCDelegate, UIActionSheetDelegate, JoinButtonsView>
 
 @end
 
@@ -79,6 +83,54 @@ BOOL isCheckingOnlineForInfo;
     return cell;
 }
 
+#pragma mark - JoinButtonsViewDelegate
+
+- (void)joinButtonsViewWIllGoToLogin {
+    LoginVC *loginPage = [[LoginVC alloc] initWithTurningBack:YES];
+    [self.navigationController pushViewController:loginPage animated:YES];
+}
+
+- (void)joinButtonsViewWillShowParticipants {
+    ParticipantsVC *participantsPage = [[ParticipantsVC alloc] init];
+    [self.navigationController pushViewController:participantsPage animated:YES];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    CLLocationCoordinate2D eventLocation =
+    CLLocationCoordinate2DMake([self.infoDictionary[@"location_x"] doubleValue],
+                               [self.infoDictionary[@"location_y"] doubleValue]);
+    
+    switch (buttonIndex) {
+        case 0: {
+            //Apple Maps, using the MKMapItem
+            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:eventLocation addressDictionary:nil];
+            MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
+            item.name = self.infoDictionary[@"project_name"];
+            [item openInMapsWithLaunchOptions:nil];
+            break;
+        }
+            
+        case 1: {
+            //Google Maps
+            //construct a URL using the comgooglemaps schema
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f",eventLocation.latitude,eventLocation.longitude]];
+            if (![[UIApplication sharedApplication] canOpenURL:url]) {
+                NSLog(@"Google Maps app is not installed. Will open website");
+                url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/maps/@%f,%f,18z",eventLocation.latitude,eventLocation.longitude]];
+                [[UIApplication sharedApplication] openURL:url];
+            } else {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - ButtonsTVCDelegate
 
 - (void)scheduleButtonPressed {
@@ -102,7 +154,7 @@ BOOL isCheckingOnlineForInfo;
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,25 +167,30 @@ BOOL isCheckingOnlineForInfo;
                 
             case 1:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_Date info:self.infoDictionary];
+                [cell setEventTextType:EventTextType_Organiser info:self.infoDictionary];
                 break;
                 
             case 2:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_Location info:self.infoDictionary];
+                [cell setEventTextType:EventTextType_Date info:self.infoDictionary];
                 break;
                 
             case 3:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_Description info:self.infoDictionary];
+                [cell setEventTextType:EventTextType_Location info:self.infoDictionary];
                 break;
                 
             case 4:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_FBPage info:self.infoDictionary];
+                [cell setEventTextType:EventTextType_Description info:self.infoDictionary];
                 break;
                 
             case 5:
+                cell = [self dequeCellIdentifier:@"EventTextTVC"];
+                [cell setEventTextType:EventTextType_FBPage info:self.infoDictionary];
+                break;
+                
+            case 6:
                 cell = [self dequeCellIdentifier:@"ButtonsTVC"];
                 [cell setDelegate:self];
                 
@@ -142,16 +199,40 @@ BOOL isCheckingOnlineForInfo;
         }
     }
     
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    if (indexPath.row == 5 &&
+        [self.infoDictionary[@"FbPage"] class] != [NSNull class] &&
+        [self.infoDictionary[@"FbPage"] length]) {
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
+    } else if (indexPath.row == 3 &&
+               [self.infoDictionary[@"location_x"] class] != [NSNull class] &&
+               [self.infoDictionary[@"location_x"] length]) {
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
+    } else {
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    JoinButtonsView *joinView = [[JoinButtonsView alloc] init];
+    [joinView setDelegate:self];
+    [joinView setInfoDictionary:self.infoDictionary];
+    return joinView;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 3) {
-        // location
-    } else if (indexPath.row == 4) {
+        [[[UIActionSheet alloc] initWithTitle:@"Alege o harta"
+                                     delegate:self
+                            cancelButtonTitle:@"Inapoi"
+                       destructiveButtonTitle:nil
+                            otherButtonTitles:@"Apple Maps", @"Google Maps", nil] showInView:self.view];
+        
+    } else if (indexPath.row == 5) {
         if ([self.infoDictionary[@"FbPage"] class] != [NSNull class] &&
             [self.infoDictionary[@"FbPage"] length]) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.infoDictionary[@"FbPage"]]];
@@ -185,6 +266,10 @@ BOOL isCheckingOnlineForInfo;
             return 50;
             break;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return [JoinButtonsView height];
 }
 
 @end

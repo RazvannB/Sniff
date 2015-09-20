@@ -22,6 +22,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *last_name;
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSString *fullname;
 
 - (void)setUserType:(UserType)userType;
 + (User*)initWithDictionary:(NSDictionary*)dictionary;

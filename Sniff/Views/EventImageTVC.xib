@@ -14,9 +14,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wCs-sZ-WnJ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="asmi_default" translatesAutoresizingMaskIntoConstraints="NO" id="wCs-sZ-WnJ">
                         <rect key="frame" x="8" y="8" width="304" height="183"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.047058823530000002" green="0.094117647060000004" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,4 +35,7 @@
             <point key="canvasLocation" x="312" y="241"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="asmi_default" width="587" height="604"/>
+    </resources>
 </document>

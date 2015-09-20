@@ -10,8 +10,14 @@
 
 @interface Feedback : NSObject
 
+@property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSNumber *rating;
-@property (nonatomic, strong) NSString *comment;
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) NSString *grade;
+@property (nonatomic, strong) NSString *date;
+@property (nonatomic, strong) NSString *event_id;
+@property (nonatomic, strong) NSString *businessOk;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

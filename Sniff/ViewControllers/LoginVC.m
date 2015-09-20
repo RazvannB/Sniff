@@ -13,11 +13,29 @@
 #import "MBProgressHUD.h"
 #import "EventsTableVC.h"
 
-@interface LoginVC () <UITextFieldDelegate>
+@interface LoginVC () <UITextFieldDelegate> {
+    BOOL shouldReturnToEvent;
+}
 
 @end
 
 @implementation LoginVC
+
+- (instancetype)init {
+    if (self = [super init]) {
+        shouldReturnToEvent = NO;
+    }
+    return self;
+}
+
+- (instancetype)initWithTurningBack:(BOOL)event {
+    if (self = [super init]) {
+        if (event) {
+            shouldReturnToEvent = YES;
+        }
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -72,7 +90,16 @@
                                                   withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
                                                       if (success) {
                                                           [progressHud hide:YES];
-                                                          [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification" object:nil];
+                                                          if (shouldReturnToEvent) {
+                                                              [self.navigationController popViewControllerAnimated:YES];
+                                                              [[[UIAlertView alloc] initWithTitle:nil
+                                                                                          message:@"Autentificare cu succes"
+                                                                                         delegate:nil
+                                                                                cancelButtonTitle:@"OK"
+                                                                                otherButtonTitles: nil] show];
+                                                          } else {
+                                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification" object:nil];
+                                                          }
                                                       } else {
                                                           [progressHud hide:YES];
                                                       }
@@ -148,7 +175,16 @@
                                                      withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
                                                          if (success) {
                                                              [progressHud hide:YES];
-                                                             [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification" object:nil];
+                                                             if (shouldReturnToEvent) {
+                                                                 [self.navigationController popViewControllerAnimated:YES];
+                                                                 [[[UIAlertView alloc] initWithTitle:nil
+                                                                                             message:@"Autentificare cu succes"
+                                                                                            delegate:nil
+                                                                                   cancelButtonTitle:@"OK"
+                                                                                   otherButtonTitles: nil] show];
+                                                             } else {
+                                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification" object:nil];
+                                                             }
                                                          } else {
                                                              [progressHud hide:YES];
                                                          }

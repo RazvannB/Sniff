@@ -11,8 +11,11 @@
 #import "MBProgressHUD.h"
 #import "Feedback.h"
 #import "FeedbackTVC.h"
+#import "SendFeedbackVC.h"
+#import "AuthenticationController.h"
+#import "LoginVC.h"
 
-@interface FeedbackTableVC () <FeedbackFooterViewDelegate>
+@interface FeedbackTableVC () <FeedbackFooterViewDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -29,10 +32,6 @@ BOOL isCheckingOnlineForFeedback;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if ([self.feedbackArray count]) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    }
     
     self.navigationItem.title = @"Feedback";
 }
@@ -58,6 +57,7 @@ BOOL isCheckingOnlineForFeedback;
     [[EventsController sharedInstance] getFeedbackForEvent:self.event
                                                 completion:^(BOOL success, NSString *message, EventsController *completion) {
                                                     if (success) {
+                                                        self.feedbackArray = completion.feedbackArray;
                                                         [self.tableView reloadData];
                                                     }
                                                     
@@ -84,20 +84,29 @@ BOOL isCheckingOnlineForFeedback;
     return cell;
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        LoginVC *loginPage = [[LoginVC alloc] initWithTurningBack:YES];
+        [self.navigationController pushViewController:loginPage animated:YES];
+    }
+}
+
 #pragma mark - FeedbackFooterViewDelegate
 
-- (void)sendFeedbackWithRating:(int)ratingValue Comment:(NSString *)comment {
-    MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    progressHud.labelText = @"Se trimite feedback-ul...";
-    
-    [[EventsController sharedInstance] sendFeedbackForEvent:self.event
-                                                    message:comment
-                                                 completion:^(BOOL success, NSString *message, EventsController *completion) {
-                                                     if (success) {
-                                                         
-                                                     }
-                                                     [progressHud hide:YES];
-                                                 }];
+- (void)feedbackFooterOpenSendPage {
+    if (![AuthenticationController sharedInstance].loggedUser.id) {
+        [[[UIAlertView alloc] initWithTitle:nil
+                                    message:@"Trebuie sa fiti autentificat ca sa puteti trimite un feedback"
+                                   delegate:self
+                          cancelButtonTitle:@"Inapoi"
+                          otherButtonTitles:@"Autentificare", nil] show];
+        return;
+    }
+    SendFeedbackVC *sendfeedback = [[SendFeedbackVC alloc] init];
+    [sendfeedback setEvent:self.event];
+    [self.navigationController pushViewController:sendfeedback animated:YES];
 }
 
 #pragma mark - Table view data source
@@ -109,13 +118,8 @@ BOOL isCheckingOnlineForFeedback;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"FeedbackTVC";
-    id cell;
-    cell = [self dequeCellIdentifier:cellIdentifier];
-    
-    Feedback *feedback = self.feedbackArray[indexPath.row];
-    [cell nameLabel].text = feedback.name;
-    [[cell slider] setValue:[feedback.rating floatValue] animated:YES withCallback:NO];
-    [cell commentView].text = feedback.comment;
+    FeedbackTVC *cell = [self dequeCellIdentifier:cellIdentifier];
+    [cell setFeedback:self.feedbackArray[indexPath.row]];
     
     return cell;
 }
@@ -129,7 +133,11 @@ BOOL isCheckingOnlineForFeedback;
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 170;
+    return [FeedbackFooterView height];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [FeedbackTVC getCellHeightWithText:[self.feedbackArray[indexPath.row] message]];
 }
 
 @end

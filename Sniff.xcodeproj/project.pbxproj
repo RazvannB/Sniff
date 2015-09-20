@@ -35,10 +35,16 @@
 		E54D44AB1B5EDE8A0066231E /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E54D44A11B5EDE8A0066231E /* AFURLResponseSerialization.m */; };
 		E54D44AC1B5EDE8A0066231E /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E54D44A31B5EDE8A0066231E /* AFURLSessionManager.m */; };
 		E54D44AF1B5EDEE20066231E /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E54D44AE1B5EDEE20066231E /* ServerRequest.m */; };
+		E55D13381BAF3D9000FF1526 /* JoinButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E55D13371BAF3D9000FF1526 /* JoinButtonsView.m */; };
+		E55D133A1BAF3DD900FF1526 /* JoinButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E55D13391BAF3DD900FF1526 /* JoinButtonsView.xib */; };
+		E55D133E1BAF438800FF1526 /* ParticipantsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E55D133C1BAF438800FF1526 /* ParticipantsVC.m */; };
+		E55D133F1BAF438800FF1526 /* ParticipantsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E55D133D1BAF438800FF1526 /* ParticipantsVC.xib */; };
 		E57B592C1B79145400E4425D /* EventsTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E57B592A1B79145400E4425D /* EventsTableVC.m */; };
 		E57B592D1B79145400E4425D /* EventsTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E57B592B1B79145400E4425D /* EventsTableVC.xib */; };
 		E57B59301B791C8900E4425D /* EventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E57B592F1B791C8900E4425D /* EventsController.m */; };
 		E59B7A691B793FA00006C950 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = E59B7A681B793FA00006C950 /* Event.m */; };
+		E5AC87891BADB1AF00B1BEF7 /* SendFeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC87871BADB1AF00B1BEF7 /* SendFeedbackVC.m */; };
+		E5AC878A1BADB1AF00B1BEF7 /* SendFeedbackVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5AC87881BADB1AF00B1BEF7 /* SendFeedbackVC.xib */; };
 		E5DAE6931B8274AF0021CD2B /* ButtonsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAE6911B8274AF0021CD2B /* ButtonsTVC.m */; };
 		E5DAE6941B8274AF0021CD2B /* ButtonsTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DAE6921B8274AF0021CD2B /* ButtonsTVC.xib */; };
 		E5DB97C71B83AF010030482A /* ScheduleTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DB97C51B83AF010030482A /* ScheduleTableVC.m */; };
@@ -125,6 +131,12 @@
 		E54D44A31B5EDE8A0066231E /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = Libraries/AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		E54D44AD1B5EDEE20066231E /* ServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerRequest.h; path = Libraries/ServerRequest.h; sourceTree = "<group>"; };
 		E54D44AE1B5EDEE20066231E /* ServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerRequest.m; path = Libraries/ServerRequest.m; sourceTree = "<group>"; };
+		E55D13361BAF3D8F00FF1526 /* JoinButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JoinButtonsView.h; path = Views/JoinButtonsView.h; sourceTree = "<group>"; };
+		E55D13371BAF3D9000FF1526 /* JoinButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JoinButtonsView.m; path = Views/JoinButtonsView.m; sourceTree = "<group>"; };
+		E55D13391BAF3DD900FF1526 /* JoinButtonsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JoinButtonsView.xib; path = Views/JoinButtonsView.xib; sourceTree = "<group>"; };
+		E55D133B1BAF438800FF1526 /* ParticipantsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticipantsVC.h; path = ViewControllers/ParticipantsVC.h; sourceTree = "<group>"; };
+		E55D133C1BAF438800FF1526 /* ParticipantsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParticipantsVC.m; path = ViewControllers/ParticipantsVC.m; sourceTree = "<group>"; };
+		E55D133D1BAF438800FF1526 /* ParticipantsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ParticipantsVC.xib; path = ViewControllers/ParticipantsVC.xib; sourceTree = "<group>"; };
 		E57B59291B79145400E4425D /* EventsTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsTableVC.h; path = ViewControllers/EventsTableVC.h; sourceTree = "<group>"; };
 		E57B592A1B79145400E4425D /* EventsTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsTableVC.m; path = ViewControllers/EventsTableVC.m; sourceTree = "<group>"; };
 		E57B592B1B79145400E4425D /* EventsTableVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventsTableVC.xib; path = ViewControllers/EventsTableVC.xib; sourceTree = "<group>"; };
@@ -132,6 +144,9 @@
 		E57B592F1B791C8900E4425D /* EventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsController.m; path = Controllers/EventsController.m; sourceTree = "<group>"; };
 		E59B7A671B793FA00006C950 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Models/Event.h; sourceTree = "<group>"; };
 		E59B7A681B793FA00006C950 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = Models/Event.m; sourceTree = "<group>"; };
+		E5AC87861BADB1AF00B1BEF7 /* SendFeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedbackVC.h; path = ViewControllers/SendFeedbackVC.h; sourceTree = "<group>"; };
+		E5AC87871BADB1AF00B1BEF7 /* SendFeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendFeedbackVC.m; path = ViewControllers/SendFeedbackVC.m; sourceTree = "<group>"; };
+		E5AC87881BADB1AF00B1BEF7 /* SendFeedbackVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SendFeedbackVC.xib; path = ViewControllers/SendFeedbackVC.xib; sourceTree = "<group>"; };
 		E5DAE6901B8274AF0021CD2B /* ButtonsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonsTVC.h; path = Views/ButtonsTVC.h; sourceTree = "<group>"; };
 		E5DAE6911B8274AF0021CD2B /* ButtonsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonsTVC.m; path = Views/ButtonsTVC.m; sourceTree = "<group>"; };
 		E5DAE6921B8274AF0021CD2B /* ButtonsTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonsTVC.xib; path = Views/ButtonsTVC.xib; sourceTree = "<group>"; };
@@ -285,6 +300,9 @@
 				E53BD6121B8F970700D64CF3 /* FeedbackTVC.h */,
 				E53BD6131B8F970700D64CF3 /* FeedbackTVC.m */,
 				E53BD6141B8F970700D64CF3 /* FeedbackTVC.xib */,
+				E55D13361BAF3D8F00FF1526 /* JoinButtonsView.h */,
+				E55D13371BAF3D9000FF1526 /* JoinButtonsView.m */,
+				E55D13391BAF3DD900FF1526 /* JoinButtonsView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -307,6 +325,12 @@
 				E53BD6081B8F964100D64CF3 /* FeedbackTableVC.h */,
 				E53BD6091B8F964100D64CF3 /* FeedbackTableVC.m */,
 				E53BD60A1B8F964100D64CF3 /* FeedbackTableVC.xib */,
+				E5AC87861BADB1AF00B1BEF7 /* SendFeedbackVC.h */,
+				E5AC87871BADB1AF00B1BEF7 /* SendFeedbackVC.m */,
+				E5AC87881BADB1AF00B1BEF7 /* SendFeedbackVC.xib */,
+				E55D133B1BAF438800FF1526 /* ParticipantsVC.h */,
+				E55D133C1BAF438800FF1526 /* ParticipantsVC.m */,
+				E55D133D1BAF438800FF1526 /* ParticipantsVC.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -482,10 +506,13 @@
 				E5DB97C81B83AF010030482A /* ScheduleTableVC.xib in Resources */,
 				E57B592D1B79145400E4425D /* EventsTableVC.xib in Resources */,
 				E5DC437D1BACA7E700419B86 /* MenuViewCell.xib in Resources */,
+				E55D133A1BAF3DD900FF1526 /* JoinButtonsView.xib in Resources */,
+				E55D133F1BAF438800FF1526 /* ParticipantsVC.xib in Resources */,
 				E5FAB7CD1B7A710700BB8BE8 /* EventImageTVC.xib in Resources */,
 				E54D447F1B5ED2CF0066231E /* MenuView.xib in Resources */,
 				E54D44891B5ED8270066231E /* LoggedUserView.xib in Resources */,
 				E53BD6111B8F968500D64CF3 /* FeedbackFooterView.xib in Resources */,
+				E5AC878A1BADB1AF00B1BEF7 /* SendFeedbackVC.xib in Resources */,
 				E521F6CB1B5DADD4006AA29B /* LoginVC.xib in Resources */,
 				E5FAB7C81B7A70EE00BB8BE8 /* EventTextTVC.xib in Resources */,
 				E521F6A01B5DA9E5006AA29B /* Images.xcassets in Resources */,
@@ -511,6 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5AC87891BADB1AF00B1BEF7 /* SendFeedbackVC.m in Sources */,
 				E54D44A91B5EDE8A0066231E /* AFURLConnectionOperation.m in Sources */,
 				E54D448F1B5EDA730066231E /* User.m in Sources */,
 				E53BD60B1B8F964100D64CF3 /* FeedbackTableVC.m in Sources */,
@@ -528,6 +556,8 @@
 				E5DB97D41B83CCC90030482A /* CommentTVC.m in Sources */,
 				E521F6CA1B5DADD4006AA29B /* LoginVC.m in Sources */,
 				E5FAB7CC1B7A710700BB8BE8 /* EventImageTVC.m in Sources */,
+				E55D13381BAF3D9000FF1526 /* JoinButtonsView.m in Sources */,
+				E55D133E1BAF438800FF1526 /* ParticipantsVC.m in Sources */,
 				E53BD6151B8F970700D64CF3 /* FeedbackTVC.m in Sources */,
 				E5FAB7C21B7A70AA00BB8BE8 /* EventInfoTableVC.m in Sources */,
 				E54D448C1B5ED9C30066231E /* AuthenticationController.m in Sources */,

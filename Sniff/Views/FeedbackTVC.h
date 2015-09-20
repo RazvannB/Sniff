@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CustomRatingSlider.h"
+#import "Feedback.h"
 
 @interface FeedbackTVC : UITableViewCell
 
+@property (nonatomic, strong) Feedback *feedback;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet CustomRatingSlider *slider;
-@property (nonatomic, weak) IBOutlet UITextView *commentView;
+@property (nonatomic, weak) IBOutlet UILabel *commentView;
+@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *commentHeightConstraint;
+@property (nonatomic, strong) NSString *message;
 
-+ (CGFloat)height;
++ (CGFloat)getCellHeightWithText:(NSString*)text;
 
 @end

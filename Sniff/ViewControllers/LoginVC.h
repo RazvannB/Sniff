@@ -34,5 +34,7 @@ typedef enum {
 
 - (IBAction)loginButtonPressed:(id)sender;
 - (IBAction)registerButtonPressed:(id)sender;
+- (instancetype)init;
+- (instancetype)initWithTurningBack:(BOOL)event;
 
 @end

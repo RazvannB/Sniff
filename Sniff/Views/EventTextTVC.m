@@ -22,6 +22,14 @@
     self.infoDictionary = [[NSDictionary alloc] initWithDictionary:infoDictionary];
     self.eventTextType = eventTextType;
     switch (eventTextType) {
+        case EventTextType_Organiser: {
+            if ([self.infoDictionary[@"org_name"] class] != [NSNull class]) {
+                [self setMessage:[NSString stringWithFormat:@"Organizator: %@", self.infoDictionary[@"org_name"]]];
+            } else {
+                [self setMessage:@"Organizator anonim"];
+            }
+            break;
+        }
             
         case EventTextType_Date: {
             if ([self.infoDictionary[@"start_date"] class] != [NSNull class]) {
@@ -30,34 +38,34 @@
                 NSDate *dateFromString = [formatter dateFromString:self.infoDictionary[@"start_date"]];
                 [formatter setDateFormat:@"dd.MM.yyyy"];
                 NSString *stringFromDate = [formatter stringFromDate:dateFromString];
-                self.textview.text = [NSString stringWithFormat:@"Data: %@", stringFromDate];
+                [self setMessage:[NSString stringWithFormat:@"Data: %@", stringFromDate]];
             } else {
-                self.textview.text = @"Nicio data disponibila momentan";
+                [self setMessage:@"Nicio data disponibila momentan"];
             }
             break;
         }
             
         case EventTextType_Location:
             if ([self.infoDictionary[@"address"] class] != [NSNull class]) {
-                self.textview.text = [NSString stringWithFormat:@"Locatie: %@", self.infoDictionary[@"address"]];
+                [self setMessage:[NSString stringWithFormat:@"Locatie: %@", self.infoDictionary[@"address"]]];
             } else {
-                self.textview.text = @"Nicio locatie disponibila momentan";
+                [self setMessage:@"Nicio locatie disponibila momentan"];
             }
             break;
             
         case EventTextType_Description:
             if ([self.infoDictionary[@"description"] class] != [NSNull class]) {
-                self.textview.text = [NSString stringWithFormat:@"%@", self.infoDictionary[@"description"]];
+                [self setMessage:[NSString stringWithFormat:@"%@", self.infoDictionary[@"description"]]];
             } else {
-                self.textview.text = @"Nicio descriere disponibila momentan";
+                [self setMessage:@"Nicio descriere disponibila momentan"];
             }
             break;
             
         case EventTextType_FBPage:
             if ([self.infoDictionary[@"FbPage"] class] != [NSNull class]) {
-                self.textview.text = self.infoDictionary[@"FbPage"];
+                [self setMessage:self.infoDictionary[@"FbPage"]];
             } else {
-                self.textview.text = @"Niciun link disponibil momentan";
+                [self setMessage:@"Niciun link disponibil momentan"];
             }
             self.textview.textAlignment = NSTextAlignmentCenter;
             break;
@@ -67,12 +75,21 @@
     }
 }
 
+- (void)setMessage:(NSString *)message {
+    self.textHeightConstraint.constant = [message boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 40, CGFLOAT_MAX)
+                                                               options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                                            attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:15.0]}
+                                                               context:nil].size.height * 1.5 + 30;
+    [self layoutIfNeeded];
+    self.textview.text = message;
+}
+
 + (CGFloat)getCellHeightWithText:(NSString*)text {
     if ([text class] != [NSNull class] && [text length]) {
-        return [text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 32, CGFLOAT_MAX)
+        return [text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 40, CGFLOAT_MAX)
                                   options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-                               attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Verdana" size:14.0]}
-                                  context:nil].size.height * 1.75 + 32;
+                               attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:15.0]}
+                                  context:nil].size.height * 1.5 + 30;
     } else {
         return 44;
     }

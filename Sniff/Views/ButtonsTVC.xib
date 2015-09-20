@@ -23,6 +23,7 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDX-k5-B8Y">
                         <rect key="frame" x="66" y="8" width="100" height="33"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="J5b-Ua-gWP"/>
                         </constraints>
@@ -36,6 +37,7 @@
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-zC-VDQ">
                         <rect key="frame" x="280" y="8" width="100" height="33"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="d0l-v8-WEu"/>
                         </constraints>
@@ -71,7 +73,8 @@
                     <constraint firstItem="Hkb-zC-VDQ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="rOa-La-9Md"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="313" y="194"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="323" y="220"/>
         </tableViewCell>
     </objects>
     <resources>

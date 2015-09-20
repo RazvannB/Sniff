@@ -11,18 +11,15 @@
 
 @protocol FeedbackFooterViewDelegate <NSObject>
 
-- (void)sendFeedbackWithRating:(int)ratingValue Comment:(NSString*)comment;
+- (void)feedbackFooterOpenSendPage;
 
 @end
 
-@interface FeedbackFooterView : UIView <CustomRatingSliderDelegate>
-
-@property (nonatomic, weak) IBOutlet UITextView *commentView;
-@property (nonatomic, assign) float userVote;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *SliderWidthCOnstraint;
+@interface FeedbackFooterView : UIView
 
 @property (nonatomic, strong) id <FeedbackFooterViewDelegate> delegate;
 
 - (IBAction)feedbackButtonTouched:(id)sender;
++ (CGFloat)height;
 
 @end

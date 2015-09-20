@@ -13,21 +13,18 @@
 - (instancetype)init {
     if (self = [super init]) {
         self = [[NSBundle mainBundle] loadNibNamed:@"FeedbackFooterView" owner:self options:nil][0];
-        self.commentView.layer.borderWidth = 1;
     }
     return self;
 }
 
 - (IBAction)feedbackButtonTouched:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(sendFeedbackWithRating:Comment:)]) {
-        [self.delegate sendFeedbackWithRating:self.userVote Comment:self.commentView.text];
+    if ([self.delegate respondsToSelector:@selector(feedbackFooterOpenSendPage)]) {
+        [self.delegate feedbackFooterOpenSendPage];
     }
 }
 
-#pragma mark - CustomRatingSliderDelegate
-
-- (void)rateValueChangedForSlider:(CustomRatingSlider *)slider {
-    self.userVote = slider.value;
++ (CGFloat)height {
+    return 47;
 }
 
 @end

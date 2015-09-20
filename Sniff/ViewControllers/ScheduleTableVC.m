@@ -103,6 +103,7 @@ BOOL isCheckingOnlineForSchedule;
     if (!_scheduleDictionarySorted || [_scheduleDictionarySorted count] == 0) {
         _scheduleDictionarySorted = [[NSMutableDictionary alloc] init];
         [self sortScheduleByDate];
+//        self.scheduleArray = [[self.scheduleArray reverseObjectEnumerator] allObjects]; //  ?
         for (ScheduleEvent* event in self.scheduleArray) {
             if (!_scheduleDictionarySorted[event.date]) {
                 NSMutableArray *hoursArray = [[NSMutableArray alloc] init];
@@ -142,6 +143,7 @@ BOOL isCheckingOnlineForSchedule;
     ScheduleEvent *currentScheduleEvent = self.scheduleDictionarySorted[[self.scheduleDictionarySorted allKeys][indexPath.section]][indexPath.row];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     cell.textLabel.text = [NSString stringWithFormat:@"%@-%@ %@", currentScheduleEvent.start_hour, currentScheduleEvent.end_hour, currentScheduleEvent.desc];
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
     cell.backgroundColor = [UIColor colorWithRed:12.0f/255.0f green:24.0f/255.0f blue:36.0f/255.0f alpha:1];
     return cell;
 }

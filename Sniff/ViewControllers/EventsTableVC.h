@@ -11,5 +11,6 @@
 @interface EventsTableVC : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *eventsArray;
+@property (nonatomic, strong) NSArray *allEventsArray;
 
 @end

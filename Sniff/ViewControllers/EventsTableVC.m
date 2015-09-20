@@ -31,7 +31,7 @@ BOOL isCheckingOnlineForEvents;
     [super viewDidLoad];
     
     self.navigationItem.title = @"Evenimente";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sorteaza"
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filtreaza"
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(chooseSort)];
@@ -43,9 +43,12 @@ BOOL isCheckingOnlineForEvents;
         if ((!_eventsArray || ![_eventsArray count]) && !isCheckingOnlineForEvents) {
             [self checkServerForUpdatesWithIndicator:YES];
         }
-    } else {
-
     }
+    
+    if (!self.allEventsArray || ![self.allEventsArray count]) {
+        self.allEventsArray = _eventsArray;
+    }
+    
     return _eventsArray;
 }
 
@@ -100,7 +103,7 @@ BOOL isCheckingOnlineForEvents;
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSPredicate *predicate;
+    NSPredicate *predicate = [[NSPredicate alloc] init];
     BOOL shouldFilter = YES;
     switch (buttonIndex) {
         case 0:
@@ -121,7 +124,7 @@ BOOL isCheckingOnlineForEvents;
     }
     
     if (shouldFilter) {
-        [self.eventsArray filteredArrayUsingPredicate:predicate];
+        self.eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
         [self.tableView reloadData];
     }
 }

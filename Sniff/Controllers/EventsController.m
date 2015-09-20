@@ -10,6 +10,7 @@
 #import "ServerRequest.h"
 #import "AuthenticationController.h"
 #import "ScheduleEvent.h"
+#import "Feedback.h"
 
 @implementation EventsController
 
@@ -58,6 +59,12 @@
     [request addValue:event.id forParameter:@"id"];
     
     [request post:^(ServerRequest *serverRequest) {
+        NSMutableArray *feedbackMutableArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *feedbackDictionary in serverRequest.response) {
+            Feedback *feedback = [[Feedback alloc] initWithDictionary:feedbackDictionary];
+            [feedbackMutableArray addObject:feedback];
+        }
+        self.feedbackArray = feedbackMutableArray;
 
         if (completion) {
             completion(YES, @"Event info retrieved", self);
@@ -71,7 +78,7 @@
     [request addValue:message forParameter:@"msg"];
     NSString *username = @"";
     if ([AuthenticationController sharedInstance].loggedUser.id) {
-        username = [AuthenticationController sharedInstance].loggedUser.first_name;
+        username = [AuthenticationController sharedInstance].loggedUser.fullname;
     }
     [request addValue:username forParameter:@"user"];
 
