@@ -144,7 +144,7 @@ BOOL isCheckingOnlineForSchedule;
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     cell.textLabel.text = [NSString stringWithFormat:@"%@-%@ %@", currentScheduleEvent.start_hour, currentScheduleEvent.end_hour, currentScheduleEvent.desc];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
-    cell.backgroundColor = [UIColor colorWithRed:12.0f/255.0f green:24.0f/255.0f blue:36.0f/255.0f alpha:1];
+    cell.backgroundColor = [UIColor colorWithRed:22.0f/255.0f green:44.0f/255.0f blue:66.0f/255.0f alpha:1];
     return cell;
 }
 

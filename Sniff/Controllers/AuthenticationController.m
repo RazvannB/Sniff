@@ -61,10 +61,12 @@
     [request addValue:user.password forParameter:@"pass"];
     
     [request post:^(ServerRequest *serverRequest) {
-        [[AuthenticationController sharedInstance] setLoggedUserWithDictionary:serverRequest.responseData];
         
-        if (completion) {
+        if (serverRequest.responseData) {
+            [[AuthenticationController sharedInstance] setLoggedUserWithDictionary:serverRequest.responseData];
             completion(YES, @"You have successfully logged in", self);
+        } else {
+            completion(NO, @"There was something wrong", self);
         }
      }];
 }

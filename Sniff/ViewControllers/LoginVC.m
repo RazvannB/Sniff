@@ -62,11 +62,15 @@
         case LoginType_Login:
             self.passwordWidthConstraint.constant = self.view.frame.size.width - 16;
             self.confirmPasswordWidthConstraint.constant = 0;
+            self.password.returnKeyType = UIReturnKeyDone;
+            self.confirmPassword.tag = -1;  //  Eliminate it from the text fields evidence
             break;
             
         case LoginType_Register:
             self.passwordWidthConstraint.constant = self.view.frame.size.width/2 - 12;
             self.confirmPasswordWidthConstraint.constant = self.view.frame.size.width/2 - 12;
+            self.password.returnKeyType = UIReturnKeyNext;
+            self.confirmPassword.tag = 4;
             break;
             
         default:
@@ -109,12 +113,8 @@
         }
             
         case LoginType_Register: {
-            [UIView animateWithDuration:0.2
-                             animations:^{
-                                 self.firstNameHeightConstraint.constant = 0;
-                                 self.lastNameHeightConstraint.constant = 0;
-                                 [self.view layoutIfNeeded];
-                             }];
+            self.firstNameHeightConstraint.constant = 0;
+            self.lastNameHeightConstraint.constant = 0;
             self.loginType = LoginType_Login;
             [self.registerButton setTitle:@"Inregistrare" forState:UIControlStateNormal];
             [self.loginButton setTitle:@"Trimite" forState:UIControlStateNormal];
@@ -131,12 +131,8 @@
 - (IBAction)registerButtonPressed:(id)sender {
     switch (self.loginType) {
         case LoginType_Login: {
-            [UIView animateWithDuration:0.2
-                             animations:^{
-                                 self.firstNameHeightConstraint.constant = 30;
-                                 self.lastNameHeightConstraint.constant = 30;
-                                 [self.view layoutIfNeeded];
-                             }];
+            self.firstNameHeightConstraint.constant = 30;
+            self.lastNameHeightConstraint.constant = 30;
             self.loginType = LoginType_Register;
             [self.loginButton setTitle:@"Autentificare" forState:UIControlStateNormal];
             [self.registerButton setTitle:@"Trimite" forState:UIControlStateNormal];
@@ -197,10 +193,6 @@
     }
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField; {
-    [textField becomeFirstResponder];
-}
-
 - (void)keyboardAppear:(NSNotification*)notification {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
@@ -208,7 +200,8 @@
     
     [UIView animateWithDuration:0
                      animations:^{
-                         self.passwordBottomConstraint.constant = 8 + keyboardFrameBeginRect.size.height - 76;
+                         self.passwordBottomConstraint.constant = keyboardFrameBeginRect.size.height - 68;
+                         self.confirmPasswordBottomConstraint.constant = keyboardFrameBeginRect.size.height - 68;
                          [self.view layoutIfNeeded];
                      }];
     
@@ -220,12 +213,35 @@
     [UIView animateWithDuration:0
                      animations:^{
                          self.passwordBottomConstraint.constant = 8;
+                         self.confirmPasswordBottomConstraint.constant = 8;
                          [self.view layoutIfNeeded];
                      }];
 }
 
 - (void)tapToDismissKeyboard {
     [self.view endEditing:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([string isEqualToString:@"\n"]) {
+        NSInteger nextTag = textField.tag + 1;
+        
+        UIResponder *nextResponder = [textField.superview viewWithTag:nextTag];
+        if (nextResponder) {
+            [nextResponder becomeFirstResponder];
+        } else {
+            [textField resignFirstResponder];
+        }
+    }
+    
+    return YES;
 }
 
 @end

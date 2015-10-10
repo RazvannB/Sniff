@@ -26,6 +26,7 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *firstNameHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *lastNameHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *passwordBottomConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *confirmPasswordBottomConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageBottomLoginConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *passwordWidthConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *confirmPasswordWidthConstraint;

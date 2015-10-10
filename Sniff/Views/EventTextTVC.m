@@ -95,10 +95,20 @@
     }
 }
 
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    
+    if (highlighted) {
+        self.contentView.backgroundColor = [UIColor colorWithRed:22.0f/255.0f green:44.0f/255.0f blue:66.0f/255.0f alpha:1];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    if (selected) {
+        self.contentView.backgroundColor = [UIColor colorWithRed:22.0f/255.0f green:44.0f/255.0f blue:66.0f/255.0f alpha:1];
+    } 
 }
 
 @end

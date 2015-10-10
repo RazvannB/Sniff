@@ -10,4 +10,6 @@
 
 @interface ParticipantsVC : UIViewController
 
+@property (nonatomic, strong) NSArray *participantsArray;
+
 @end
