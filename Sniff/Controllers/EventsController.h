@@ -24,7 +24,7 @@ typedef void(^EventsControllerCompletionHandler)(BOOL success, NSString *message
 - (void)getPublicEventsWithCompletion:(EventsControllerCompletionHandler)completion;
 - (void)getInfoForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion;
 - (void)getFeedbackForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion;
-- (void)sendFeedbackForEvent:(Event*)event message:(NSString*)message completion:(EventsControllerCompletionHandler)completion;
+- (void)sendFeedbackForEvent:(Event*)event username:(NSString*)username message:(NSString*)message completion:(EventsControllerCompletionHandler)completion;
 - (void)getScheduleForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion;
 
 @end

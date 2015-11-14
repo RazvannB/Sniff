@@ -97,7 +97,7 @@
                                                           if (shouldReturnToEvent) {
                                                               [self.navigationController popViewControllerAnimated:YES];
                                                               [[[UIAlertView alloc] initWithTitle:nil
-                                                                                          message:@"Autentificare cu succes"
+                                                                                          message:message
                                                                                          delegate:nil
                                                                                 cancelButtonTitle:@"OK"
                                                                                 otherButtonTitles: nil] show];
@@ -105,6 +105,11 @@
                                                               [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification" object:nil];
                                                           }
                                                       } else {
+                                                          [[[UIAlertView alloc] initWithTitle:nil
+                                                                                      message:message
+                                                                                     delegate:nil
+                                                                            cancelButtonTitle:@"OK"
+                                                                            otherButtonTitles: nil] show];
                                                           [progressHud hide:YES];
                                                       }
                                                   }];

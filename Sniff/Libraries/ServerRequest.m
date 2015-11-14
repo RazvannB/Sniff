@@ -41,7 +41,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text", nil];
     
     [manager POST:self.functionURL
        parameters:self.parameters
@@ -50,6 +50,8 @@
               if ([responseObject isKindOfClass:[NSDictionary class]]) {
                   self.responseData = responseObject;
               } else if ([responseObject isKindOfClass:[NSArray class]]) {
+                  self.response = responseObject;
+              } else if ([responseObject isKindOfClass:[NSString class]]){
                   self.response = responseObject;
               } else {
                   self.responseMessage = @"Invalid server response!";
@@ -123,7 +125,7 @@
         case ServerRequestType_GetSchedule:
             return [self.serverURL stringByAppendingString:@"getSchandule.php"];
         case ServerRequestType_SendFeedback:
-            return [self.serverURL stringByAppendingString:@"trimiteFeedback.php"];
+            return [self.serverURL stringByAppendingString:@"mobileTrimiteFeedback.php"];
 
         default:
             break;

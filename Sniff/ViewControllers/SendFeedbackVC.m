@@ -77,6 +77,7 @@
     progressHud.labelText = @"Se trimite feedback-ul...";
     
     [[EventsController sharedInstance] sendFeedbackForEvent:self.event
+                                                   username:self.nameLabel.text
                                                     message:self.comment.text
                                                  completion:^(BOOL success, NSString *message, EventsController *completion) {
                                                      if (success) {

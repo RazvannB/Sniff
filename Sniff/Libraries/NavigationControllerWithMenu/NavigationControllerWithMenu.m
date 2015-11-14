@@ -22,6 +22,7 @@
     self = [super initWithRootViewController:rootViewController];
     if (self) {
         rootViewController.navigationItem.leftBarButtonItem = self.menuButton;
+        self.view.backgroundColor = [UIColor redColor];
     }
     return self;
 }

@@ -37,6 +37,12 @@ BOOL isCheckingOnlineForInfo;
     self.navigationItem.title = self.event.project_name;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 - (NSDictionary *)infoDictionary {
     if (!_infoDictionary || ![_infoDictionary count]) {
         _infoDictionary = [EventsController sharedInstance].infoDictionary;
@@ -168,16 +174,19 @@ BOOL isCheckingOnlineForInfo;
             case 1:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
                 [cell setEventTextType:EventTextType_Organiser info:self.infoDictionary];
+                [cell textview].textAlignment = NSTextAlignmentCenter;
                 break;
                 
             case 2:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
                 [cell setEventTextType:EventTextType_Date info:self.infoDictionary];
+                [cell textview].textAlignment = NSTextAlignmentCenter;
                 break;
                 
             case 3:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
                 [cell setEventTextType:EventTextType_Location info:self.infoDictionary];
+                [cell textview].textAlignment = NSTextAlignmentCenter;
                 break;
                 
             case 4:
@@ -247,18 +256,22 @@ BOOL isCheckingOnlineForInfo;
             break;
             
         case 1:
-            return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"start_date"]];
+            return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"org_name"]];
             break;
             
         case 2:
-            return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"address"]];
+            return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"start_date"]];
             break;
             
         case 3:
-            return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"description"]];
+            return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"address"]];
             break;
             
         case 4:
+            return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"description"]];
+            break;
+            
+        case 5:
             return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"FbPage"]];
             break;
             

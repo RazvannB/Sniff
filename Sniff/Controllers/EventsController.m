@@ -8,7 +8,6 @@
 
 #import "EventsController.h"
 #import "ServerRequest.h"
-#import "AuthenticationController.h"
 #import "ScheduleEvent.h"
 #import "Feedback.h"
 
@@ -72,19 +71,18 @@
     }];
 }
 
-- (void)sendFeedbackForEvent:(Event*)event message:(NSString*)message completion:(EventsControllerCompletionHandler)completion {
+- (void)sendFeedbackForEvent:(Event*)event username:(NSString*)username message:(NSString*)message completion:(EventsControllerCompletionHandler)completion {
     ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_SendFeedback];
     [request addValue:event.id forParameter:@"id"];
     [request addValue:message forParameter:@"msg"];
-    NSString *username = @"";
-    if ([AuthenticationController sharedInstance].loggedUser.id) {
-        username = [AuthenticationController sharedInstance].loggedUser.fullname;
+    if ([username isEqualToString:@"Anonim"]) {
+        username = @"";
     }
     [request addValue:username forParameter:@"user"];
 
     [request post:^(ServerRequest *serverRequest) {
         
-        if (completion) {
+        if (serverRequest.response) {
             completion(YES, @"Event feedback sent", self);
         }
     }];

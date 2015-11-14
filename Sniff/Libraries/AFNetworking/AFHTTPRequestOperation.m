@@ -86,6 +86,11 @@ static dispatch_group_t http_request_operation_completion_group() {
         NSError *error = nil;
         self.responseObject = [self.responseSerializer responseObjectForResponse:self.response data:self.responseData error:&error];
         if (error) {
+            NSString *string = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+            if (string) {
+                self.responseObject = string;
+                error = nil;
+            }
             self.responseSerializationError = error;
         }
     }

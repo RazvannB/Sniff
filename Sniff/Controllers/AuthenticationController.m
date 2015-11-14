@@ -31,12 +31,20 @@
     return user;
 }
 
-- (void)setLoggedUserWithDictionary:(NSDictionary*)dictionary {
-    User *loggedUser = [User initWithDictionary:dictionary];    
-    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:loggedUser];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:encodedObject forKey:@"loggedUserKey"];
-    [defaults synchronize];
+- (void)setLoggedUserWithObject:(id)object {
+    User *loggedUser;
+    if ([object isKindOfClass:[NSDictionary class]]) {
+        loggedUser = [User initWithDictionary:(NSDictionary*)object];
+    } else if ([object isKindOfClass:[User class]]) {
+        loggedUser = (User*)object;
+    }
+    
+    if (loggedUser) {
+        NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:loggedUser];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:encodedObject forKey:@"loggedUserKey"];
+        [defaults synchronize];
+    }
 }
 
 - (void)registerUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion {
@@ -47,10 +55,10 @@
     [request addValue:user.password forParameter:@"pass1"];
     
     [request post:^(ServerRequest *serverRequest) {
-        [[AuthenticationController sharedInstance] setLoggedUserWithDictionary:serverRequest.responseData];
+        [[AuthenticationController sharedInstance] setLoggedUserWithObject:user];
         
-        if (completion) {
-            completion(YES, @"You have successfully registered", self);
+        if (serverRequest.response) {
+            completion(YES, @"Inregistrare cu succes", self);
         }
     }];
 }
@@ -63,10 +71,10 @@
     [request post:^(ServerRequest *serverRequest) {
         
         if (serverRequest.responseData) {
-            [[AuthenticationController sharedInstance] setLoggedUserWithDictionary:serverRequest.responseData];
-            completion(YES, @"You have successfully logged in", self);
+            [[AuthenticationController sharedInstance] setLoggedUserWithObject:serverRequest.responseData];
+            completion(YES, @"Autentificare cu succes", self);
         } else {
-            completion(NO, @"There was something wrong", self);
+            completion(NO, @"A aparut o eroare. Incercati din nou", self);
         }
      }];
 }

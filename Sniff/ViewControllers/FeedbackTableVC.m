@@ -96,7 +96,7 @@ BOOL isCheckingOnlineForFeedback;
 #pragma mark - FeedbackFooterViewDelegate
 
 - (void)feedbackFooterOpenSendPage {
-    if (![AuthenticationController sharedInstance].loggedUser.id) {
+    if (![AuthenticationController sharedInstance].loggedUser) {
         [[[UIAlertView alloc] initWithTitle:nil
                                     message:@"Trebuie sa fiti autentificat ca sa puteti trimite un feedback"
                                    delegate:self

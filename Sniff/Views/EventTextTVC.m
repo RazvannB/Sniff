@@ -78,8 +78,8 @@
 - (void)setMessage:(NSString *)message {
     self.textHeightConstraint.constant = [message boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 40, CGFLOAT_MAX)
                                                                options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-                                                            attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:15.0]}
-                                                               context:nil].size.height * 1.5 + 30;
+                                                            attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:17.0]}
+                                                               context:nil].size.height;
     [self layoutIfNeeded];
     self.textview.text = message;
 }
@@ -88,8 +88,8 @@
     if ([text class] != [NSNull class] && [text length]) {
         return [text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 40, CGFLOAT_MAX)
                                   options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-                               attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:15.0]}
-                                  context:nil].size.height * 1.5 + 30;
+                               attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:17.0]}
+                                  context:nil].size.height + 16;
     } else {
         return 44;
     }
