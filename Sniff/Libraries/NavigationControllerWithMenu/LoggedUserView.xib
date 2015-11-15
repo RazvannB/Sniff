@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,6 +13,7 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunteti autentificat ca" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpt-Tz-pjA">
                     <rect key="frame" x="8" y="8" width="234" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="jhi-NI-LtM"/>
                     </constraints>
@@ -24,6 +26,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOo-b2-BRq">
                             <rect key="frame" x="8" y="8" width="234" height="47"/>
+                            <animations/>
                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="25"/>
                             <size key="titleShadowOffset" width="2" height="2"/>
                             <state key="normal">
@@ -32,6 +35,7 @@
                             </state>
                         </button>
                     </subviews>
+                    <animations/>
                     <constraints>
                         <constraint firstItem="YOo-b2-BRq" firstAttribute="leading" secondItem="AYD-D6-FoS" secondAttribute="leading" constant="8" id="Aqt-hD-z5P"/>
                         <constraint firstAttribute="height" constant="63" id="OmS-1T-W46"/>
@@ -43,6 +47,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" red="0.0" green="0.58823529411764708" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="cpt-Tz-pjA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="QKA-1C-njd"/>

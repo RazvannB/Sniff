@@ -57,6 +57,8 @@
 		E5DC437C1BACA7E700419B86 /* MenuViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DC437A1BACA7E700419B86 /* MenuViewCell.m */; };
 		E5DC437D1BACA7E700419B86 /* MenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DC437B1BACA7E700419B86 /* MenuViewCell.xib */; };
 		E5DF0EBA1B77F66F004E5573 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */; };
+		E5E7EF641BF7D03A00E1081D /* AuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E7EF621BF7D03A00E1081D /* AuthenticationVC.m */; };
+		E5E7EF651BF7D03A00E1081D /* AuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5E7EF631BF7D03A00E1081D /* AuthenticationVC.xib */; };
 		E5E939D21B5EE9D700F1EA92 /* NavigationControllerWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */; };
 		E5F57B5D1B9E3999000E4247 /* CustomRatingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F57B5C1B9E3999000E4247 /* CustomRatingSlider.m */; };
 		E5F57B601B9E3999000E4247 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F57B5F1B9E3999000E4247 /* Feedback.m */; };
@@ -166,6 +168,9 @@
 		E5DC437B1BACA7E700419B86 /* MenuViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuViewCell.xib; path = Views/MenuViewCell.xib; sourceTree = "<group>"; };
 		E5DF0EB81B77F66F004E5573 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E5DF0EB91B77F66F004E5573 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E5E7EF611BF7D03A00E1081D /* AuthenticationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AuthenticationVC.h; path = ViewControllers/AuthenticationVC.h; sourceTree = "<group>"; };
+		E5E7EF621BF7D03A00E1081D /* AuthenticationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AuthenticationVC.m; path = ViewControllers/AuthenticationVC.m; sourceTree = "<group>"; };
+		E5E7EF631BF7D03A00E1081D /* AuthenticationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AuthenticationVC.xib; path = ViewControllers/AuthenticationVC.xib; sourceTree = "<group>"; };
 		E5E939D01B5EE9D700F1EA92 /* NavigationControllerWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationControllerWithMenu.h; path = Libraries/NavigationControllerWithMenu/NavigationControllerWithMenu.h; sourceTree = "<group>"; };
 		E5E939D11B5EE9D700F1EA92 /* NavigationControllerWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationControllerWithMenu.m; path = Libraries/NavigationControllerWithMenu/NavigationControllerWithMenu.m; sourceTree = "<group>"; };
 		E5F57B5B1B9E3999000E4247 /* CustomRatingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomRatingSlider.h; path = Libraries/Rating/CustomRatingSlider.h; sourceTree = "<group>"; };
@@ -313,6 +318,9 @@
 				E521F6C71B5DADD4006AA29B /* LoginVC.h */,
 				E521F6C81B5DADD4006AA29B /* LoginVC.m */,
 				E521F6C91B5DADD4006AA29B /* LoginVC.xib */,
+				E5E7EF611BF7D03A00E1081D /* AuthenticationVC.h */,
+				E5E7EF621BF7D03A00E1081D /* AuthenticationVC.m */,
+				E5E7EF631BF7D03A00E1081D /* AuthenticationVC.xib */,
 				E57B59291B79145400E4425D /* EventsTableVC.h */,
 				E57B592A1B79145400E4425D /* EventsTableVC.m */,
 				E57B592B1B79145400E4425D /* EventsTableVC.xib */,
@@ -509,6 +517,7 @@
 				E5DC437D1BACA7E700419B86 /* MenuViewCell.xib in Resources */,
 				E55D133A1BAF3DD900FF1526 /* JoinButtonsView.xib in Resources */,
 				E55D133F1BAF438800FF1526 /* ParticipantsVC.xib in Resources */,
+				E5E7EF651BF7D03A00E1081D /* AuthenticationVC.xib in Resources */,
 				E5FAB7CD1B7A710700BB8BE8 /* EventImageTVC.xib in Resources */,
 				E54D447F1B5ED2CF0066231E /* MenuView.xib in Resources */,
 				E54D44891B5ED8270066231E /* LoggedUserView.xib in Resources */,
@@ -545,6 +554,7 @@
 				E53BD60B1B8F964100D64CF3 /* FeedbackTableVC.m in Sources */,
 				E5DAE6931B8274AF0021CD2B /* ButtonsTVC.m in Sources */,
 				E54D44A81B5EDE8A0066231E /* AFSecurityPolicy.m in Sources */,
+				E5E7EF641BF7D03A00E1081D /* AuthenticationVC.m in Sources */,
 				E54D44871B5ED8120066231E /* LoggedUserView.m in Sources */,
 				E5F57B601B9E3999000E4247 /* Feedback.m in Sources */,
 				E5DC437C1BACA7E700419B86 /* MenuViewCell.m in Sources */,

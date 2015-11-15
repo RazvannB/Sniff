@@ -22,7 +22,6 @@
     self = [super initWithRootViewController:rootViewController];
     if (self) {
         rootViewController.navigationItem.leftBarButtonItem = self.menuButton;
-        self.view.backgroundColor = [UIColor redColor];
     }
     return self;
 }
@@ -60,8 +59,8 @@
 
     [UIView animateWithDuration:0.2
                      animations:^{
-                         [viewController.view setFrame:CGRectMake(200, 0, viewController.view.frame.size.width, viewController.view.frame.size.height)];
-                         self.navigationBar.frame = CGRectMake(200, [UIApplication sharedApplication].statusBarFrame.size.height, self.navigationBar.frame.size.width, self.navigationBar.frame.size.height);
+                         [viewController.view setFrame:CGRectMake(250, 0, viewController.view.frame.size.width, viewController.view.frame.size.height)];
+                         self.navigationBar.frame = CGRectMake(250, [UIApplication sharedApplication].statusBarFrame.size.height, self.navigationBar.frame.size.width, self.navigationBar.frame.size.height);
                      }];
 }
 

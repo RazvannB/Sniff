@@ -93,7 +93,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {    
-    self.loggedUserView = [[LoggedUserView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+    self.loggedUserView = [[LoggedUserView alloc] initWithFrame:CGRectMake(0, 0, 250, 100)];
     self.loggedUserView = [[NSBundle mainBundle] loadNibNamed:@"LoggedUserView" owner:nil options:nil][0];
     
     return self.loggedUserView;

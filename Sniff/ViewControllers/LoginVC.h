@@ -22,14 +22,21 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet UITextField *confirmPassword;
 @property (nonatomic, weak) IBOutlet UIButton *loginButton;
 @property (nonatomic, weak) IBOutlet UIButton *registerButton;
+@property (nonatomic, weak) IBOutlet UIButton *loginFacebookButton;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *firstNameHeightConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *firstNameBottomConstraint;
+
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *lastNameHeightConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *lastNameBottomConstraint;
+
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *passwordBottomConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *confirmPasswordBottomConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageBottomLoginConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *passwordWidthConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *confirmPasswordWidthConstraint;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageHeightConstraint;
 
 @property (nonatomic) LoginType loginType;
 
