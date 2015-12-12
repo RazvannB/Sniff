@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    EventsTableVCType_Default,
+    EventsTableVCType_PastEvents
+} EventsTableVCType;
+
 @interface EventsTableVC : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *eventsArray;
 @property (nonatomic, strong) NSArray *allEventsArray;
+@property (nonatomic) NSInteger typeSelected;
+
+@property (nonatomic) EventsTableVCType eventsType;
 
 @end

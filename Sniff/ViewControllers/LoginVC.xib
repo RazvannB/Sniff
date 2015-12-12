@@ -7,9 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginVC">
             <connections>
-                <outlet property="imageHeightConstraint" destination="ZjM-gs-6bU" id="HrM-B6-aFJ"/>
+                <outlet property="imageTopConstraint" destination="jky-VM-VaJ" id="yYb-tQ-YBu"/>
                 <outlet property="loginButton" destination="wY9-Uy-7cw" id="VcV-WH-Skv"/>
                 <outlet property="loginFacebookButton" destination="GV3-Ar-g12" id="3yV-0v-A4s"/>
+                <outlet property="logoImage" destination="Gei-q6-TgN" id="Jas-pt-AaJ"/>
                 <outlet property="registerButton" destination="Q4C-eo-1sh" id="knN-Re-2Dl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -54,11 +55,11 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sniff_login" translatesAutoresizingMaskIntoConstraints="NO" id="Gei-q6-TgN">
-                    <rect key="frame" x="8" y="52" width="359" height="286"/>
+                    <rect key="frame" x="8" y="52" width="359" height="200"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="286" id="ZjM-gs-6bU"/>
+                        <constraint firstAttribute="height" constant="200" id="ZjM-gs-6bU"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GV3-Ar-g12">
@@ -76,7 +77,7 @@
                 </button>
             </subviews>
             <animations/>
-            <color key="backgroundColor" red="0.086274509803921567" green="0.17254901960784313" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="wY9-Uy-7cw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JYk-Yf-CeB"/>
                 <constraint firstItem="GV3-Ar-g12" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="SrS-4p-EuM"/>
@@ -93,6 +94,6 @@
         </view>
     </objects>
     <resources>
-        <image name="sniff_login" width="682" height="640"/>
+        <image name="sniff_login" width="412" height="358"/>
     </resources>
 </document>

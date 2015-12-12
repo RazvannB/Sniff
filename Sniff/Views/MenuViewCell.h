@@ -10,6 +10,10 @@
 
 @interface MenuViewCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *imageview;
+
++ (CGFloat)height;
 
 @end

@@ -18,8 +18,9 @@ alpha:1.0]
 #import "Event.h"
 #import "EventInfoTableVC.h"
 #import "EventsListTVC.h"
+#import "FilterEventsVC.h"
 
-@interface EventsTableVC () <UIActionSheetDelegate>
+@interface EventsTableVC () <FilterEventsVCDelegate>
 
 @end
 
@@ -30,17 +31,16 @@ BOOL isCheckingOnlineForEvents;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = NO;
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    self.navigationController.navigationBar.translucent = NO;
     
     self.navigationItem.title = @"Evenimente";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filtreaza"
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
-                                                                             action:@selector(chooseSort)];
+                                                                             action:@selector(chooseFilter)];
+    
+    [self setTypeSelected:0];
 }
 
 - (NSMutableArray *)eventsArray {
@@ -56,6 +56,53 @@ BOOL isCheckingOnlineForEvents;
     }
     
     return _eventsArray;
+}
+
+- (void)setTypeSelected:(NSInteger)typeSelected {
+    _typeSelected = typeSelected;
+    
+    BOOL shouldFilter = YES;
+    NSString *predicateTerm = @"";
+    switch (typeSelected) {
+        case 0:
+            break;
+            
+        case 1:
+            predicateTerm = @"Educational";
+            break;
+            
+        case 2:
+            predicateTerm = @"Cariera";
+            break;
+            
+        case 3:
+            predicateTerm = @"Social";
+            break;
+            
+        case 4:
+            predicateTerm = @"Distractie";
+            break;
+            
+        case 5:
+            predicateTerm = @"Concurs";
+            break;
+            
+        case 6:
+            predicateTerm = @"Training";
+            break;
+            
+        default:
+            shouldFilter = NO;
+            break;
+    }
+    
+    if (shouldFilter) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName contains %@", predicateTerm];
+        self.eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
+        [self.tableView reloadData];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
@@ -84,55 +131,46 @@ BOOL isCheckingOnlineForEvents;
     }];
 }
 
-- (void)chooseSort {
-    [[[UIActionSheet alloc] initWithTitle:@"Alege o categorie"
-                                 delegate:self
-                        cancelButtonTitle:@"Inapoi"
-                   destructiveButtonTitle:nil
-                        otherButtonTitles:@"Toate categoriile", @"Educational", @"Concurs", nil] showInView:self.view];
+- (void)chooseFilter {
+    FilterEventsVC *filterVC = [[FilterEventsVC alloc] init];
+    filterVC.view.backgroundColor = [UIColor clearColor];
+    filterVC.providesPresentationContextTransitionStyle = YES;
+    filterVC.definesPresentationContext = YES;
+    filterVC.delegate = self;
+    [filterVC setSelectedValue:self.typeSelected];
+    self.view.alpha = 0.3;
+    
+    [self.navigationController presentViewController:filterVC animated:YES completion:nil];
 }
 
-- (UIImage *)imageWithColor:(UIColor *)color {
-    CGRect rect = CGRectMake(8.0f, 8.0f, 59.0f, 59.0f);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
+//- (void)sortArrayOfEvents {
+//    NSMutableArray *tempEventsArray = [self.allEventsArray mutableCopy];
+//    for (Event *event in self.allEventsArray) {
+//        if (self.eventsType == EventsTableVCType_Default && [event.DiffDate intValue] < 0) {
+//            [tempEventsArray removeObject:event];
+//        } else if (self.eventsType == EventsTableVCType_PastEvents && [event.DiffDate intValue] >= 0) {
+//            [tempEventsArray removeObject:event];
+//        }
+//    }
+//    self.allEventsArray = [tempEventsArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//        
+//        int amr1 = [[obj1 DiffDate] intValue];
+//        int amr2 = [[obj2 DiffDate] intValue];
+//        
+//        return [
+//    }];
+//    
+//}
 
-#pragma mark - UIActionSheetDelegate
+#pragma mark - FilterEventsVCDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSPredicate *predicate = [[NSPredicate alloc] init];
-    BOOL shouldFilter = YES;
-    switch (buttonIndex) {
-        case 0:
-            predicate = [NSPredicate predicateWithFormat:@"categoryName contains %@", @""];
-            break;
-        
-        case 1:
-            predicate = [NSPredicate predicateWithFormat:@"categoryName like %@", @"Educational"];
-            break;
-            
-        case 2:
-            predicate = [NSPredicate predicateWithFormat:@"categoryName like %@", @"Concurs"];
-            break;
-            
-        default:
-            shouldFilter = NO;
-            break;
-    }
+- (void)filterEventsVC:(FilterEventsVC *)filterEventsVC dismissViewWithValue:(NSInteger)index {
     
-    if (shouldFilter) {
-        self.eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
-        [self.tableView reloadData];
-    }
+    [self setTypeSelected:index];
+    
+    [self dismissViewControllerAnimated:filterEventsVC completion:^{
+        self.view.alpha = 1;
+    }];
 }
 
 #pragma mark - Table view data source

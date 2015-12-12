@@ -142,14 +142,14 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNh-bb-gxo">
-                    <rect key="frame" x="16" y="24" width="50" height="30"/>
+                    <rect key="frame" x="24" y="32" width="36" height="36"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="cYP-Jr-jaH"/>
-                        <constraint firstAttribute="height" constant="30" id="ofr-gQ-gc0"/>
+                        <constraint firstAttribute="width" constant="36" id="cYP-Jr-jaH"/>
+                        <constraint firstAttribute="height" constant="36" id="ofr-gQ-gc0"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" title="Back">
+                    <state key="normal" backgroundImage="back_arrow">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -161,7 +161,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="UoY-55-ok8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="508-7H-Y0f"/>
-                <constraint firstItem="hNh-bb-gxo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="6Qw-We-U4o"/>
+                <constraint firstItem="hNh-bb-gxo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="6Qw-We-U4o"/>
                 <constraint firstItem="3Ji-W6-BrR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ELw-Ep-wvv"/>
                 <constraint firstAttribute="bottom" secondItem="xSS-sT-tG4" secondAttribute="bottom" constant="8" id="I9i-pD-bVv"/>
                 <constraint firstItem="bC2-nD-qbD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="K5h-QV-xoL"/>
@@ -172,7 +172,7 @@
                 <constraint firstItem="0Qp-wx-CF7" firstAttribute="top" secondItem="XbC-k8-nhH" secondAttribute="bottom" constant="8" id="bDP-ZX-ZhH"/>
                 <constraint firstItem="XbC-k8-nhH" firstAttribute="leading" secondItem="bC2-nD-qbD" secondAttribute="leading" id="ber-Yp-rL8"/>
                 <constraint firstItem="SRb-xA-Lo4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dj0-1k-9Xt"/>
-                <constraint firstItem="hNh-bb-gxo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="fFJ-gu-shq"/>
+                <constraint firstItem="hNh-bb-gxo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="32" id="fFJ-gu-shq"/>
                 <constraint firstItem="0Qp-wx-CF7" firstAttribute="top" secondItem="Ucw-d5-xC2" secondAttribute="bottom" constant="8" id="gx2-bj-L2C"/>
                 <constraint firstItem="xSS-sT-tG4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h1w-UM-mT3"/>
                 <constraint firstItem="xSS-sT-tG4" firstAttribute="top" secondItem="SRb-xA-Lo4" secondAttribute="bottom" constant="8" id="oNR-ow-Afe"/>
@@ -183,4 +183,7 @@
             <point key="canvasLocation" x="353.5" y="54.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="back_arrow" width="24" height="24"/>
+    </resources>
 </document>

@@ -89,6 +89,19 @@
         cell = [[NSBundle mainBundle] loadNibNamed:@"MenuViewCell" owner:self options:nil][0];
     }    
     [cell titleLabel].text = self.menuItemsArray[indexPath.row];
+    
+    switch (indexPath.row) {
+        case 0:
+            cell.imageview.image = [UIImage imageNamed:@"event"];
+            break;
+            
+        case 1:
+            cell.imageview.image = [UIImage imageNamed:@"logout"];
+            
+        default:
+            break;
+    }
+    
     return cell;
 }
 
@@ -110,6 +123,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 100;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [MenuViewCell height];
 }
 
 @end

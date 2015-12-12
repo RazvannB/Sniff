@@ -28,4 +28,12 @@
     return event;
 }
 
+- (NSString*)imageLink {
+    return [NSString stringWithFormat:@"http://sniff.as-mi.ro/services/images/%@.png", self.id];
+}
+
+- (NSString*)imageLinkResized {
+    return [NSString stringWithFormat:@"http://sniff.as-mi.ro/services/images/%@_r.png", self.id];
+}
+
 @end

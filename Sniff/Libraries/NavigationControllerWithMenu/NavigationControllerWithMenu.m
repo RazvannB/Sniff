@@ -94,7 +94,7 @@
 #pragma mark - MenuViewDelegate
 
 - (void)menuView:(MenuView *)menuView selectedMenuItemAtIndex:(NSInteger)menuIndex {
-    switch (menuIndex) {            
+    switch (menuIndex) {
         case 0:{
             if ([self.viewControllers[0] isKindOfClass:[EventsTableVC class]]) {
                 break;

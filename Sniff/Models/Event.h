@@ -25,5 +25,7 @@
 @property (nonatomic, strong) NSString *DiffDate;
 
 + (Event*)initWithDictionary:(NSDictionary*)dictionary;
+- (NSString*)imageLink;
+- (NSString*)imageLinkResized;
 
 @end

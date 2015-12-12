@@ -49,18 +49,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+//                                                  forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = YES;
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    self.imageHeightConstraint.constant = self.view.frame.size.height/2;
+    self.title = @"Autentificare";
     
     self.loginButton.layer.cornerRadius = 7.5;
     self.registerButton.layer.cornerRadius = 7.5;
     self.loginFacebookButton.layer.cornerRadius = 7.5;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    self.imageTopConstraint.constant = (self.loginButton.frame.origin.y - self.logoImage.frame.size.height -
+                                        self.navigationController.navigationBar.frame.size.height -
+                                        [UIApplication sharedApplication].statusBarFrame.size.height)/2;
 }
 
 - (IBAction)loginButtonPressed:(id)sender {

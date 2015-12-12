@@ -29,6 +29,7 @@
     navController = [navController initWithRootViewController:self.viewController];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navController;
+    self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
     [self.window makeKeyAndVisible];
     
     return YES;

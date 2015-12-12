@@ -7,6 +7,7 @@
 //
 
 #import "MenuViewCell.h"
+#import "Colors.h"
 
 @implementation MenuViewCell
 
@@ -15,9 +16,31 @@
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+    [super setSelected:NO animated:animated];
 
-    // Configure the view for the selected state
+    if (selected) {
+        self.containerView.backgroundColor = [Colors customGrayColor];
+        self.titleLabel.textColor = [UIColor whiteColor];
+    } else {
+        self.containerView.backgroundColor = [UIColor whiteColor];
+        self.titleLabel.textColor = [UIColor blackColor];
+    }
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:NO animated:animated];
+    
+    if (highlighted) {
+        self.containerView.backgroundColor = [Colors customGrayColor];
+        self.titleLabel.textColor = [UIColor whiteColor];
+    } else {
+        self.containerView.backgroundColor = [UIColor whiteColor];
+        self.titleLabel.textColor = [UIColor blackColor];
+    }
+}
+
++ (CGFloat)height {
+    return 56.0;
 }
 
 @end

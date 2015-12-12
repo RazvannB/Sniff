@@ -8,6 +8,7 @@
 
 #import "LoggedUserView.h"
 #import "AuthenticationController.h"
+#import "Colors.h"
 
 @implementation LoggedUserView
 
@@ -22,11 +23,11 @@
     [super awakeFromNib];
 
     if ([AuthenticationController sharedInstance].loggedUser) {
-        self.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:150.0f/255.0f blue:0.0f/255.0f alpha:1];
+        self.backgroundColor = [Colors customGreenColor];
         self.messageLabel.text = @"Sunteti autentificat ca";
         [self.loggedUser setTitle:[AuthenticationController sharedInstance].loggedUser.first_name forState:UIControlStateNormal];
     } else {
-        self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = [Colors customGrayColor];
         self.messageLabel.text = @"Nu sunteti autentificat";
         [self.loggedUser setTitle:@"Autentificare" forState:UIControlStateNormal];
         [self.loggedUser addTarget:self action:@selector(loginButtonPresed:) forControlEvents:UIControlEventTouchUpInside];
