@@ -20,8 +20,9 @@ alpha:1.0]
 #import "EventsListTVC.h"
 #import "FilterEventsVC.h"
 #import "MessageTVC.h"
+#import "Colors.h"
 
-@interface EventsTableVC () <FilterEventsVCDelegate>
+@interface EventsTableVC () <FilterEventsVCDelegate, UISearchBarDelegate>
 
 @end
 
@@ -57,15 +58,19 @@ BOOL isCheckingOnlineForEvents;
     
     if (self.eventsType == EventsTableVCType_Default) {
         self.title = @"Evenimente";
-        if ([self.eventsArray count]) {
-            [self checkServerForUpdatesWithIndicator:NO];
-        } else {
-            [self checkServerForUpdatesWithIndicator:YES];
-        }
+        [self updateEvents];
+        
     } else {
         self.title = @"Evenimente favorite";
         self.allEventsArray = [EventsController sharedInstance].favoriteEventsArray;
     }
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [Colors customGreenColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(updateEvents)
+                  forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -147,6 +152,15 @@ BOOL isCheckingOnlineForEvents;
     [self.tableView reloadData];
 }
 
+- (void)updateEvents {
+    
+    if ([self.eventsArray count]) {
+        [self checkServerForUpdatesWithIndicator:NO];
+    } else {
+        [self checkServerForUpdatesWithIndicator:YES];
+    }
+}
+
 - (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
     isCheckingOnlineForEvents = YES;
     MBProgressHUD *progressHud;
@@ -175,9 +189,15 @@ BOOL isCheckingOnlineForEvents;
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil] show];
         }
+        
         if (indicator) {
             [progressHud hide:YES];
         }
+        
+        if ([self.refreshControl isRefreshing]) {
+            [self.refreshControl endRefreshing];
+        }
+        
         isCheckingOnlineForEvents = NO;
     }];
 }
@@ -193,6 +213,37 @@ BOOL isCheckingOnlineForEvents;
     self.view.alpha = 0.3;
     
     [self.navigationController presentViewController:filterVC animated:YES completion:nil];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (![searchText length]) {
+        [self.view endEditing:YES];
+        self.eventsArray = [EventsController sharedInstance].eventsArray;
+        [self.tableView reloadData];
+        return;
+    }
+    
+    [[EventsController sharedInstance] searchEventsWithTerm:searchText
+                                                 completion:^(BOOL success, NSString *message, EventsController *completion) {
+                                                     
+                                                     if (success) {
+                                                         self.eventsArray = completion.searchArray;
+                                                     }
+                                                     
+                                                     [self.tableView reloadData];
+                                                     
+                                                 }];
+}
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"/n"]) {
+        [self.view endEditing:YES];
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - FilterEventsVCDelegate
@@ -242,15 +293,13 @@ BOOL isCheckingOnlineForEvents;
         
         if (![self.allEventsArray count]) {
             self.navigationItem.rightBarButtonItem.enabled = NO;
-            if (self.eventsType == EventsTableVCType_Default) {
-                [cell setMessageTVCType:MessageTVCType_NoEvents];
-            } else {
-                [cell setMessageTVCType:MessageTVCType_NoFavoriteEvents];
-            }
-        } else {
-            [cell setMessageTVCType:MessageTVCType_NoCategoryEvents];
         }
         
+        if (self.eventsType == EventsTableVCType_Default) {
+            [cell setMessageTVCType:MessageTVCType_NoEvents];
+        } else {
+            [cell setMessageTVCType:MessageTVCType_NoFavoriteEvents];
+        }
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -264,6 +313,8 @@ BOOL isCheckingOnlineForEvents;
     if ([self.eventsArray count]) {
         EventInfoTableVC *eventInfo = [[EventInfoTableVC alloc] initWithEvent:self.eventsArray[indexPath.row]];
         [self.navigationController pushViewController:eventInfo animated:YES];
+    } else {
+        [self.view endEditing:YES];
     }
 }
 

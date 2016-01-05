@@ -17,6 +17,7 @@ typedef void(^EventsControllerCompletionHandler)(BOOL success, NSString *message
 
 @property (nonatomic, strong) NSMutableArray *eventsArray;
 @property (nonatomic, strong) NSArray *favoriteEventsArray;
+@property (nonatomic, strong) NSMutableArray *searchArray;
 @property (nonatomic, strong) NSDictionary *infoDictionary;
 @property (nonatomic, strong) NSArray *feedbackArray;
 @property (nonatomic, strong) NSArray *scheduleArray;
@@ -27,6 +28,7 @@ typedef void(^EventsControllerCompletionHandler)(BOOL success, NSString *message
 - (void)getFeedbackForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion;
 - (void)sendFeedbackForEvent:(Event*)event username:(NSString*)username message:(NSString*)message completion:(EventsControllerCompletionHandler)completion;
 - (void)getScheduleForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion;
+- (void)searchEventsWithTerm:(NSString *)term completion:(EventsControllerCompletionHandler)completion;
 
 - (void)addEventToFavorites:(Event *)event;
 - (void)removeEventFromFavorites:(Event *)event;

@@ -21,7 +21,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JVV-HC-XSI">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sniff_login" translatesAutoresizingMaskIntoConstraints="NO" id="JVV-HC-XSI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                     </imageView>
                 </subviews>
@@ -39,4 +39,7 @@
             </connections>
         </tableView>
     </objects>
+    <resources>
+        <image name="sniff_login" width="659" height="955"/>
+    </resources>
 </document>

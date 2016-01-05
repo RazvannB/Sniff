@@ -68,7 +68,7 @@
     }
     
     [self.imageview sd_setImageWithURL:[NSURL URLWithString:[self.event imageLinkResized]]
-                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                      placeholderImage:[UIImage imageNamed:@"sniff_loading"]];
 }
 
 + (CGFloat)height {

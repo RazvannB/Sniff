@@ -126,6 +126,8 @@
             return [self.serverURL stringByAppendingString:@"getSchandule.php"];
         case ServerRequestType_SendFeedback:
             return [self.serverURL stringByAppendingString:@"mobileTrimiteFeedback.php"];
+        case ServerRequestType_SearchEvents:
+            return [self.serverURL stringByAppendingString:@"search.php"];
 
         default:
             break;

@@ -86,9 +86,20 @@
 
 - (IBAction)joinButtonTouched:(id)sender {
     
-    BOOL newState = !self.isFavourite;
-    [self setIsFavourite:newState];
-    
+    if ([[AuthenticationController sharedInstance].loggedUser.id length]) {
+        
+        BOOL newState = !self.isFavourite;
+        [self setIsFavourite:newState];
+        
+    } else {
+        
+        [[[UIAlertView alloc] initWithTitle:nil
+                                    message:@"Trebuie sa fiti autentificat ca sa puteti salva evenimente!"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        
+    }
 }
 
 - (IBAction)participantsButtonTouched:(id)sender {

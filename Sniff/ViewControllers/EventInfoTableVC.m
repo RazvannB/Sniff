@@ -59,7 +59,7 @@ BOOL isCheckingOnlineForInfo;
     self.navigationItem.title = self.event.project_name;
     
     [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:[self.event imageLink]]
-                            placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                            placeholderImage:[UIImage imageNamed:@"sniff_login"]];
     
     self.tableView.contentInset = UIEdgeInsetsMake([self kTableHeaderHeight], 0, 0, 0);
     self.tableView.contentOffset = CGPointMake(0, -[self kTableHeaderHeight]);

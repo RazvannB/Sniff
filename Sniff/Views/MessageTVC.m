@@ -26,9 +26,6 @@
             self.messageLabel.text = @"Nu aveti evenimente favorite!";
             break;
             
-        case MessageTVCType_NoCategoryEvents:
-            self.messageLabel.text = @"Nu exista evenimente in aceasta categorie!";
-            
         default:
             break;
     }

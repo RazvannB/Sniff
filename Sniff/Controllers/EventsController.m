@@ -105,6 +105,23 @@
     }];
 }
 
+- (void)searchEventsWithTerm:(NSString *)term completion:(EventsControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_SearchEvents];
+    [request addValue:term forParameter:@"event_name"];
+    
+    [request post:^(ServerRequest *serverRequest) {
+        self.searchArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *eventDictionary in serverRequest.response) {
+            Event *event = [Event initWithDictionary:eventDictionary];
+            [self.searchArray addObject:event];
+        }
+        if (completion) {
+            completion(YES, @"Events retrieved", self);
+        }
+    }];
+
+}
+
 - (void)addEventToFavorites:(Event *)event {
     
     if (!self.favoriteEventsArray) {
@@ -120,10 +137,13 @@
 
 - (void)removeEventFromFavorites:(Event *)event {
     
-    if ([[[EventsController sharedInstance].favoriteEventsArray valueForKey:@"id"]  containsObject:event.id]) {
-        NSMutableArray *mutableArray = [self.favoriteEventsArray mutableCopy];
-        [mutableArray removeObject:event];
-        self.favoriteEventsArray = [mutableArray copy];
+    for (Event *favEvent in self.favoriteEventsArray) {
+        if ([favEvent.id isEqualToString:event.id]) {
+            NSMutableArray *mutableArray = [self.favoriteEventsArray mutableCopy];
+            [mutableArray removeObject:favEvent];
+            self.favoriteEventsArray = [mutableArray copy];
+            break;
+        }
     }
 }
 

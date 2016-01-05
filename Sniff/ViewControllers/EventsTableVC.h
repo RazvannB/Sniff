@@ -17,6 +17,7 @@ typedef enum {
 
 @property (nonatomic, strong) NSMutableArray *eventsArray;
 @property (nonatomic, strong) NSArray *allEventsArray;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) NSInteger typeSelected;
 
 @property (nonatomic) EventsTableVCType eventsType;
