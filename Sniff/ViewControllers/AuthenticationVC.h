@@ -41,15 +41,22 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet UIButton *authButton;
 @property (nonatomic, weak) IBOutlet UIButton *forgotButton;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *emailHeightConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *emailWidthConstraint;
+
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *firstNameHeightConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *firstNameWidthConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *firstNameBottomConstraint;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *lastNameHeightConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *lastNameWidthConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *lastNameBottomConstraint;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *passwordWidthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *passwordHeightConstraint;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *confirmPasswordWidthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *confirmPasswordHeightConstraint;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *authHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *authWidthConstraint;

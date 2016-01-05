@@ -1,45 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTextTVC" id="KGk-i7-Jjw" customClass="EventTextTVC">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTextTVC" rowHeight="100" id="KGk-i7-Jjw" customClass="EventTextTVC">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kg-VF-f52">
-                        <rect key="frame" x="16" y="11" width="296" height="21"/>
-                        <animations/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wei-Gt-8cO">
+                        <rect key="frame" x="8" y="8" width="304" height="57"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqb-FT-zJJ">
+                        <rect key="frame" x="24" y="16" width="272" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" priority="999" constant="21" id="fNL-2V-iYY"/>
+                            <constraint firstAttribute="height" constant="21" id="MNq-nm-Ar2"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THM-GY-kHr">
+                        <rect key="frame" x="24" y="37" width="272" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Wvq-zW-Dh1"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Qdi-lu-ubr">
+                        <rect key="frame" x="283" y="21" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Qdi-lu-ubr" secondAttribute="height" multiplier="1:1" id="3d5-E0-0ab"/>
+                            <constraint firstAttribute="width" constant="24" id="fx2-c6-bTY"/>
+                            <constraint firstAttribute="height" constant="24" id="wfD-Kk-TAq"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
-                <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="7kg-VF-f52" secondAttribute="trailing" constant="8" id="gCG-8u-M3w"/>
-                    <constraint firstItem="7kg-VF-f52" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="lmB-qd-UKG"/>
-                    <constraint firstAttribute="centerY" secondItem="7kg-VF-f52" secondAttribute="centerY" priority="999" id="xCE-16-M9c"/>
+                    <constraint firstAttribute="bottom" secondItem="Wei-Gt-8cO" secondAttribute="bottom" id="0qP-Ge-5hB"/>
+                    <constraint firstAttribute="trailing" secondItem="THM-GY-kHr" secondAttribute="trailing" priority="999" constant="24" id="BHR-YG-LUA"/>
+                    <constraint firstItem="Qdi-lu-ubr" firstAttribute="leading" secondItem="qqb-FT-zJJ" secondAttribute="trailing" priority="998" constant="8" id="Bwi-Nf-l1t"/>
+                    <constraint firstItem="THM-GY-kHr" firstAttribute="top" secondItem="qqb-FT-zJJ" secondAttribute="bottom" id="Fmp-Pd-b1W"/>
+                    <constraint firstItem="THM-GY-kHr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="H0d-EX-bH6"/>
+                    <constraint firstItem="qqb-FT-zJJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="NaE-H7-qxk"/>
+                    <constraint firstItem="Wei-Gt-8cO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Sqb-Yx-rTc"/>
+                    <constraint firstItem="Wei-Gt-8cO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="XJk-b1-8mo"/>
+                    <constraint firstAttribute="trailing" secondItem="Wei-Gt-8cO" secondAttribute="trailing" constant="8" id="fzo-jf-tDv"/>
+                    <constraint firstAttribute="trailing" secondItem="Qdi-lu-ubr" secondAttribute="trailing" constant="13" id="gvK-7c-qt4"/>
+                    <constraint firstItem="qqb-FT-zJJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="h1q-0H-2vP"/>
+                    <constraint firstAttribute="trailing" secondItem="qqb-FT-zJJ" secondAttribute="trailing" priority="999" constant="24" id="kPq-4s-uYO"/>
+                    <constraint firstItem="Qdi-lu-ubr" firstAttribute="leading" secondItem="THM-GY-kHr" secondAttribute="trailing" priority="998" constant="8" id="ogH-h8-u5k"/>
+                    <constraint firstItem="Qdi-lu-ubr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vDq-RV-8cc"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
-            <color key="backgroundColor" red="0.086274509799999996" green="0.17254901959999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
-                <outlet property="textHeightConstraint" destination="fNL-2V-iYY" id="IKo-We-dVY"/>
-                <outlet property="textview" destination="7kg-VF-f52" id="IuQ-cP-Kuf"/>
+                <outlet property="containerView" destination="Wei-Gt-8cO" id="BY8-jQ-FAi"/>
+                <outlet property="rightArrowImageView" destination="Qdi-lu-ubr" id="52M-v3-nXz"/>
+                <outlet property="textHeightConstraint" destination="Wvq-zW-Dh1" id="TFR-fc-xA6"/>
+                <outlet property="textLabel" destination="THM-GY-kHr" id="SKg-YY-SnA"/>
+                <outlet property="textLabelTrailingConstraint" destination="BHR-YG-LUA" id="YjM-A1-6xH"/>
+                <outlet property="titleLabel" destination="qqb-FT-zJJ" id="wHA-OK-67g"/>
+                <outlet property="titleLabelTrailingConstraint" destination="kPq-4s-uYO" id="gv5-Fx-ato"/>
             </connections>
-            <point key="canvasLocation" x="368" y="325"/>
+            <point key="canvasLocation" x="368" y="353"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="right_arrow" width="24" height="24"/>
+    </resources>
 </document>

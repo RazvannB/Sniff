@@ -8,11 +8,12 @@
 
 #import "EventsListTVC.h"
 #import "UIImageView+WebCache.h"
+#import "EventsController.h"
 
 @implementation EventsListTVC
 
 - (void)awakeFromNib {
-    // Initialization code
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -24,13 +25,19 @@
 - (void)setEvent:(Event *)event {
     _event = event;
     
+    if (![[[EventsController sharedInstance].favoriteEventsArray valueForKey:@"id"]  containsObject:event.id]) {
+        self.favoriteButton.hidden = YES;
+    } else {
+        self.favoriteButton.hidden = NO;
+    }
+    
     self.titleLabel.text = event.project_name;
     if ([event.DiffDate intValue] == 0) {
         self.organiserLabel.text = @"Astazi";
     } else if ([event.DiffDate intValue] == -1) {
-        self.organiserLabel.text = [NSString stringWithFormat:@"A mai ramas %@ zi", event.DiffDate];
+        self.organiserLabel.text = [NSString stringWithFormat:@"A mai ramas %d zi", abs([event.DiffDate intValue])];
     } else {
-        self.organiserLabel.text = [NSString stringWithFormat:@"Au mai ramas %@ zile", event.DiffDate];
+        self.organiserLabel.text = [NSString stringWithFormat:@"Au mai ramas %d zile", abs([event.DiffDate intValue])];
     }
     
     self.orgName.text = event.org_name;

@@ -19,6 +19,7 @@
 #import "MBProgressHUD.h"
 #import "EventsTableVC.h"
 #import "AuthenticationVC.h"
+#import "Macros.h"
 
 @interface LoginVC () <UITextFieldDelegate, AuthenticationVCDelegate> {
     BOOL shouldReturnToEvent;
@@ -49,18 +50,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-//                                                  forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
-//    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
     
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.title = @"Autentificare";
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.loginButton.layer.cornerRadius = 7.5;
     self.registerButton.layer.cornerRadius = 7.5;
     self.loginFacebookButton.layer.cornerRadius = 7.5;
+    
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
+        self.loginButtonWidthConstraint.constant = fieldWidthSmallScreen;
+        self.registerButtonWidthConstraint.constant = fieldWidthSmallScreen;
+        self.loginFacebookButtonWidthConstraint.constant = fieldWidthSmallScreen;
+    }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateLogoImage)];
+    self.logoImage.userInteractionEnabled = YES;
+    [self.logoImage addGestureRecognizer:tap];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -69,6 +81,29 @@
     self.imageTopConstraint.constant = (self.loginButton.frame.origin.y - self.logoImage.frame.size.height -
                                         self.navigationController.navigationBar.frame.size.height -
                                         [UIApplication sharedApplication].statusBarFrame.size.height)/2;
+}
+
+- (void)animateLogoImage {
+    
+    [UIView animateWithDuration:0.25
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut animations:^{
+                            
+                            self.logoImage.transform = CGAffineTransformMakeScale(1.75, 1.75);
+                            
+                        } completion:^(BOOL finished){
+                            
+                            [UIView animateWithDuration:0.5
+                                                  delay:0
+                                                options:UIViewAnimationOptionCurveEaseOut animations:^{
+                                                    
+                                                    self.logoImage.transform = CGAffineTransformIdentity;
+                                                    
+                                                } completion:^(BOOL finished){
+                                                    
+                                                }];
+
+                        }];
 }
 
 - (IBAction)loginButtonPressed:(id)sender {

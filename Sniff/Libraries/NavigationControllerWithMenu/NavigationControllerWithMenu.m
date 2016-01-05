@@ -80,7 +80,8 @@
     }
 
     LoginVC *login = [[LoginVC alloc] init];
-    [self pushViewController:login animated:YES];
+    login.navigationItem.leftBarButtonItem = self.menuButton;
+    self.viewControllers = @[login];
 }
 
 - (void)userLoggedIn {
@@ -96,17 +97,28 @@
 - (void)menuView:(MenuView *)menuView selectedMenuItemAtIndex:(NSInteger)menuIndex {
     switch (menuIndex) {
         case 0:{
-            if ([self.viewControllers[0] isKindOfClass:[EventsTableVC class]]) {
+            if ([[self.viewControllers firstObject] isKindOfClass:[EventsTableVC class]] &&
+                [[self.viewControllers firstObject] eventsType] == EventsTableVCType_Default) {
                 break;
             }
-            EventsTableVC *events = [[EventsTableVC alloc] init];
-            events.navigationItem.title = @"Events";
+            EventsTableVC *events = [[EventsTableVC alloc] initWithType:EventsTableVCType_Default];
             events.navigationItem.leftBarButtonItem = self.menuButton;
             [self setViewControllers:@[events] animated:YES];
             break;
         }
             
         case 1: {
+            if ([[self.viewControllers firstObject] isKindOfClass:[EventsTableVC class]] &&
+                [[self.viewControllers firstObject] eventsType] == EventsTableVCType_Favorite) {
+                break;
+            }
+            EventsTableVC *events = [[EventsTableVC alloc] initWithType:EventsTableVCType_Favorite];
+            events.navigationItem.leftBarButtonItem = self.menuButton;
+            [self setViewControllers:@[events] animated:YES];
+            break;
+        }
+            
+        case 3: {
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:nil forKey:@"loggedUserKey"];
             [defaults synchronize];

@@ -18,4 +18,8 @@
     return [UIColor colorWithRed:0.0f/255.0f green:150.0f/255.0f blue:0.0f/255.0f alpha:1];
 }
 
++ (UIColor *)customPinkColor {
+    return [UIColor colorWithRed:247.0f/255.0f green:202.0f/255.0f blue:201.0f/255.0f alpha:1];
+}
+
 @end

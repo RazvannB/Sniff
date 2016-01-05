@@ -26,6 +26,7 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet UILabel *organiserLabel;
 @property (nonatomic, weak) IBOutlet UILabel *orgName;
 @property (nonatomic, weak) IBOutlet UIImageView *categoryImage;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
 
 @property (nonatomic) EventsListTVCCategoryType categoryType;
 

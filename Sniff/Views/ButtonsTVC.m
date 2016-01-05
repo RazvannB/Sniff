@@ -14,19 +14,26 @@
     // Initialization code
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.scheduleButtonLeadingConstraint.constant = (CGRectGetWidth(self.frame)/2 - 8 - CGRectGetWidth(self.scheduleButton.frame))/2;
+    self.feedbackButtonTrailingConstrant.constant = (CGRectGetWidth(self.frame)/2 - 8 - CGRectGetWidth(self.feedbackButton.frame))/2;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
 
-- (void)schedulePressed:(id)sender {
+- (IBAction)schedulePressed:(id)sender {
     if ([self.delegate respondsToSelector:@selector(scheduleButtonPressed)]) {
         [self.delegate scheduleButtonPressed];
     }
 }
 
-- (void)feedbackPressed:(id)sender {
+- (IBAction)feedbackPressed:(id)sender {
     if ([self.delegate respondsToSelector:@selector(feedbackButtonPressed)]) {
         [self.delegate feedbackButtonPressed];
     }

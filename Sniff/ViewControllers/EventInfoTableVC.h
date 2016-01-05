@@ -13,7 +13,9 @@
 
 @property (nonatomic, strong) Event *event;
 @property (nonatomic, strong) NSDictionary *infoDictionary;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, weak) IBOutlet UIImageView *headerImageView;
 
-- (void)initWithEvent:(Event*)event;
+- (instancetype)initWithEvent:(Event*)event;
 
 @end

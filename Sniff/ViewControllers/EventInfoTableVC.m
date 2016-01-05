@@ -18,9 +18,14 @@
 #import "JoinButtonsView.h"
 #import "LoginVC.h"
 #import "ParticipantsVC.h"
+#import "UIImageView+WebCache.h"
+#import "Macros.h"
 #import <MapKit/MapKit.h>
+#import "AuthenticationController.h"
 
-@interface EventInfoTableVC () <ButtonsTVCDelegate, UIActionSheetDelegate, JoinButtonsView>
+@interface EventInfoTableVC () <ButtonsTVCDelegate, UIActionSheetDelegate, JoinButtonsView, UIAlertViewDelegate> {
+    BOOL isFavourite;
+}
 
 @end
 
@@ -28,19 +33,72 @@
 
 BOOL isCheckingOnlineForInfo;
 
-- (void)initWithEvent:(Event*)event {
-    self.event = event;
+- (instancetype)initWithEvent:(Event*)event {
+    if (self = [super init]) {
+        self.event = event;
+    }
+    return self;
+}
+
+- (CGFloat)kTableHeaderHeight {
+    
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
+        return 208;
+    } else if (IS_IPHONE_6) {
+        return 240;
+    } else if (IS_IPHONE_6P) {
+        return 272;
+    }
+    
+    return 0;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = self.event.project_name;
+    
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:[self.event imageLink]]
+                            placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake([self kTableHeaderHeight], 0, 0, 0);
+    self.tableView.contentOffset = CGPointMake(0, -[self kTableHeaderHeight]);
+    
+    self.headerView = self.tableView.tableHeaderView;
+    self.headerView.clipsToBounds = YES;
+    self.tableView.tableHeaderView = nil;
+    [self.tableView addSubview:self.headerView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.tableView reloadData];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    [self updateHeaderView];
+}
+
+- (void)updateHeaderView {
+    CGRect headerRect = CGRectMake(0, -[self kTableHeaderHeight], CGRectGetWidth(self.tableView.frame), [self kTableHeaderHeight]);
+    if (self.tableView.contentOffset.y < -[self kTableHeaderHeight]) {
+        headerRect.origin.y = self.tableView.contentOffset.y;
+        headerRect.size.height = -self.tableView.contentOffset.y;
+    }
+    
+    self.headerView.frame = headerRect;
+    
 }
 
 - (NSDictionary *)infoDictionary {
@@ -99,6 +157,26 @@ BOOL isCheckingOnlineForInfo;
 - (void)joinButtonsViewWillShowParticipants {
     ParticipantsVC *participantsPage = [[ParticipantsVC alloc] init];
     [self.navigationController pushViewController:participantsPage animated:YES];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (alertView.tag) {
+            
+        case 0:
+            //  Date
+            if (buttonIndex == 1) {
+                
+            }
+            break;
+            
+        default:
+            break;
+    }
+    
+    
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -160,46 +238,40 @@ BOOL isCheckingOnlineForInfo;
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     id cell;
     if (cell == nil) {
         switch (indexPath.row) {
+                
             case 0:
-                cell = [self dequeCellIdentifier:@"EventImageTVC"];
+                cell = [self dequeCellIdentifier:@"EventTextTVC"];
+                [cell setEventTextType:EventTextType_Organiser info:self.infoDictionary cellType:EventTextCellType_Arrow];
                 break;
                 
             case 1:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_Organiser info:self.infoDictionary];
-                [cell textview].textAlignment = NSTextAlignmentCenter;
+                [cell setEventTextType:EventTextType_Date info:self.infoDictionary cellType:EventTextCellType_Arrow];
                 break;
                 
             case 2:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_Date info:self.infoDictionary];
-                [cell textview].textAlignment = NSTextAlignmentCenter;
+                [cell setEventTextType:EventTextType_Location info:self.infoDictionary cellType:EventTextCellType_Arrow];
                 break;
                 
             case 3:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_Location info:self.infoDictionary];
-                [cell textview].textAlignment = NSTextAlignmentCenter;
+                [cell setEventTextType:EventTextType_Description info:self.infoDictionary cellType:EventTextCellType_Default];
                 break;
                 
             case 4:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_Description info:self.infoDictionary];
+                [cell setEventTextType:EventTextType_FBPage info:self.infoDictionary cellType:EventTextCellType_Arrow];
                 break;
                 
             case 5:
-                cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_FBPage info:self.infoDictionary];
-                break;
-                
-            case 6:
                 cell = [self dequeCellIdentifier:@"ButtonsTVC"];
                 [cell setDelegate:self];
                 
@@ -208,24 +280,12 @@ BOOL isCheckingOnlineForInfo;
         }
     }
     
-    if (indexPath.row == 5 &&
-        [self.infoDictionary[@"FbPage"] class] != [NSNull class] &&
-        [self.infoDictionary[@"FbPage"] length]) {
-        
-        [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
-    } else if (indexPath.row == 3 &&
-               [self.infoDictionary[@"location_x"] class] != [NSNull class] &&
-               [self.infoDictionary[@"location_x"] length]) {
-        
-        [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
-    } else {
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    JoinButtonsView *joinView = [[JoinButtonsView alloc] init];
+    JoinButtonsView *joinView = [[JoinButtonsView alloc] initWithEvent:self.event];
     [joinView setDelegate:self];
     [joinView setInfoDictionary:self.infoDictionary];
     return joinView;
@@ -234,55 +294,84 @@ BOOL isCheckingOnlineForInfo;
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 3) {
-        [[[UIActionSheet alloc] initWithTitle:@"Alege o harta"
-                                     delegate:self
-                            cancelButtonTitle:@"Inapoi"
-                       destructiveButtonTitle:nil
-                            otherButtonTitles:@"Apple Maps", @"Google Maps", nil] showInView:self.view];
+    
+    switch (indexPath.row) {
         
-    } else if (indexPath.row == 5) {
-        if ([self.infoDictionary[@"FbPage"] class] != [NSNull class] &&
-            [self.infoDictionary[@"FbPage"] length]) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.infoDictionary[@"FbPage"]]];
+        case 0:
+            break;
+            
+        case 1: {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:@"Doriti sa salvati evenimentul in calendar?"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Inapoi"
+                                                      otherButtonTitles:@"Salveaza", nil];
+            alertView.tag = 0;
+            [alertView show];
+            break;
         }
+            
+        case 2: {
+            [[[UIActionSheet alloc] initWithTitle:@"Alege o harta"
+                                         delegate:self
+                                cancelButtonTitle:@"Inapoi"
+                           destructiveButtonTitle:nil
+                                otherButtonTitles:@"Apple Maps", @"Google Maps", nil] showInView:self.view];
+
+            break;
+        }
+            
+        case 3:
+            break;
+            
+        case 4: {
+            if ([self.infoDictionary[@"FbPage"] class] != [NSNull class] &&
+                [self.infoDictionary[@"FbPage"] length]) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.infoDictionary[@"FbPage"]]];
+            }
+            break;
+        }
+            
+        default:
+            break;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 0:
-            return 200;
-            break;
             
-        case 1:
+        case 0:
             return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"org_name"]];
             break;
             
-        case 2:
+        case 1:
             return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"start_date"]];
             break;
             
-        case 3:
+        case 2:
             return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"address"]];
             break;
             
-        case 4:
+        case 3:
             return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"description"]];
             break;
             
-        case 5:
+        case 4:
             return [EventTextTVC getCellHeightWithText:self.infoDictionary[@"FbPage"]];
             break;
             
         default:
-            return 50;
+            return 58;
             break;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return [JoinButtonsView height];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self updateHeaderView];
 }
 
 @end

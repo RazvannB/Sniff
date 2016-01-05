@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "NavigationControllerWithMenu.h"
 #import "AuthenticationController.h"
+#import "CustomNavigationBar.h"
 
 @interface AppDelegate ()
 

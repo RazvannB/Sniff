@@ -40,7 +40,7 @@
 - (NSArray *)menuItemsArray {
     _menuItemsArray = [NSArray alloc];
     if ([AuthenticationController sharedInstance].loggedUser) {
-        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Arata-mi evenimentele", @"Iesire din cont"]];
+        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Arata-mi evenimentele", @"Evenimentele mele", @"Setari cont", @"Iesire din cont"]];
     } else {
         _menuItemsArray = [_menuItemsArray initWithArray:@[@"Arata-mi evenimentele"]];
     }
@@ -55,6 +55,8 @@
                      animations:^{
                          
                          self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+                         [self.tableView reloadData];
+                         
                      } completion:^(BOOL finished) {
                          [self.shadowView setAlpha:0.5];
                          [self layoutSubviews];
@@ -96,7 +98,16 @@
             break;
             
         case 1:
+            cell.imageview.image = [UIImage imageNamed:@"heart"];
+            break;
+            
+        case 2:
+            cell.imageview.image = [UIImage imageNamed:@"settings"];
+            break;
+            
+        case 3:
             cell.imageview.image = [UIImage imageNamed:@"logout"];
+            break;
             
         default:
             break;

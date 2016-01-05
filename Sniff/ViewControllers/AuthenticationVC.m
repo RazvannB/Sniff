@@ -6,13 +6,15 @@
 //  Copyright © 2015 Razvan Balint. All rights reserved.
 //
 
-#define buttonHeight 40
+#define buttonHeightBigDevice 40
+#define buttonHeightSmallDevice 30
 #define spaceHeight 8
 #define lineHeight 1
 #define buttonWidthBigDevice 300
 #define buttonWidthSmallDevice 256
 
 #import "AuthenticationVC.h"
+#import "Macros.h"
 
 @interface AuthenticationVC () <UITextFieldDelegate> {
     BOOL validationPassed;
@@ -28,14 +30,13 @@
     shouldRaiseFields = YES;
     
     [self addBlackTransluscentEffectOnView:self.view];
-    [self setDeviceDimenssions];
+    [self setAuthType:self.authType];
+    [self setDeviceDimensions];
     [self setButtonsLayout];
     
     self.navigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [self setAuthType:self.authType];
 }
 
 - (void)addBlackTransluscentEffectOnView:(UIView*)view {
@@ -48,8 +49,62 @@
     [view insertSubview:beView atIndex:0];
 }
 
-- (void)setDeviceDimenssions {
+- (void)setDeviceDimensions {
+    if (IS_IPHONE_4_OR_LESS) {
+        self.firstNameHeightConstraint.constant = buttonHeightSmallDevice;
+        self.lastNameHeightConstraint.constant = buttonHeightSmallDevice;
+        self.emailHeightConstraint.constant = buttonHeightSmallDevice;
+        self.passwordHeightConstraint.constant = buttonHeightSmallDevice;
+        self.confirmPasswordHeightConstraint.constant = buttonHeightSmallDevice;
+        self.authHeightConstraint.constant = buttonHeightSmallDevice;
+        self.forgotHeightConstraint.constant = buttonHeightSmallDevice;
+        
+        self.firstNameWidthConstraint.constant = buttonWidthSmallDevice;
+        self.lastNameWidthConstraint.constant = buttonWidthSmallDevice;
+        self.emailWidthConstraint.constant = buttonWidthSmallDevice;
+        
+        self.authWidthConstraint.constant = buttonWidthSmallDevice;
+        self.forgotWidthConstraint.constant = buttonWidthSmallDevice;
+        self.lineWidthConstraint.constant = buttonWidthSmallDevice - 32;
+        
+        if (self.authType == AuthenticationVCType_Login) {
+            self.passwordWidthConstraint.constant = buttonWidthSmallDevice;
+            
+        } else if (self.authType == AuthenticationVCType_Register) {
+            self.passwordWidthConstraint.constant = buttonWidthSmallDevice/2 - 4;
+            self.confirmPasswordWidthConstraint.constant = buttonWidthSmallDevice/2 - 4;
+        }
+        
+    } else if (IS_IPHONE_5) {
+        self.firstNameWidthConstraint.constant = buttonWidthSmallDevice;
+        self.lastNameWidthConstraint.constant = buttonWidthSmallDevice;
+        self.emailWidthConstraint.constant = buttonWidthSmallDevice;
+        self.passwordWidthConstraint.constant = buttonWidthSmallDevice;
+        self.confirmPasswordWidthConstraint.constant = buttonWidthSmallDevice;
+        self.authWidthConstraint.constant = buttonWidthSmallDevice;
+        self.forgotWidthConstraint.constant = buttonWidthSmallDevice;
+        self.lineWidthConstraint.constant = buttonWidthSmallDevice - 32;
+        
+        if (self.authType == AuthenticationVCType_Login) {
+            self.passwordWidthConstraint.constant = buttonWidthSmallDevice;
+            
+        } else if (self.authType == AuthenticationVCType_Register) {
+            self.passwordWidthConstraint.constant = buttonWidthSmallDevice/2 - 4;
+            self.confirmPasswordWidthConstraint.constant = buttonWidthSmallDevice/2 - 4;
+        }
+    } else {
     
+        if (self.authType == AuthenticationVCType_Login) {
+            self.passwordWidthConstraint.constant = buttonWidthBigDevice;
+            
+        } else if (self.authType == AuthenticationVCType_Register) {
+            self.passwordWidthConstraint.constant = buttonWidthBigDevice/2 - 4;
+            self.confirmPasswordWidthConstraint.constant = buttonWidthBigDevice/2 - 4;
+        }
+        
+    }
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)setButtonsLayout {
@@ -67,9 +122,17 @@
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
     
-    CGFloat newHeight = 56;
+    CGFloat newHeight = 0;
+    if (IS_IPHONE_4_OR_LESS) {
+        newHeight = 0;
+    } else if (IS_IPHONE_5) {
+        newHeight = spaceHeight*3;
+    } else {
+        newHeight = spaceHeight*7;
+    }
+    
     if (self.authType == AuthenticationVCType_Login) {
-        newHeight += spaceHeight;
+        newHeight += spaceHeight*3;
     }
     
     if (shouldRaiseFields) {
@@ -101,15 +164,11 @@
             self.lastNameBottomConstraint.constant = 0;
             self.lastName.alpha = 0;
 
-            self.passwordWidthConstraint.constant = buttonWidthBigDevice;
             self.confirmPasswordWidthConstraint.constant = 0;
             self.confirmPassword.alpha = 0;
             
             self.lineHeightConstraint.constant = lineHeight;
             self.lineBottomConstraint.constant = spaceHeight;
-            
-            self.forgotHeightConstraint.constant = buttonHeight;
-            self.forgotBottomConstraint.constant = spaceHeight;
             
             self.confirmPassword.tag = -1;
             self.password.returnKeyType = UIReturnKeyGo;
@@ -120,14 +179,8 @@
         case AuthenticationVCType_Register:
             [self.authButton setTitle:@"Creeaza cont" forState:UIControlStateNormal];
             
-            self.firstNameHeightConstraint.constant = buttonHeight;
             self.firstNameBottomConstraint.constant = spaceHeight;
-            
-            self.lastNameHeightConstraint.constant = buttonHeight;
             self.lastNameBottomConstraint.constant = spaceHeight;
-            
-            self.passwordWidthConstraint.constant = buttonWidthBigDevice/2 - 4;
-            self.confirmPasswordWidthConstraint.constant = buttonWidthBigDevice/2 - 4;
             
             self.lineHeightConstraint.constant = 0;
             self.lineBottomConstraint.constant = 0;

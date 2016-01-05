@@ -22,6 +22,10 @@ typedef enum {
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageTopConstraint;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *loginButtonWidthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *registerButtonWidthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *loginFacebookButtonWidthConstraint;
+
 @property (nonatomic) LoginType loginType;
 
 - (IBAction)loginButtonPressed:(id)sender;

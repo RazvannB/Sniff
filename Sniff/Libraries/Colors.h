@@ -15,4 +15,6 @@
 
 + (UIColor *)customGreenColor;
 
++ (UIColor *)customPinkColor;
+
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
+#import "Event.h"
 
 @class AuthenticationController;
 
@@ -16,6 +17,7 @@ typedef void(^AuthenticationControllerCompletionHandler)(BOOL success, NSString 
 @interface AuthenticationController : NSObject
 
 @property (nonatomic, strong) User *loggedUser;
+@property (nonatomic, strong) NSArray *favoriteEventsArray;
 
 + (instancetype)sharedInstance;
 - (void)setLoggedUserWithObject:(id)object;

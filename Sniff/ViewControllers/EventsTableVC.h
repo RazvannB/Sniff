@@ -10,7 +10,7 @@
 
 typedef enum {
     EventsTableVCType_Default,
-    EventsTableVCType_PastEvents
+    EventsTableVCType_Favorite
 } EventsTableVCType;
 
 @interface EventsTableVC : UITableViewController
@@ -20,5 +20,7 @@ typedef enum {
 @property (nonatomic) NSInteger typeSelected;
 
 @property (nonatomic) EventsTableVCType eventsType;
+
+- (instancetype)initWithType:(EventsTableVCType)eventsType;
 
 @end

@@ -105,4 +105,26 @@
     }];
 }
 
+- (void)addEventToFavorites:(Event *)event {
+    
+    if (!self.favoriteEventsArray) {
+        self.favoriteEventsArray = [[NSArray alloc] init];
+    }
+    
+    if (![[[EventsController sharedInstance].favoriteEventsArray valueForKey:@"id"]  containsObject:event.id]) {
+        NSMutableArray *mutableArray = [self.favoriteEventsArray mutableCopy];
+        [mutableArray addObject:event];
+        self.favoriteEventsArray = [mutableArray copy];
+    }
+}
+
+- (void)removeEventFromFavorites:(Event *)event {
+    
+    if ([[[EventsController sharedInstance].favoriteEventsArray valueForKey:@"id"]  containsObject:event.id]) {
+        NSMutableArray *mutableArray = [self.favoriteEventsArray mutableCopy];
+        [mutableArray removeObject:event];
+        self.favoriteEventsArray = [mutableArray copy];
+    }
+}
+
 @end

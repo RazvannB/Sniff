@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Event.h"
 
 @interface EventImageTVC : UITableViewCell
 
+@property (nonatomic, strong) Event *event;
 @property (nonatomic, weak) IBOutlet UIImageView *imageview;
 
 @end

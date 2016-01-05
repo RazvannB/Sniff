@@ -22,6 +22,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
     if ([AuthenticationController sharedInstance].loggedUser) {
         self.backgroundColor = [Colors customGreenColor];
         self.messageLabel.text = @"Sunteti autentificat ca";

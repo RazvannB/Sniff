@@ -17,6 +17,11 @@
 
 @interface ButtonsTVC : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UIButton *scheduleButton;
+@property (nonatomic, weak) IBOutlet UIButton *feedbackButton;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *scheduleButtonLeadingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *feedbackButtonTrailingConstrant;
+
 @property (nonatomic, strong) id<ButtonsTVCDelegate> delegate;
 
 - (IBAction)schedulePressed:(id)sender;

@@ -8,17 +8,51 @@
 
 #import "JoinButtonsView.h"
 #import "AuthenticationController.h"
+#import "EventsController.h"
+#import "Colors.h"
 
 @implementation JoinButtonsView
 
-- (instancetype)init {
+- (instancetype)initWithEvent:(Event *)event {
     if (self = [super init]) {
         self = [[NSBundle mainBundle] loadNibNamed:@"JoinButtonsView" owner:self options:nil][0];
-        self.joinButton.layer.cornerRadius = 5;
-        self.participantsButton.layer.cornerRadius = 5;
-        self.numberOfParticipants = @100;
+        [self setEvent:event];
+        _joinButton.layer.cornerRadius = 5;
+        _participantsButton.layer.cornerRadius = 5;
+        _numberOfParticipants = @100;
     }
     return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    CAShapeLayer *viewMaskLayer = [[CAShapeLayer alloc] init];
+    viewMaskLayer.fillColor = [[Colors customGrayColor] CGColor];
+    
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    [path moveToPoint:CGPointMake(0, 64)];
+    [path addLineToPoint:CGPointMake(0, 32)];
+    [path addLineToPoint:CGPointMake(CGRectGetMidX(self.frame) - CGRectGetWidth(self.joinButton.frame)/2 - 20, 32)];
+    [path addLineToPoint:CGPointMake(CGRectGetMidX(self.frame) - CGRectGetWidth(self.joinButton.frame)/2, 2)];
+    
+    [path addLineToPoint:CGPointMake(CGRectGetMidX(self.frame) + CGRectGetWidth(self.joinButton.frame)/2, 2)];
+    [path addLineToPoint:CGPointMake(CGRectGetMidX(self.frame) + CGRectGetWidth(self.joinButton.frame)/2 + 20, 32)];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(self.frame), 32)];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(self.frame), 64)];
+    
+    viewMaskLayer.path = path.CGPath;
+    
+    [self.layer addSublayer:viewMaskLayer];
+    
+    [self bringSubviewToFront:self.joinButton];
+}
+
+- (void)setEvent:(Event *)event {
+    _event = event;
+    
+    BOOL isFavoriteEvent = [[[EventsController sharedInstance].favoriteEventsArray valueForKey:@"id"]  containsObject:self.event.id];
+    [self setIsFavourite:isFavoriteEvent];
 }
 
 - (void)setInfoDictionary:(NSDictionary *)infoDictionary {
@@ -27,6 +61,7 @@
     if ([[self.infoDictionary allKeys] containsObject:@"participanti"] && [self.infoDictionary[@"participanti"] class] != [NSNull class]) {
         self.numberOfParticipants = @([self.infoDictionary[@"participanti"] integerValue]);
     }
+    
     [self.participantsButton setTitle:[NSString stringWithFormat:@"%@ Participanti", self.numberOfParticipants] forState:UIControlStateNormal];
     
     if ([self.numberOfParticipants compare:@0] != 0) {
@@ -36,7 +71,23 @@
     }
 }
 
+- (void)setIsFavourite:(BOOL)isFavourite {
+    _isFavourite = isFavourite;
+    
+    if (self.isFavourite) {
+        [self.joinButton setBackgroundImage:[UIImage imageNamed:@"heart_full"] forState:UIControlStateNormal];
+        [[EventsController sharedInstance] addEventToFavorites:self.event];
+        
+    } else {
+        [self.joinButton setBackgroundImage:[UIImage imageNamed:@"heart_empty"] forState:UIControlStateNormal];
+        [[EventsController sharedInstance] removeEventFromFavorites:self.event];
+    }
+}
+
 - (IBAction)joinButtonTouched:(id)sender {
+    
+    BOOL newState = !self.isFavourite;
+    [self setIsFavourite:newState];
     
 }
 
@@ -55,7 +106,7 @@
 }
 
 + (CGFloat)height {
-    return 46;
+    return 64;
 }
 
 #pragma mark - UIAlertViewDelegate
