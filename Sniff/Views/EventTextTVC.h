@@ -34,7 +34,6 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleLabelTrailingConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *textLabelTrailingConstraint;
 
-- (void)initWithInfo:(NSDictionary*)dictionary;
 - (void)setEventTextType:(EventTextType)eventTextType info:(NSDictionary*)infoDictionary cellType:(EventTextCellType)eventTextCellType;
 + (CGFloat)getCellHeightWithText:(NSString*)text;
 

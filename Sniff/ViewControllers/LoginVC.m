@@ -16,12 +16,13 @@
 #import "User.h"
 #import "ServerRequest.h"
 #import "AuthenticationController.h"
+#import "EventsController.h"
 #import "MBProgressHUD.h"
 #import "EventsTableVC.h"
 #import "AuthenticationVC.h"
 #import "Macros.h"
 
-@interface LoginVC () <UITextFieldDelegate, AuthenticationVCDelegate> {
+@interface LoginVC () <AuthenticationVCDelegate> {
     BOOL shouldReturnToEvent;
     BOOL keyboardOnScreen;
 }
@@ -48,17 +49,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+    [EventsController makeNavigationBarTranslucent:self.navigationController.navigationBar];
     
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.loginButton.layer.cornerRadius = 7.5;
     self.registerButton.layer.cornerRadius = 7.5;
@@ -120,6 +115,10 @@
     [auth setDelegate:self];
     auth.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self.navigationController presentViewController:auth animated:YES completion:nil];
+}
+
+- (IBAction)loginViaFacebookButtonTouched:(id)sender {
+    
 }
 
 #pragma mark - AuthenticationVCDelegate
@@ -198,29 +197,8 @@
     
 }
 
-- (void)authenticationVC:(AuthenticationVC *)authVC forgotPasswordButtonTouched:(id)sender {
-    
-}
-
 - (void)authenticationVC:(AuthenticationVC *)authVC backButtonTouched:(id)sender {
     [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([string isEqualToString:@"\n"]) {
-        NSInteger nextTag = textField.tag + 1;
-        
-        UIResponder *nextResponder = [textField.superview viewWithTag:nextTag];
-        if (nextResponder) {
-            [nextResponder becomeFirstResponder];
-        } else {
-            [textField resignFirstResponder];
-        }
-    }
-    
-    return YES;
 }
 
 @end

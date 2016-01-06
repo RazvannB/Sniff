@@ -11,6 +11,8 @@
 typedef enum {
     MessageTVCType_NoEvents,
     MessageTVCType_NoFavoriteEvents,
+    MessageTVCType_NoProgram,
+    MessageTVCType_NoFeedback
 } MessageTVCType ;
 
 @interface MessageTVC : UITableViewCell

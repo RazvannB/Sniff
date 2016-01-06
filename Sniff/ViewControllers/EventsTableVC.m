@@ -6,12 +6,6 @@
 //  Copyright (c) 2015 Razvan Balint. All rights reserved.
 //
 
-#define UIColorFromRGB(rgbValue) \
-[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
-blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
-alpha:1.0]
-
 #import "EventsTableVC.h"
 #import "EventsController.h"
 #import "MBProgressHUD.h"
@@ -41,15 +35,10 @@ BOOL isCheckingOnlineForEvents;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = NO;
+    [EventsController makeNavigationBarBackToDefault:self.navigationController.navigationBar];
     
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.automaticallyAdjustsScrollViewInsets = YES;
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filtreaza"
                                                                               style:UIBarButtonItemStylePlain
@@ -104,49 +93,17 @@ BOOL isCheckingOnlineForEvents;
     _typeSelected = typeSelected;
     
     BOOL shouldFilter = YES;
-    NSString *predicateTerm = @"";
-    switch (typeSelected) {
-        case 0:
-            break;
-            
-        case 1:
-            predicateTerm = @"Educational";
-            break;
-            
-        case 2:
-            predicateTerm = @"Cariera";
-            break;
-            
-        case 3:
-            predicateTerm = @"Social";
-            break;
-            
-        case 4:
-            predicateTerm = @"Distractie";
-            break;
-            
-        case 5:
-            predicateTerm = @"Concurs";
-            break;
-            
-        case 6:
-            predicateTerm = @"Training";
-            break;
-            
-        default:
-            shouldFilter = NO;
-            break;
+    if (typeSelected > 6) {
+        shouldFilter = NO;
     }
     
     if (shouldFilter) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName contains %@", predicateTerm];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName contains %@", [EventsController getPredicateTermWithIndex:typeSelected]];
         self.eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
         
         if (typeSelected == 0) {
             self.eventsArray = nil;
         }
-        
-        [self.tableView reloadData];
     }
     
     [self.tableView reloadData];

@@ -8,7 +8,6 @@
 
 #import "EventInfoTableVC.h"
 #import "EventTextTVC.h"
-#import "EventImageTVC.h"
 #import "EventsController.h"
 #import "ButtonsTVC.h"
 #import "MBProgressHUD.h"
@@ -17,7 +16,6 @@
 #import "FeedbackTableVC.h"
 #import "JoinButtonsView.h"
 #import "LoginVC.h"
-#import "ParticipantsVC.h"
 #import "UIImageView+WebCache.h"
 #import "Macros.h"
 #import <MapKit/MapKit.h>
@@ -73,15 +71,10 @@ BOOL isCheckingOnlineForInfo;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = NO;
+    [EventsController makeNavigationBarBackToDefault:self.navigationController.navigationBar];
     
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.automaticallyAdjustsScrollViewInsets = YES;
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -107,9 +100,8 @@ BOOL isCheckingOnlineForInfo;
         if ((!_infoDictionary || ![_infoDictionary count]) && !isCheckingOnlineForInfo) {
             [self checkServerForUpdatesWithIndicator:YES];
         }
-    } else {
-
     }
+    
     return _infoDictionary;
 }
 
@@ -154,11 +146,6 @@ BOOL isCheckingOnlineForInfo;
     [self.navigationController pushViewController:loginPage animated:YES];
 }
 
-- (void)joinButtonsViewWillShowParticipants {
-    ParticipantsVC *participantsPage = [[ParticipantsVC alloc] init];
-    [self.navigationController pushViewController:participantsPage animated:YES];
-}
-
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -168,15 +155,13 @@ BOOL isCheckingOnlineForInfo;
         case 0:
             //  Date
             if (buttonIndex == 1) {
-                
+                //  Save date to local calendar
             }
             break;
             
         default:
             break;
     }
-    
-    
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -287,7 +272,6 @@ BOOL isCheckingOnlineForInfo;
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     JoinButtonsView *joinView = [[JoinButtonsView alloc] initWithEvent:self.event];
     [joinView setDelegate:self];
-    [joinView setInfoDictionary:self.infoDictionary];
     return joinView;
 }
 
@@ -298,6 +282,7 @@ BOOL isCheckingOnlineForInfo;
     switch (indexPath.row) {
         
         case 0:
+            //  Pagina organizator
             break;
             
         case 1: {
@@ -320,9 +305,6 @@ BOOL isCheckingOnlineForInfo;
 
             break;
         }
-            
-        case 3:
-            break;
             
         case 4: {
             if ([self.infoDictionary[@"FbPage"] class] != [NSNull class] &&

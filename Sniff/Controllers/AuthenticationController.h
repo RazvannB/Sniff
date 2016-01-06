@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "User.h"
 #import "Event.h"
 
@@ -20,9 +21,16 @@ typedef void(^AuthenticationControllerCompletionHandler)(BOOL success, NSString 
 @property (nonatomic, strong) NSArray *favoriteEventsArray;
 
 + (instancetype)sharedInstance;
+
+#pragma mark - User methods
+
 - (void)setLoggedUserWithObject:(id)object;
 - (void)registerUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion;
 - (void)loginUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler) completion;
 - (void)logout;
+
+#pragma mark - AuthenticationVC methods
+
++ (void)addBlackTransluscentEffectOnView:(UIView*)view;
 
 @end

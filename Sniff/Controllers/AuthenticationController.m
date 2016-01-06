@@ -24,6 +24,8 @@
     return instance;
 }
 
+#pragma mark - User methods
+
 - (User *)loggedUser {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *encodedObject = [defaults objectForKey:@"loggedUserKey"];
@@ -81,6 +83,19 @@
 
 - (void)logout {
     
+}
+
+#pragma mark - AuthenticationVC methods
+
++ (void)addBlackTransluscentEffectOnView:(UIView*)view {
+    
+    UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIVisualEffectView *beView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    beView.frame = view.bounds;
+    
+    view.frame = view.bounds;
+    view.backgroundColor = [UIColor clearColor];
+    [view insertSubview:beView atIndex:0];
 }
 
 @end

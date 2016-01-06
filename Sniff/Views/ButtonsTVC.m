@@ -10,21 +10,11 @@
 
 @implementation ButtonsTVC
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     
     self.scheduleButtonLeadingConstraint.constant = (CGRectGetWidth(self.frame)/2 - 8 - CGRectGetWidth(self.scheduleButton.frame))/2;
     self.feedbackButtonTrailingConstrant.constant = (CGRectGetWidth(self.frame)/2 - 8 - CGRectGetWidth(self.feedbackButton.frame))/2;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (IBAction)schedulePressed:(id)sender {

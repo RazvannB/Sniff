@@ -14,7 +14,9 @@
 #define buttonWidthSmallDevice 256
 
 #import "AuthenticationVC.h"
+#import "AuthenticationController.h"
 #import "Macros.h"
+#import "Colors.h"
 
 @interface AuthenticationVC () <UITextFieldDelegate> {
     BOOL validationPassed;
@@ -29,24 +31,74 @@
     [super viewDidLoad];
     shouldRaiseFields = YES;
     
-    [self addBlackTransluscentEffectOnView:self.view];
+    [AuthenticationController addBlackTransluscentEffectOnView:self.view];
     [self setAuthType:self.authType];
     [self setDeviceDimensions];
     [self setButtonsLayout];
     
-    self.navigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardAppear:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
 }
 
-- (void)addBlackTransluscentEffectOnView:(UIView*)view {
-    UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    UIVisualEffectView *beView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    beView.frame = view.bounds;
+- (void)setAuthType:(AuthenticationVCType)authType {
+    _authType = authType;
     
-    view.frame = view.bounds;
-    view.backgroundColor = [UIColor clearColor];
-    [view insertSubview:beView atIndex:0];
+    switch (authType) {
+        case AuthenticationVCType_Login:
+            [self.authButton setTitle:@"Autentifica-te" forState:UIControlStateNormal];
+            
+            self.firstNameHeightConstraint.constant = 0;
+            self.firstNameBottomConstraint.constant = 0;
+            self.firstName.alpha = 0;
+            
+            self.lastNameHeightConstraint.constant = 0;
+            self.lastNameBottomConstraint.constant = 0;
+            self.lastName.alpha = 0;
+            
+            self.confirmPasswordWidthConstraint.constant = 0;
+            self.confirmPassword.alpha = 0;
+            
+            self.lineHeightConstraint.constant = lineHeight;
+            self.lineBottomConstraint.constant = spaceHeight;
+            
+            self.confirmPassword.tag = -1;
+            self.password.returnKeyType = UIReturnKeyGo;
+            
+            [self.email becomeFirstResponder];
+            break;
+            
+        case AuthenticationVCType_Register:
+            [self.authButton setTitle:@"Creeaza cont" forState:UIControlStateNormal];
+            
+            self.firstNameBottomConstraint.constant = spaceHeight;
+            self.lastNameBottomConstraint.constant = spaceHeight;
+            
+            self.lineHeightConstraint.constant = 0;
+            self.lineBottomConstraint.constant = 0;
+            
+            self.forgotHeightConstraint.constant = 0;
+            self.forgotBottomConstraint.constant = 0;
+            self.forgotButton.alpha = 0;
+            
+            self.confirmPassword.tag = 4;
+            self.password.returnKeyType = UIReturnKeyNext;
+            
+            [self.firstName becomeFirstResponder];
+            break;
+            
+        case AuthenticationVCType_ForgotPassword:
+            break;
+            
+        case AuthenticationVCType_ResetPassword:
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)setDeviceDimensions {
@@ -110,11 +162,11 @@
 - (void)setButtonsLayout {
     self.authButton.layer.cornerRadius = 7.5;
     self.authButton.layer.borderWidth = 1.5;
-    self.authButton.layer.borderColor = [[UIColor colorWithRed:0.0f green:150.0f/255.0f blue:0.0f alpha:1] CGColor];
+    self.authButton.layer.borderColor = [[Colors customGreenColor] CGColor];
     
     self.forgotButton.layer.cornerRadius = 7.5;
     self.forgotButton.layer.borderWidth = 1.5;
-    self.forgotButton.layer.borderColor = [[UIColor colorWithRed:0.0f green:150.0f/255.0f blue:0.0f alpha:1] CGColor];
+    self.forgotButton.layer.borderColor = [[Colors customGreenColor] CGColor];
 }
 
 - (void)keyboardAppear:(NSNotification*)notification {
@@ -147,65 +199,6 @@
         }];
         shouldRaiseFields = NO;
     }
-}
-
-- (void)setAuthType:(AuthenticationVCType)authType {
-    _authType = authType;
-    
-    switch (authType) {
-        case AuthenticationVCType_Login:
-            [self.authButton setTitle:@"Autentifica-te" forState:UIControlStateNormal];
-            
-            self.firstNameHeightConstraint.constant = 0;
-            self.firstNameBottomConstraint.constant = 0;
-            self.firstName.alpha = 0;
-            
-            self.lastNameHeightConstraint.constant = 0;
-            self.lastNameBottomConstraint.constant = 0;
-            self.lastName.alpha = 0;
-
-            self.confirmPasswordWidthConstraint.constant = 0;
-            self.confirmPassword.alpha = 0;
-            
-            self.lineHeightConstraint.constant = lineHeight;
-            self.lineBottomConstraint.constant = spaceHeight;
-            
-            self.confirmPassword.tag = -1;
-            self.password.returnKeyType = UIReturnKeyGo;
-            
-            [self.email becomeFirstResponder];
-            break;
-            
-        case AuthenticationVCType_Register:
-            [self.authButton setTitle:@"Creeaza cont" forState:UIControlStateNormal];
-            
-            self.firstNameBottomConstraint.constant = spaceHeight;
-            self.lastNameBottomConstraint.constant = spaceHeight;
-            
-            self.lineHeightConstraint.constant = 0;
-            self.lineBottomConstraint.constant = 0;
-            
-            self.forgotHeightConstraint.constant = 0;
-            self.forgotBottomConstraint.constant = 0;
-            self.forgotButton.alpha = 0;
-            
-            self.confirmPassword.tag = 4;
-            self.password.returnKeyType = UIReturnKeyNext;
-            
-            [self.firstName becomeFirstResponder];
-            break;
-            
-        case AuthenticationVCType_ForgotPassword:
-            break;
-            
-        case AuthenticationVCType_ResetPassword:
-            break;
-            
-        default:
-            break;
-    }
-    
-    [self.view layoutIfNeeded];
 }
 
 - (void)showAlertViewWithMessage:(NSString*)message {

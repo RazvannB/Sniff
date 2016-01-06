@@ -11,7 +11,6 @@
 
 @protocol JoinButtonsView <NSObject>
 
-- (void)joinButtonsViewWillShowParticipants;
 - (void)joinButtonsViewWIllGoToLogin;
 
 @end
@@ -20,16 +19,12 @@
 
 @property (nonatomic, weak) Event *event;
 @property (nonatomic, weak) IBOutlet UIButton *joinButton;
-@property (nonatomic, weak) IBOutlet UIButton *participantsButton;
-@property (nonatomic, strong) NSDictionary *infoDictionary;
-@property (nonatomic, strong) NSNumber *numberOfParticipants;
 @property (nonatomic, strong) id <JoinButtonsView> delegate;
 
 @property (nonatomic, assign) BOOL isFavourite;
 
 - (instancetype)initWithEvent:(Event *)event;
 - (IBAction)joinButtonTouched:(id)sender;
-- (IBAction)participantsButtonTouched:(id)sender;
 + (CGFloat)height;
 
 @end

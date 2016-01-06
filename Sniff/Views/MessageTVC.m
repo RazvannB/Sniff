@@ -26,6 +26,14 @@
             self.messageLabel.text = @"Nu aveti evenimente favorite!";
             break;
             
+        case MessageTVCType_NoProgram:
+            self.messageLabel.text = @"Nu exista un program momentan!";
+            break;
+            
+        case MessageTVCType_NoFeedback:
+            self.messageLabel.text = @"Nu exista feedback!";
+            break;
+            
         default:
             break;
     }
