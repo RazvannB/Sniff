@@ -13,7 +13,8 @@
 
 @property (nonatomic, strong) Event *event;
 @property (nonatomic, strong) NSArray *scheduleArray;
-@property (nonatomic, strong) NSMutableDictionary *scheduleDictionarySorted;
+@property (nonatomic, strong) NSMutableDictionary *scheduleDictionary;
+@property (nonatomic, strong) UIView *headerView;
 
 - (id)initWithEvent:(Event*)event;
 

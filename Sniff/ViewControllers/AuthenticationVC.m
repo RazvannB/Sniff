@@ -213,6 +213,7 @@
 #pragma mark - Delegate Methods
 
 - (void)authButtonTouched:(id)sender {
+    
     self.user = [[User alloc] init];
     self.user.email = self.email.text;
     self.user.first_name = self.firstName.text;

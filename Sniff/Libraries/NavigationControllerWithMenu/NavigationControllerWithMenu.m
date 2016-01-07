@@ -9,6 +9,7 @@
 #import "NavigationControllerWithMenu.h"
 #import "LoginVC.h"
 #import "EventsTableVC.h"
+#import "EventsController.h"
 
 @interface NavigationControllerWithMenu () <MenuViewDelegate, LoggedUserViewDelegate> {
     NSString *currentViewTitle;
@@ -122,6 +123,8 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:nil forKey:@"loggedUserKey"];
             [defaults synchronize];
+            [EventsController sharedInstance].favoriteEventsArray = nil;
+            
             LoginVC *login = [[LoginVC alloc] init];
             login.navigationItem.leftBarButtonItem = self.menuButton;
             [self setViewControllers:@[login] animated:YES];

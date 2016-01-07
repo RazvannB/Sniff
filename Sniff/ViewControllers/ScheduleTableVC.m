@@ -10,6 +10,8 @@
 #import "EventsController.h"
 #import "MBProgressHUD.h"
 #import "ScheduleEvent.h"
+#import "ScheduleTVC.h"
+#import "Colors.h"
 
 @interface ScheduleTableVC ()
 
@@ -39,6 +41,7 @@ BOOL isCheckingOnlineForSchedule;
             [self checkServerForUpdatesWithIndicator:YES];
         }
     }
+    
     return _scheduleArray;
 }
 
@@ -87,38 +90,47 @@ BOOL isCheckingOnlineForSchedule;
     return [formatter stringFromDate:[self getDateFromString:string]];
 }
 
-- (void)sortScheduleByDate {
-    self.scheduleArray = [self.scheduleArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        obj1 = [self getDateFromString: [(ScheduleEvent*)obj1 date]];
-        obj2 = [self getDateFromString: [(ScheduleEvent*)obj2 date]];
-        if ([obj1 isEqualToDate:obj2]) {
-            obj1 = [self getHourFromString: [(ScheduleEvent*)obj1 start_hour]];
-            obj2 = [self getHourFromString: [(ScheduleEvent*)obj2 start_hour]];
-        }
+//- (NSArray *)sortScheduleEventsByDateInArray:(NSArray *)scheduleArray {
+//    
+//    scheduleArray = [scheduleArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        obj1 = [self getDateFromString: [(ScheduleEvent*)obj1 date]];
+//        obj2 = [self getDateFromString: [(ScheduleEvent*)obj2 date]];
+//        if ([obj1 isEqualToDate:obj2]) {
+//            obj1 = [self getHourFromString: [(ScheduleEvent*)obj1 start_hour]];
+//            obj2 = [self getHourFromString: [(ScheduleEvent*)obj2 start_hour]];
+//        }
+//        return [obj1 compare:obj2];
+//    }];
+//    
+//    return scheduleArray;
+//}
+
+- (NSArray *)sortDatesInArray:(NSArray *)array {
+    
+    array = [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        obj1 = [self getDateFromString:obj1];
+        obj2 = [self getDateFromString:obj2];
         return [obj1 compare:obj2];
     }];
+    
+    return array;
 }
 
-- (NSMutableDictionary *)scheduleDictionarySorted {
-    if (!_scheduleDictionarySorted || [_scheduleDictionarySorted count] == 0) {
-        _scheduleDictionarySorted = [[NSMutableDictionary alloc] init];
-        [self sortScheduleByDate];
-//        self.scheduleArray = [[self.scheduleArray reverseObjectEnumerator] allObjects]; //  ?
+- (NSMutableDictionary *)scheduleDictionary {
+    
+    if (!_scheduleDictionary || [_scheduleDictionary count] == 0) {
+        _scheduleDictionary = [[NSMutableDictionary alloc] init];
         for (ScheduleEvent* event in self.scheduleArray) {
-            if (!_scheduleDictionarySorted[event.date]) {
+            if (!_scheduleDictionary[event.date]) {
                 NSMutableArray *hoursArray = [[NSMutableArray alloc] init];
                 [hoursArray addObject:event];
-                _scheduleDictionarySorted[event.date] = hoursArray;
+                _scheduleDictionary[event.date] = hoursArray;
             } else {
-                [_scheduleDictionarySorted[event.date] addObject:event];
+                [_scheduleDictionary[event.date] addObject:event];
             }
         }
     }
-    return _scheduleDictionarySorted;
-}
-
-- (void)reverseDate {
-    
+    return _scheduleDictionary;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -132,35 +144,65 @@ BOOL isCheckingOnlineForSchedule;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.scheduleDictionarySorted allKeys] count];
+    return [self.scheduleDictionary.allKeys count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.scheduleDictionarySorted[[self.scheduleDictionarySorted allKeys][section]] count];
+    NSString *currentDate = self.scheduleDictionary.allKeys[section];
+    return [self.scheduleDictionary[currentDate] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ScheduleEvent *currentScheduleEvent = self.scheduleDictionarySorted[[self.scheduleDictionarySorted allKeys][indexPath.section]][indexPath.row];
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@-%@ %@", currentScheduleEvent.start_hour, currentScheduleEvent.end_hour, currentScheduleEvent.desc];
-    [cell.textLabel setTextColor:[UIColor whiteColor]];
-    cell.backgroundColor = [UIColor colorWithRed:22.0f/255.0f green:44.0f/255.0f blue:66.0f/255.0f alpha:1];
+    
+    static NSString *scheduleCellIdentifier = @"ScheduleTVC";
+    
+    NSArray *sortedDates = [self sortDatesInArray:self.scheduleDictionary.allKeys];
+    NSArray *currentDate = sortedDates[indexPath.section];
+    ScheduleEvent *currentScheduleEvent = self.scheduleDictionary[currentDate][indexPath.row];
+    
+    ScheduleTVC *cell = [tableView dequeueReusableCellWithIdentifier:scheduleCellIdentifier];
+    if (cell == nil) {
+        cell = [[ScheduleTVC alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:scheduleCellIdentifier];
+        cell = [[NSBundle mainBundle] loadNibNamed:@"ScheduleTVC" owner:self options:nil][0];
+    }
+    
+    [cell setScheduleEvent:currentScheduleEvent];
+    
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.view.frame) - 50, 7, 100, 30)];
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = [self reverseDate:[self.scheduleDictionarySorted allKeys][section]];
+    NSArray *sortedKeys = [self sortDatesInArray:self.scheduleDictionary.allKeys];
+    label.text = [self reverseDate:sortedKeys[section]];
     
-    UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor darkGrayColor];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
+    view.backgroundColor = [Colors customGrayColor];
+    
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    [path moveToPoint:CGPointMake(24, CGRectGetMidY(view.frame))];
+    [path addLineToPoint:CGPointMake(CGRectGetMinX(label.frame) - 16, CGRectGetMidY(view.frame))];
+    [path moveToPoint:CGPointMake(CGRectGetMaxX(label.frame) + 16, CGRectGetMidY(view.frame))];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(view.frame) - 24    , CGRectGetMidY(view.frame))];
+    
+    CAShapeLayer *viewMaskLayer = [[CAShapeLayer alloc] init];
+    viewMaskLayer.path = path.CGPath;
+    viewMaskLayer.strokeColor = [[UIColor whiteColor] CGColor];
+    viewMaskLayer.lineWidth = 1;
+    [view.layer addSublayer:viewMaskLayer];
+    
     [view addSubview:label];
     
     return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [ScheduleTVC height];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

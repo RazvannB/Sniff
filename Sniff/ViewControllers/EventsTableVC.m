@@ -55,7 +55,7 @@ BOOL isCheckingOnlineForEvents;
     }
     
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [Colors customGreenColor];
+    self.refreshControl.backgroundColor = [Colors customGrayColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
     [self.refreshControl addTarget:self
                             action:@selector(updateEvents)
@@ -173,6 +173,16 @@ BOOL isCheckingOnlineForEvents;
 }
 
 #pragma mark - UISearchBarDelegate
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.view endEditing:YES];
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+    return YES;
+}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     

@@ -74,9 +74,13 @@
         
         if (serverRequest.responseData) {
             [[AuthenticationController sharedInstance] setLoggedUserWithObject:serverRequest.responseData];
-            completion(YES, @"Autentificare cu succes", self);
+            if (completion) {
+                completion(YES, @"Autentificare cu succes", self);
+            }
         } else {
-            completion(NO, @"A aparut o eroare. Incercati din nou", self);
+            if (completion) {
+                completion(NO, @"A aparut o eroare. Incercati din nou", self);
+            }
         }
      }];
 }

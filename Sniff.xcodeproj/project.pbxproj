@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E5041B551C384CF900A4E54D /* MessageTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5041B531C384CF900A4E54D /* MessageTVC.m */; };
 		E5041B561C384CF900A4E54D /* MessageTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5041B541C384CF900A4E54D /* MessageTVC.xib */; };
+		E50B5F3F1C3E42E10037D729 /* ScheduleTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B5F3D1C3E42E10037D729 /* ScheduleTVC.m */; };
+		E50B5F401C3E42E10037D729 /* ScheduleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50B5F3E1C3E42E10037D729 /* ScheduleTVC.xib */; };
 		E521F6951B5DA9E5006AA29B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6941B5DA9E5006AA29B /* main.m */; };
 		E521F6981B5DA9E5006AA29B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E521F6971B5DA9E5006AA29B /* AppDelegate.m */; };
 		E521F6A01B5DA9E5006AA29B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E521F69F1B5DA9E5006AA29B /* Images.xcassets */; };
@@ -101,6 +103,9 @@
 		E5041B521C384CF900A4E54D /* MessageTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTVC.h; path = Views/MessageTVC.h; sourceTree = "<group>"; };
 		E5041B531C384CF900A4E54D /* MessageTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageTVC.m; path = Views/MessageTVC.m; sourceTree = "<group>"; };
 		E5041B541C384CF900A4E54D /* MessageTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageTVC.xib; path = Views/MessageTVC.xib; sourceTree = "<group>"; };
+		E50B5F3C1C3E42E10037D729 /* ScheduleTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleTVC.h; path = Views/ScheduleTVC.h; sourceTree = "<group>"; };
+		E50B5F3D1C3E42E10037D729 /* ScheduleTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleTVC.m; path = Views/ScheduleTVC.m; sourceTree = "<group>"; };
+		E50B5F3E1C3E42E10037D729 /* ScheduleTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ScheduleTVC.xib; path = Views/ScheduleTVC.xib; sourceTree = "<group>"; };
 		E521F68F1B5DA9E5006AA29B /* Sniff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sniff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E521F6931B5DA9E5006AA29B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E521F6941B5DA9E5006AA29B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -358,6 +363,9 @@
 				E5041B521C384CF900A4E54D /* MessageTVC.h */,
 				E5041B531C384CF900A4E54D /* MessageTVC.m */,
 				E5041B541C384CF900A4E54D /* MessageTVC.xib */,
+				E50B5F3C1C3E42E10037D729 /* ScheduleTVC.h */,
+				E50B5F3D1C3E42E10037D729 /* ScheduleTVC.m */,
+				E50B5F3E1C3E42E10037D729 /* ScheduleTVC.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -636,6 +644,7 @@
 				E5FAB7C31B7A70AA00BB8BE8 /* EventInfoTableVC.xib in Resources */,
 				E53BD60C1B8F964100D64CF3 /* FeedbackTableVC.xib in Resources */,
 				E53BD6161B8F970700D64CF3 /* FeedbackTVC.xib in Resources */,
+				E50B5F401C3E42E10037D729 /* ScheduleTVC.xib in Resources */,
 				E5DAE6941B8274AF0021CD2B /* ButtonsTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,6 +714,7 @@
 				E56AE0CD1C29F716007D5265 /* SDWebImageDownloaderOperation.m in Sources */,
 				E54D44A71B5EDE8A0066231E /* AFNetworkReachabilityManager.m in Sources */,
 				E56AE0D61C29F716007D5265 /* UIView+WebCacheOperation.m in Sources */,
+				E50B5F3F1C3E42E10037D729 /* ScheduleTVC.m in Sources */,
 				E56F8BAA1C1CF6E800944419 /* Macros.m in Sources */,
 				E54D447B1B5ED2970066231E /* MenuView.m in Sources */,
 				E54D44A41B5EDE8A0066231E /* AFHTTPRequestOperation.m in Sources */,

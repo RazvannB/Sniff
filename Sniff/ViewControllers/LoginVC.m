@@ -134,6 +134,7 @@
              loginUser:user
              withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
                  if (success) {
+                     [authVC resignFirstResponder];
                      [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
                      
                      [progressHud hide:YES];
@@ -168,19 +169,35 @@
              registerUser:user
              withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
                  if (success) {
-                     [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
                      
-                     [progressHud hide:YES];
-                     if (shouldReturnToEvent) {
-                         [self.navigationController popViewControllerAnimated:YES];
-                         [[[UIAlertView alloc] initWithTitle:nil
-                                                     message:@"Autentificare cu succes"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles: nil] show];
-                     } else {
-                         [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification" object:nil];
-                     }
+                     [[AuthenticationController sharedInstance]
+                      loginUser:user
+                      withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
+                          if (success) {
+                              [authVC resignFirstResponder];
+                              [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
+                              
+                              [progressHud hide:YES];
+                              if (shouldReturnToEvent) {
+                                  [self.navigationController popViewControllerAnimated:YES];
+                                  [[[UIAlertView alloc] initWithTitle:nil
+                                                              message:message
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles: nil] show];
+                              } else {
+                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification"
+                                                                                      object:nil];
+                              }
+                          } else {
+                              [[[UIAlertView alloc] initWithTitle:nil
+                                                          message:message
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil] show];
+                              [progressHud hide:YES];
+                          }
+                      }];
                  } else {
                      [progressHud hide:YES];
                  }
@@ -192,9 +209,6 @@
         default:
             break;
     }
-    
-    
-    
 }
 
 - (void)authenticationVC:(AuthenticationVC *)authVC backButtonTouched:(id)sender {
