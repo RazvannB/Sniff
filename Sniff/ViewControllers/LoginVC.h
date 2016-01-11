@@ -19,17 +19,19 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet UIButton *loginButton;
 @property (nonatomic, weak) IBOutlet UIButton *registerButton;
 @property (nonatomic, weak) IBOutlet UIButton *loginFacebookButton;
+@property (nonatomic, weak) IBOutlet UIButton *showEventsButton;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageTopConstraint;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *loginButtonWidthConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *registerButtonWidthConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *loginFacebookButtonWidthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *loginFacebookButtonBottomConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *showEventsButtonWidthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *showEventsButtonHeightConstraint;
 
 @property (nonatomic) LoginType loginType;
 
-- (IBAction)loginButtonPressed:(id)sender;
-- (IBAction)registerButtonPressed:(id)sender;
 - (instancetype)init;
 - (instancetype)initWithTurningBack:(BOOL)event;
 

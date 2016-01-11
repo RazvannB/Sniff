@@ -11,10 +11,14 @@
                 <outlet property="loginButton" destination="wY9-Uy-7cw" id="VcV-WH-Skv"/>
                 <outlet property="loginButtonWidthConstraint" destination="h1q-Po-xC1" id="bPE-uO-uqa"/>
                 <outlet property="loginFacebookButton" destination="GV3-Ar-g12" id="3yV-0v-A4s"/>
+                <outlet property="loginFacebookButtonBottomConstraint" destination="hkG-C7-caw" id="D2d-pb-nyu"/>
                 <outlet property="loginFacebookButtonWidthConstraint" destination="FkR-uz-GOC" id="5Az-zQ-VIg"/>
                 <outlet property="logoImage" destination="Gei-q6-TgN" id="Jas-pt-AaJ"/>
                 <outlet property="registerButton" destination="Q4C-eo-1sh" id="knN-Re-2Dl"/>
                 <outlet property="registerButtonWidthConstraint" destination="dfh-jo-qSh" id="8cZ-uu-fF4"/>
+                <outlet property="showEventsButton" destination="nhf-pq-H6s" id="L0g-vd-3bh"/>
+                <outlet property="showEventsButtonHeightConstraint" destination="P5H-3W-CPh" id="l8w-SD-hYK"/>
+                <outlet property="showEventsButtonWidthConstraint" destination="u1b-u7-bPI" id="lLN-Tl-Ajm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wY9-Uy-7cw">
-                    <rect key="frame" x="38" y="494" width="300" height="40"/>
+                    <rect key="frame" x="38" y="446" width="300" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="h1q-Po-xC1"/>
@@ -40,7 +44,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4C-eo-1sh">
-                    <rect key="frame" x="38" y="542" width="300" height="40"/>
+                    <rect key="frame" x="38" y="494" width="300" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="dfh-jo-qSh"/>
@@ -63,7 +67,7 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GV3-Ar-g12">
-                    <rect key="frame" x="38" y="590" width="300" height="40"/>
+                    <rect key="frame" x="38" y="542" width="300" height="40"/>
                     <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="FkR-uz-GOC"/>
@@ -77,16 +81,32 @@
                         <action selector="loginViaFacebookButtonTouched:" destination="-1" eventType="touchUpInside" id="gCn-yN-NYj"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-pq-H6s">
+                    <rect key="frame" x="38" y="590" width="300" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="P5H-3W-CPh"/>
+                        <constraint firstAttribute="width" constant="300" id="u1b-u7-bPI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Arata-mi evenimentele">
+                        <color key="titleColor" red="0.0" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="showEventsButtonPressed:" destination="-1" eventType="touchUpInside" id="IFM-d4-5kC"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="wY9-Uy-7cw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JYk-Yf-CeB"/>
+                <constraint firstAttribute="bottom" secondItem="nhf-pq-H6s" secondAttribute="bottom" constant="37" id="SiM-e2-1h0"/>
                 <constraint firstItem="GV3-Ar-g12" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="SrS-4p-EuM"/>
                 <constraint firstItem="Gei-q6-TgN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Wek-X0-IKK"/>
-                <constraint firstAttribute="bottom" secondItem="GV3-Ar-g12" secondAttribute="bottom" constant="37" id="c2Z-bX-II2"/>
                 <constraint firstItem="GV3-Ar-g12" firstAttribute="top" secondItem="Q4C-eo-1sh" secondAttribute="bottom" constant="8" id="ddm-Yd-bcY"/>
+                <constraint firstItem="nhf-pq-H6s" firstAttribute="top" secondItem="GV3-Ar-g12" secondAttribute="bottom" constant="8" id="hkG-C7-caw"/>
                 <constraint firstAttribute="trailing" secondItem="Gei-q6-TgN" secondAttribute="trailing" constant="8" id="jSo-Ub-IOq"/>
                 <constraint firstItem="Gei-q6-TgN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="52" id="jky-VM-VaJ"/>
+                <constraint firstItem="nhf-pq-H6s" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mFi-hy-F20"/>
                 <constraint firstItem="Q4C-eo-1sh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qHZ-9D-lNj"/>
                 <constraint firstItem="Q4C-eo-1sh" firstAttribute="top" secondItem="wY9-Uy-7cw" secondAttribute="bottom" priority="999" constant="8" id="vTd-sm-URH"/>
             </constraints>

@@ -21,6 +21,7 @@
 #import "EventsTableVC.h"
 #import "AuthenticationVC.h"
 #import "Macros.h"
+#import "NavigationControllerWithMenu.h"
 
 @interface LoginVC () <AuthenticationVCDelegate> {
     BOOL shouldReturnToEvent;
@@ -63,11 +64,18 @@
         self.loginButtonWidthConstraint.constant = fieldWidthSmallScreen;
         self.registerButtonWidthConstraint.constant = fieldWidthSmallScreen;
         self.loginFacebookButtonWidthConstraint.constant = fieldWidthSmallScreen;
+        self.showEventsButtonWidthConstraint.constant = fieldWidthSmallScreen;
     }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateLogoImage)];
     self.logoImage.userInteractionEnabled = YES;
     [self.logoImage addGestureRecognizer:tap];
+    
+    if (shouldReturnToEvent) {
+        self.showEventsButtonHeightConstraint.constant = 0;
+        self.loginFacebookButtonBottomConstraint.constant = 0;
+        self.showEventsButton.hidden = YES;
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -119,6 +127,13 @@
 
 - (IBAction)loginViaFacebookButtonTouched:(id)sender {
     
+}
+
+- (IBAction)showEventsButtonPressed:(id)sender {
+    
+    EventsTableVC *events = [[EventsTableVC alloc] initWithType:EventsTableVCType_Default];
+    events.navigationItem.leftBarButtonItem = [(NavigationControllerWithMenu *)self.navigationController menuButton];
+    [self.navigationController setViewControllers:@[events] animated:YES];
 }
 
 #pragma mark - AuthenticationVCDelegate

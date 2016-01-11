@@ -40,9 +40,9 @@
 - (NSArray *)menuItemsArray {
     _menuItemsArray = [NSArray alloc];
     if ([AuthenticationController sharedInstance].loggedUser) {
-        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Arata-mi evenimentele", @"Evenimentele mele", @"Setari cont", @"Iesire din cont"]];
+        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Toate evenimentele", @"Evenimentele mele", @"Setari cont", @"Iesire din cont"]];
     } else {
-        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Arata-mi evenimentele"]];
+        _menuItemsArray = [_menuItemsArray initWithArray:@[@"Toate evenimentele"]];
     }
     
     return _menuItemsArray;

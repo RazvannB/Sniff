@@ -10,10 +10,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventsListTVC" rowHeight="222" id="KGk-i7-Jjw" customClass="EventsListTVC">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="229"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgm-Zi-3U5">
@@ -45,7 +45,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="2m5-Vh-lLa"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="pdZ-nE-tC6"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="highlightedColor"/>
@@ -91,19 +90,19 @@
                     <constraint firstItem="y5N-HM-T3Y" firstAttribute="top" secondItem="0ac-Cj-53h" secondAttribute="bottom" constant="8" id="EGO-gf-oje"/>
                     <constraint firstItem="pgm-Zi-3U5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="FUN-vK-Z6u"/>
                     <constraint firstItem="L3K-O4-KKU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="N0X-yT-cm7"/>
-                    <constraint firstItem="C4s-kb-Gdk" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" constant="1" id="NTR-dZ-jnG"/>
+                    <constraint firstItem="C4s-kb-Gdk" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" constant="-4" id="NTR-dZ-jnG"/>
                     <constraint firstAttribute="trailing" secondItem="0ac-Cj-53h" secondAttribute="trailing" constant="16" id="PD0-U1-S1P"/>
                     <constraint firstItem="C4s-kb-Gdk" firstAttribute="top" secondItem="y5N-HM-T3Y" secondAttribute="bottom" constant="8" id="QUm-vH-jyo"/>
                     <constraint firstAttribute="trailing" secondItem="Neq-C8-BVt" secondAttribute="trailing" constant="8" id="RI2-5c-Z0F"/>
                     <constraint firstItem="C4s-kb-Gdk" firstAttribute="leading" secondItem="s2T-cY-oys" secondAttribute="trailing" constant="8" id="cAv-Pd-yC4"/>
-                    <constraint firstAttribute="bottom" secondItem="s2T-cY-oys" secondAttribute="bottom" constant="17" id="jiw-kN-uu7"/>
+                    <constraint firstAttribute="bottom" secondItem="s2T-cY-oys" secondAttribute="bottom" constant="22" id="jiw-kN-uu7"/>
                     <constraint firstAttribute="trailing" secondItem="L3K-O4-KKU" secondAttribute="trailing" constant="16" id="lhe-I9-34N"/>
                     <constraint firstItem="Neq-C8-BVt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="nUp-ER-sly"/>
                     <constraint firstAttribute="trailing" secondItem="C4s-kb-Gdk" secondAttribute="trailing" constant="16" id="ny4-hg-B6D"/>
                     <constraint firstItem="Neq-C8-BVt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="o9k-Lc-A9b"/>
                     <constraint firstItem="y5N-HM-T3Y" firstAttribute="leading" secondItem="s2T-cY-oys" secondAttribute="trailing" constant="8" id="pOc-iU-liB"/>
                     <constraint firstItem="0ac-Cj-53h" firstAttribute="leading" secondItem="s2T-cY-oys" secondAttribute="trailing" constant="8" id="shB-Vs-HkD"/>
-                    <constraint firstAttribute="bottom" secondItem="pgm-Zi-3U5" secondAttribute="bottom" id="vFt-QZ-g4K"/>
+                    <constraint firstAttribute="bottom" secondItem="pgm-Zi-3U5" secondAttribute="bottom" constant="5" id="vFt-QZ-g4K"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

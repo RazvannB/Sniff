@@ -179,16 +179,22 @@ BOOL isCheckingOnlineForEvents;
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    [searchBar setShowsCancelButton:YES animated:YES];
-    return YES;
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    NSString *searchText = searchBar.text;
     
     if (![searchText length]) {
         [self.view endEditing:YES];
-        self.eventsArray = [EventsController sharedInstance].eventsArray;
+        
+        if (self.eventsType == EventsTableVCType_Default) {
+            
+            self.eventsArray = [EventsController sharedInstance].eventsArray;
+            [self setTypeSelected:self.typeSelected];
+            
+        } else if (self.eventsType == EventsTableVCType_Favorite) {
+            self.eventsArray = [[EventsController sharedInstance].favoriteEventsArray mutableCopy];
+        }
+        
         [self.tableView reloadData];
         return;
     }
@@ -203,6 +209,15 @@ BOOL isCheckingOnlineForEvents;
                                                      [self.tableView reloadData];
                                                      
                                                  }];
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+    return YES;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self searchBarSearchButtonClicked:searchBar];
 }
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

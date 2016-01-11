@@ -22,7 +22,9 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController {
     self = [super initWithRootViewController:rootViewController];
     if (self) {
-        rootViewController.navigationItem.leftBarButtonItem = self.menuButton;
+        if (![rootViewController isKindOfClass:[LoginVC class]]) {
+            rootViewController.navigationItem.leftBarButtonItem = self.menuButton;
+        }
     }
     return self;
 }
@@ -80,9 +82,7 @@
         return;
     }
 
-    LoginVC *login = [[LoginVC alloc] init];
-    login.navigationItem.leftBarButtonItem = self.menuButton;
-    self.viewControllers = @[login];
+    self.viewControllers = @[[[LoginVC alloc] init]];
 }
 
 - (void)userLoggedIn {
@@ -125,9 +125,7 @@
             [defaults synchronize];
             [EventsController sharedInstance].favoriteEventsArray = nil;
             
-            LoginVC *login = [[LoginVC alloc] init];
-            login.navigationItem.leftBarButtonItem = self.menuButton;
-            [self setViewControllers:@[login] animated:YES];
+            [self setViewControllers:@[[[LoginVC alloc] init]] animated:YES];
             self.menuView = nil;
             break;
         }

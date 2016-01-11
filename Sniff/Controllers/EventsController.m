@@ -33,11 +33,16 @@
     ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_GetPublicEvents];
     
     [request post:^(ServerRequest *serverRequest) {
-        self.eventsArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *eventDictionary in serverRequest.response) {
-            Event *event = [Event initWithDictionary:eventDictionary];
-            [self.eventsArray addObject:event];
+        if ([serverRequest.response isKindOfClass:[NSArray class]] &&
+            [serverRequest.response count]) {
+            
+            self.eventsArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *eventDictionary in serverRequest.response) {
+                Event *event = [Event initWithDictionary:eventDictionary];
+                [self.eventsArray addObject:event];
+            }
         }
+        
         if (completion) {
             completion(YES, @"Events retrieved", self);
         }

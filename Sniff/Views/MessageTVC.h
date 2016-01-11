@@ -11,7 +11,7 @@
 typedef enum {
     MessageTVCType_NoEvents,
     MessageTVCType_NoFavoriteEvents,
-    MessageTVCType_NoProgram,
+    MessageTVCType_NoSchedule,
     MessageTVCType_NoFeedback
 } MessageTVCType ;
 
