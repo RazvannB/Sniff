@@ -22,6 +22,8 @@
 #import "AuthenticationVC.h"
 #import "Macros.h"
 #import "NavigationControllerWithMenu.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface LoginVC () <AuthenticationVCDelegate> {
     BOOL shouldReturnToEvent;
@@ -125,8 +127,100 @@
     [self.navigationController presentViewController:auth animated:YES completion:nil];
 }
 
+- (void)registerUser:(User *)user {
+    AuthenticationVC *auth = [[AuthenticationVC alloc] init];
+    [auth setAuthType:AuthenticationVCType_Register];
+    [auth setDelegate:self];
+    auth.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self.navigationController presentViewController:auth animated:YES completion:nil];
+}
+
 - (IBAction)loginViaFacebookButtonTouched:(id)sender {
     
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logOut];
+    [login
+     logInWithReadPermissions: @[@"public_profile", @"email"]
+     fromViewController:self
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             NSLog(@"Logged in");
+             
+             if ([FBSDKAccessToken currentAccessToken]) {
+                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email,first_name,last_name"}]
+                  startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                      if (!error) {
+                          NSLog(@"Fetched user:%@", result);
+                          User *user = [User initWithDictionary:@{@"first_name": result[@"first_name"],
+                                                                  @"last_name": result[@"last_name"],
+                                                                  @"email": result[@"email"]}];
+                          user.password = [AuthenticationController hashString:result[@"id"] withKey:@"SniffEventsForiOS"];;
+                          
+                          MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+                          progressHud.labelText = @"Autentificare...";
+                          
+                          [[AuthenticationController sharedInstance]
+                           loginUser:user
+                           withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
+                               if (success) {
+                                   [progressHud hide:YES];
+                                   if (shouldReturnToEvent) {
+                                       [self.navigationController popViewControllerAnimated:YES];
+                                       [[[UIAlertView alloc] initWithTitle:nil
+                                                                   message:message
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles: nil] show];
+                                   } else {
+                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification"
+                                                                                           object:nil];
+                                   }
+                               } else {
+                                   [[AuthenticationController sharedInstance]
+                                    registerUser:user
+                                    withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
+                                        if (success) {
+                                            
+                                            [[AuthenticationController sharedInstance]
+                                             loginUser:user
+                                             withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
+                                                 if (success) {
+                                                     [progressHud hide:YES];
+                                                     if (shouldReturnToEvent) {
+                                                         [self.navigationController popViewControllerAnimated:YES];
+                                                         [[[UIAlertView alloc] initWithTitle:nil
+                                                                                     message:message
+                                                                                    delegate:nil
+                                                                           cancelButtonTitle:@"OK"
+                                                                           otherButtonTitles: nil] show];
+                                                     } else {
+                                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSuccessfullyLoggedInNotification"
+                                                                                                             object:nil];
+                                                     }
+                                                 } else {
+                                                     [[[UIAlertView alloc] initWithTitle:nil
+                                                                                 message:message
+                                                                                delegate:nil
+                                                                       cancelButtonTitle:@"OK"
+                                                                       otherButtonTitles: nil] show];
+                                                     [progressHud hide:YES];
+                                                 }
+                                             }];
+                                        } else {
+                                            [progressHud hide:YES];
+                                        }
+                                    }];
+                               }
+                           }];
+                      }
+                  }];
+             }
+         }
+     }];
 }
 
 - (IBAction)showEventsButtonPressed:(id)sender {
@@ -189,8 +283,10 @@
                       loginUser:user
                       withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
                           if (success) {
-                              [authVC resignFirstResponder];
-                              [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
+                              if (authVC) {
+                                  [authVC resignFirstResponder];
+                                  [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
+                              }
                               
                               [progressHud hide:YES];
                               if (shouldReturnToEvent) {
@@ -217,7 +313,7 @@
                      [progressHud hide:YES];
                  }
              }];
-            
+
             break;
         }
             

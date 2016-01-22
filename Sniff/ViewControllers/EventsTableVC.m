@@ -72,8 +72,10 @@ BOOL isCheckingOnlineForEvents;
 
         if (self.eventsType == EventsTableVCType_Default) {
             _eventsArray = [[NSMutableArray alloc] initWithArray:[EventsController sharedInstance].eventsArray];
+            [self sortEvents];
         } else {
             _eventsArray = [[NSMutableArray alloc] initWithArray:[EventsController sharedInstance].favoriteEventsArray];
+            [self sortEvents];
         }
     }
     
@@ -99,13 +101,14 @@ BOOL isCheckingOnlineForEvents;
     
     if (shouldFilter) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName contains %@", [EventsController getPredicateTermWithIndex:typeSelected]];
-        self.eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
+        _eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
         
         if (typeSelected == 0) {
-            self.eventsArray = nil;
+            _eventsArray = nil;
         }
     }
     
+    [self sortEvents];
     [self.tableView reloadData];
 }
 
@@ -116,6 +119,16 @@ BOOL isCheckingOnlineForEvents;
     } else {
         [self checkServerForUpdatesWithIndicator:YES];
     }
+}
+
+- (void)sortEvents {
+    [_eventsArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        
+        obj1 = @(abs([[(Event *)obj1 DiffDate] intValue]));
+        obj2 = @(abs([[(Event *)obj2 DiffDate] intValue]));
+        
+        return [obj1 compare:obj2];
+    }];
 }
 
 - (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
@@ -129,13 +142,19 @@ BOOL isCheckingOnlineForEvents;
     [[EventsController sharedInstance] getPublicEventsWithCompletion:^(BOOL success, NSString *message, EventsController *completion) {
         if (success) {
             
-            self.eventsArray = [[NSMutableArray alloc] initWithArray:[EventsController sharedInstance].eventsArray];
+            _eventsArray = [[NSMutableArray alloc] initWithArray:[EventsController sharedInstance].eventsArray];
             
             if (!self.allEventsArray || ![self.allEventsArray count]) {
                 self.allEventsArray = _eventsArray;
             }
             
             [self setTypeSelected:0];
+            
+            [[EventsController sharedInstance] getFavoriteEventsWithCompletion:^(BOOL success, NSString *message, EventsController *completion) {
+                if (success) {
+                    [self.tableView reloadData];
+                }
+            }];
             
             [self.tableView reloadData];
             

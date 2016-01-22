@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) id <FeedbackFooterViewDelegate> delegate;
 
+@property (nonatomic, weak) IBOutlet UIButton *sendFeedbackButton;
+
 - (IBAction)feedbackButtonTouched:(id)sender;
 + (CGFloat)height;
 

@@ -11,6 +11,7 @@
 #import "ScheduleEvent.h"
 #import "Feedback.h"
 #import "Colors.h"
+#import "AuthenticationController.h"
 
 @implementation EventsController
 
@@ -45,6 +46,28 @@
         
         if (completion) {
             completion(YES, @"Events retrieved", self);
+        }
+    }];
+}
+
+- (void)getFavoriteEventsWithCompletion:(EventsControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_GetFavouriteEvents];
+    [request addValue:[AuthenticationController sharedInstance].loggedUser.id forParameter:@"id"];
+    
+    [request post:^(ServerRequest *serverRequest) {
+        if ([serverRequest.response isKindOfClass:[NSArray class]] &&
+            [serverRequest.response count]) {
+            
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *eventDictionary in serverRequest.response) {
+                Event *event = [Event initWithDictionary:eventDictionary];
+                [tempArray addObject:event];
+            }
+            self.favoriteEventsArray = [[NSArray alloc] initWithArray:tempArray];
+        }
+        
+        if (completion) {
+            completion(YES, @"Favorite events retrieved", self);
         }
     }];
 }
@@ -119,15 +142,43 @@
     
     [request post:^(ServerRequest *serverRequest) {
         self.searchArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *eventDictionary in serverRequest.response) {
-            Event *event = [Event initWithDictionary:eventDictionary];
-            [self.searchArray addObject:event];
+        if ([serverRequest.response isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *eventDictionary in serverRequest.response) {
+                Event *event = [Event initWithDictionary:eventDictionary];
+                [self.searchArray addObject:event];
+            }
         }
         if (completion) {
             completion(YES, @"Events retrieved", self);
         }
     }];
 
+}
+
+- (void)addOrRemoveEvent:(Event *)event fromFavoritesWithCompletion:(EventsControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_JoinEvent];
+    [request addValue:[AuthenticationController sharedInstance].loggedUser.id forParameter:@"user_id"];
+    [request addValue:event.id forParameter:@"event_id"];
+    
+    BOOL eventIsFavourite = [[self.favoriteEventsArray valueForKey:@"id"] containsObject:event.id];
+    [request addValue:[@(eventIsFavourite) stringValue] forParameter:@"action"];
+    
+    [request post:^(ServerRequest *serverRequest) {
+        [self getFavoriteEventsWithCompletion:nil];
+        if (completion) {
+            completion(YES, @"Event modified", self);
+        }
+    }];
+}
+
+- (void)checkIfEvent:(Event *)event isFavoriteWithCompletion:(EventsControllerCompletionHandler)completion {
+    ServerRequest *request = [ServerRequest requestWithFunction:ServerRequestType_CheckIfJoined];
+    [request addValue:[AuthenticationController sharedInstance].loggedUser.id forParameter:@"user_id"];
+    [request addValue:event.id forParameter:@"event_id"];
+    
+    [request post:^(ServerRequest *serverRequest) {
+        
+    }];
 }
 
 #pragma mark - Favorite events methods
@@ -273,6 +324,59 @@
     viewMaskLayer.path = path.CGPath;
     
     return viewMaskLayer;
+}
+
+#pragma mark - Feedback methods
+
++ (CAShapeLayer *)drawMaskForSendFeedbackView:(UIView *)view {
+    
+    CAShapeLayer *viewMaskLayer = [[CAShapeLayer alloc] init];
+    viewMaskLayer.fillColor = [[Colors customGrayColor] CGColor];
+    viewMaskLayer.strokeColor = [[UIColor whiteColor] CGColor];
+    
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    [path moveToPoint:CGPointMake(-1, 0)];
+    [path addLineToPoint:CGPointMake(-1, CGRectGetMaxY(view.frame))];
+    
+    for (float i = 0; i < CGRectGetWidth([[UIScreen mainScreen] bounds])/40; i++) {
+        [path addLineToPoint:CGPointMake(i * 40 + 20, CGRectGetMaxY(view.frame) - 10)];
+        [path addLineToPoint:CGPointMake( (i + 1) * 40, CGRectGetMaxY(view.frame))];
+    }
+    
+    [path addLineToPoint:CGPointMake(CGRectGetMaxX(view.frame), 0)];
+    
+    viewMaskLayer.path = path.CGPath;
+    
+    return viewMaskLayer;
+}
+
++ (CAShapeLayer *)drawMaskForFeedbackView:(UIView *)view {
+    
+    CAShapeLayer *viewMaskLayer = [[CAShapeLayer alloc] init];
+    viewMaskLayer.fillColor = [[UIColor whiteColor] CGColor];
+    
+    UIBezierPath *maskPath = [[UIBezierPath alloc] init];
+    maskPath = [UIBezierPath bezierPathWithRoundedRect:view.bounds
+                                     byRoundingCorners:(UIRectCornerTopLeft|UIRectCornerBottomRight)
+                                           cornerRadii:CGSizeMake(20.0, 20.0)];
+    
+    viewMaskLayer.frame = view.bounds;
+    viewMaskLayer.path = maskPath.CGPath;
+    
+    return viewMaskLayer;
+}
+
++ (NSArray *)sortFeedbackArray:(NSArray *)array {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    return
+    [array sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        NSDate *date1 = [formatter dateFromString:[(Feedback *)obj1 date]];
+        NSDate *date2 = [formatter dateFromString:[(Feedback *)obj2 date]];
+        return [date1 compare:date2];
+    }];
 }
 
 @end

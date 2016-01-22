@@ -8,6 +8,7 @@
 
 #import "AuthenticationController.h"
 #import "ServerRequest.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @implementation AuthenticationController
 
@@ -22,6 +23,40 @@
         
     });
     return instance;
+}
+
++ (NSString *)uuid {
+    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+    CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
+    CFRelease(uuidRef);
+    return (__bridge_transfer NSString *)uuidStringRef;
+}
+
++ (NSString *)hashString:(NSString *)string withKey:(NSString *)key {
+    if ([string length] == 0 || [key length] == 0)
+        return nil;
+    const char *stringVars = [string UTF8String];
+    const char *keyVars = [key UTF8String];
+    char result[3*strlen(stringVars) + 1];
+    result[3*strlen(stringVars)] = '\0';
+    for (int i=0; i<strlen(stringVars); i++) {
+        result[3*i] = stringVars[i];
+        result[3*i+1] = 'a' + stringVars[i] - '0';
+        result[3*i+2] = keyVars[i%(strlen(keyVars))];
+    }
+    return [AuthenticationController md5:result];
+}
+
++ (NSString *)md5:(char*)input {
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( input, (CC_LONG)strlen(input), result);
+    return [NSString stringWithFormat:
+            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];
 }
 
 #pragma mark - User methods

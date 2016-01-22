@@ -28,11 +28,14 @@ typedef void(^EventsControllerCompletionHandler)(BOOL success, NSString *message
 #pragma mark - Server request methods
 
 - (void)getPublicEventsWithCompletion:(EventsControllerCompletionHandler)completion;
+- (void)getFavoriteEventsWithCompletion:(EventsControllerCompletionHandler)completion;
 - (void)getInfoForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion;
 - (void)getFeedbackForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion;
 - (void)sendFeedbackForEvent:(Event*)event username:(NSString*)username message:(NSString*)message completion:(EventsControllerCompletionHandler)completion;
 - (void)getScheduleForEvent:(Event*)event completion:(EventsControllerCompletionHandler)completion;
 - (void)searchEventsWithTerm:(NSString *)term completion:(EventsControllerCompletionHandler)completion;
+- (void)addOrRemoveEvent:(Event *)event fromFavoritesWithCompletion:(EventsControllerCompletionHandler)completion;
+- (void)checkIfEvent:(Event *)event isFavoriteWithCompletion:(EventsControllerCompletionHandler)completion;
 
 #pragma mark - Favorite events methods
 
@@ -57,5 +60,11 @@ typedef void(^EventsControllerCompletionHandler)(BOOL success, NSString *message
 #pragma mark - JoinButtonsView methods
 
 + (CAShapeLayer *)drawMaskForFavouriteButtonWithView:(UIView *)view button:(UIView *)button;
+
+#pragma mark - Feedback methods
+
++ (CAShapeLayer *)drawMaskForSendFeedbackView:(UIView *)view;
++ (CAShapeLayer *)drawMaskForFeedbackView:(UIView *)view;
++ (NSArray *)sortFeedbackArray:(NSArray *)array;
 
 @end

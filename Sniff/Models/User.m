@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "AuthenticationController.h"
 
 @implementation User
 
@@ -29,8 +30,12 @@
     User *user = [[User alloc] init];
     user.first_name = dictionary[@"first_name"];
     user.last_name = dictionary[@"last_name"];
-    user.id = dictionary[@"id"];
     user.email = dictionary[@"email"];
+    user.id = dictionary[@"id"];
+    
+    if (![user.id length]) {
+        user.id = [AuthenticationController uuid];
+    }
     
     return user;
 }

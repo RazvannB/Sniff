@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -11,7 +11,7 @@
                 <outlet property="checkmark" destination="vpa-bE-Bk5" id="r5V-j9-ZBS"/>
                 <outlet property="comment" destination="w0L-J2-1T1" id="fvX-y7-YYT"/>
                 <outlet property="commentHeightConstraint" destination="CHR-mV-1Kj" id="ccb-3J-kwP"/>
-                <outlet property="nameLabel" destination="Plp-q4-gVd" id="sqO-0L-r4L"/>
+                <outlet property="nameLabel" destination="1sv-J2-muB" id="JAy-hS-hRO"/>
                 <outlet property="sendButton" destination="ghm-Hz-mac" id="oiy-V0-DbN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,20 +21,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plp-q4-gVd">
-                    <rect key="frame" x="8" y="70" width="552" height="24"/>
-                    <animations/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="24" id="xle-5R-16X"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpa-bE-Bk5">
-                    <rect key="frame" x="568" y="70" width="24" height="24"/>
-                    <animations/>
+                    <rect key="frame" x="544" y="55" width="24" height="24"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="ciu-F0-mSB"/>
@@ -44,55 +32,82 @@
                     <state key="normal" backgroundImage="checkmark">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="checkmarkTouched:" destination="-1" eventType="touchUpInside" id="bXd-he-64r"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghm-Hz-mac">
-                    <rect key="frame" x="8" y="140" width="584" height="30"/>
-                    <animations/>
+                    <rect key="frame" x="24" y="137" width="552" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="W2h-PV-JRi"/>
+                        <constraint firstAttribute="height" constant="40" id="W2h-PV-JRi"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="Trimite">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="sendFeedbackTouched:" destination="-1" eventType="touchUpInside" id="H4u-GC-dLT"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0L-J2-1T1">
-                    <rect key="frame" x="8" y="102" width="584" height="30"/>
-                    <animations/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Razvan Balint" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sv-J2-muB">
+                    <rect key="frame" x="24" y="50" width="504" height="36"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="CHR-mV-1Kj"/>
+                        <constraint firstAttribute="height" constant="36" id="djR-71-acY"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0L-J2-1T1">
+                    <rect key="frame" x="24" y="93" width="552" height="36"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="CHR-mV-1Kj"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="delegate" destination="-1" id="T4L-cK-8Dm"/>
                     </connections>
                 </textView>
             </subviews>
-            <animations/>
-            <color key="backgroundColor" red="0.086274509799999996" green="0.17254901959999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="ghm-Hz-mac" secondAttribute="trailing" constant="8" id="A2R-oh-ZJq"/>
-                <constraint firstAttribute="trailing" secondItem="w0L-J2-1T1" secondAttribute="trailing" constant="8" id="As6-U9-v76"/>
-                <constraint firstItem="w0L-J2-1T1" firstAttribute="top" secondItem="vpa-bE-Bk5" secondAttribute="bottom" constant="8" id="SnT-FB-qya"/>
-                <constraint firstItem="vpa-bE-Bk5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="VKp-7I-qfG"/>
-                <constraint firstItem="w0L-J2-1T1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ZIZ-18-Asf"/>
-                <constraint firstItem="Plp-q4-gVd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="aqv-kh-H58"/>
-                <constraint firstItem="ghm-Hz-mac" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="fTe-a2-DMM"/>
+                <constraint firstAttribute="trailing" secondItem="ghm-Hz-mac" secondAttribute="trailing" constant="24" id="A2R-oh-ZJq"/>
+                <constraint firstAttribute="trailing" secondItem="w0L-J2-1T1" secondAttribute="trailing" constant="24" id="As6-U9-v76"/>
+                <constraint firstItem="1sv-J2-muB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="GbI-zO-hwg"/>
+                <constraint firstItem="vpa-bE-Bk5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="55" id="VKp-7I-qfG"/>
+                <constraint firstItem="vpa-bE-Bk5" firstAttribute="leading" secondItem="1sv-J2-muB" secondAttribute="trailing" constant="16" id="WAa-1N-Yjb"/>
+                <constraint firstItem="w0L-J2-1T1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="ZIZ-18-Asf"/>
+                <constraint firstItem="1sv-J2-muB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="a36-N6-YOr"/>
+                <constraint firstItem="ghm-Hz-mac" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="fTe-a2-DMM"/>
+                <constraint firstItem="w0L-J2-1T1" firstAttribute="top" secondItem="1sv-J2-muB" secondAttribute="bottom" constant="7" id="ijp-MP-LC8"/>
                 <constraint firstItem="ghm-Hz-mac" firstAttribute="top" secondItem="w0L-J2-1T1" secondAttribute="bottom" constant="8" id="jCV-f7-2Mx"/>
-                <constraint firstAttribute="trailing" secondItem="vpa-bE-Bk5" secondAttribute="trailing" constant="8" id="ocF-K6-sz4"/>
-                <constraint firstItem="vpa-bE-Bk5" firstAttribute="leading" secondItem="Plp-q4-gVd" secondAttribute="trailing" constant="8" id="sM1-6N-h1a"/>
-                <constraint firstItem="Plp-q4-gVd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="u0O-ne-Seu"/>
+                <constraint firstAttribute="trailing" secondItem="vpa-bE-Bk5" secondAttribute="trailing" constant="32" id="ocF-K6-sz4"/>
             </constraints>
+            <point key="canvasLocation" x="362" y="239"/>
         </view>
     </objects>
     <resources>

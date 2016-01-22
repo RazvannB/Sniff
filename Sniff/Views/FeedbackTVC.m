@@ -12,6 +12,12 @@
 
 @implementation FeedbackTVC
 
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    [self.containerView.layer addSublayer:[EventsController drawMaskForFeedbackView:self.containerView]];
+}
+
 - (void)setFeedback:(Feedback *)feedback {
     _feedback = feedback;
     
@@ -31,9 +37,10 @@
 + (CGFloat)getCellHeightWithText:(NSString*)text {
     
     if ([text class] != [NSNull class] && [text length]) {
-        return [EventsController getTextCellHeightWithText:text];
+        return [EventsController getTextCellHeightWithText:text] +
+        16 + 21 + 3 + 15 + 8 + 17;
     } else {
-        return 55;
+        return 101;
     }
 }
 

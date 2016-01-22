@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *commentView;
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *commentHeightConstraint;
 @property (nonatomic, strong) NSString *message;
 

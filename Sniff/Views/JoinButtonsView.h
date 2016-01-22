@@ -12,6 +12,7 @@
 @protocol JoinButtonsView <NSObject>
 
 - (void)joinButtonsViewWIllGoToLogin;
+//- (void)
 
 @end
 

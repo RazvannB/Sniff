@@ -114,20 +114,36 @@
     switch (self.serverRequestType) {
         case ServerRequestType_Login:
             return [self.serverURL stringByAppendingString:@"login.php"];
+            
         case ServerRequestType_Register:
             return [self.serverURL stringByAppendingString:@"registerMobile.php"];
+            
         case ServerRequestType_GetPublicEvents:
             return [self.serverURL stringByAppendingString:@"getPublicEvents.php"];
+            
         case ServerRequestType_GetEventInfo:
             return [self.serverURL stringByAppendingString:@"getEventInfo.php"];
+            
         case ServerRequestType_GetApprovedFeedback:
             return [self.serverURL stringByAppendingString:@"getAprovedFeedback.php"];
+            
         case ServerRequestType_GetSchedule:
             return [self.serverURL stringByAppendingString:@"getSchandule.php"];
+            
         case ServerRequestType_SendFeedback:
             return [self.serverURL stringByAppendingString:@"mobileTrimiteFeedback.php"];
+            
         case ServerRequestType_SearchEvents:
-            return [self.serverURL stringByAppendingString:@"search.php"];
+            return [self.serverURL stringByAppendingString:@"searchiOS.php"];
+            
+        case ServerRequestType_JoinEvent:
+            return [self.serverURL stringByAppendingString:@"joinEventiOS.php"];
+            
+        case ServerRequestType_CheckIfJoined:
+            return [self.serverURL stringByAppendingString:@"ifJoin.php"];
+            
+        case ServerRequestType_GetFavouriteEvents:
+            return [self.serverURL stringByAppendingString:@"getFavoritesiOS.php"];
 
         default:
             break;

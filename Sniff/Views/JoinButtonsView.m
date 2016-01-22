@@ -55,8 +55,21 @@
     
     if ([[AuthenticationController sharedInstance].loggedUser.id length]) {
         
-        BOOL newState = !self.isFavourite;
-        [self setIsFavourite:newState];
+        [[EventsController sharedInstance] addOrRemoveEvent:self.event
+                                fromFavoritesWithCompletion:^(BOOL success, NSString *message, EventsController *completion) {
+                                    if (success) {
+                                        BOOL newState = !self.isFavourite;
+                                        [self setIsFavourite:newState];
+                                    } else {
+                                        [[[UIAlertView alloc] initWithTitle:nil
+                                                                    message:@"A aparut o problema cu modificarea evenimentului!"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles: nil] show];
+                                    }
+                                }];
+        
+        
         
     } else {
         

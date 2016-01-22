@@ -18,7 +18,10 @@ typedef enum {
     ServerRequestType_GetApprovedFeedback,
     ServerRequestType_GetSchedule,
     ServerRequestType_SendFeedback,
-    ServerRequestType_SearchEvents
+    ServerRequestType_SearchEvents,
+    ServerRequestType_JoinEvent,
+    ServerRequestType_CheckIfJoined,
+    ServerRequestType_GetFavouriteEvents,
 } ServerRequestType;
 
 typedef void(^ServerRequestCompletion)(ServerRequest *serverRequest);

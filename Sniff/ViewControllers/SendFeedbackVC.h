@@ -17,7 +17,7 @@ typedef enum {
 @interface SendFeedbackVC : UIViewController
 
 @property (nonatomic, strong) Event *event;
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UITextView *nameLabel;
 @property (nonatomic, weak) IBOutlet UITextView *comment;
 @property (nonatomic, weak) IBOutlet UIButton *checkmark;
 @property (nonatomic, weak) IBOutlet UIButton *sendButton;

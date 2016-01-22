@@ -14,8 +14,9 @@
 #import "SendFeedbackVC.h"
 #import "AuthenticationController.h"
 #import "LoginVC.h"
+#import "MessageTVC.h"
 
-@interface FeedbackTableVC () <FeedbackFooterViewDelegate, UIAlertViewDelegate>
+@interface FeedbackTableVC () <FeedbackFooterViewDelegate, UIAlertViewDelegate> 
 
 @end
 
@@ -34,16 +35,10 @@ BOOL isCheckingOnlineForFeedback;
     [super viewDidLoad];
     
     self.navigationItem.title = @"Feedback";
-}
-
-- (NSArray *)feedbackArray {
-    if (!_feedbackArray || ![_feedbackArray count]) {
-        _feedbackArray = [EventsController sharedInstance].feedbackArray;
-        if ((!_feedbackArray || ![_feedbackArray count]) && !isCheckingOnlineForFeedback) {
-            [self checkServerForUpdatesWithIndicator:YES];
-        }
+    _feedbackArray = [EventsController sharedInstance].feedbackArray;
+    if ((!_feedbackArray || ![_feedbackArray count]) && !isCheckingOnlineForFeedback) {
+        [self checkServerForUpdatesWithIndicator:YES];
     }
-    return _feedbackArray;
 }
 
 - (void)checkServerForUpdatesWithIndicator:(BOOL)indicator {
@@ -57,7 +52,7 @@ BOOL isCheckingOnlineForFeedback;
     [[EventsController sharedInstance] getFeedbackForEvent:self.event
                                                 completion:^(BOOL success, NSString *message, EventsController *completion) {
                                                     if (success) {
-                                                        self.feedbackArray = completion.feedbackArray;
+                                                        self.feedbackArray = [EventsController sortFeedbackArray:completion.feedbackArray];
                                                         [self.tableView reloadData];
                                                     }
                                                     
@@ -104,6 +99,7 @@ BOOL isCheckingOnlineForFeedback;
                           otherButtonTitles:@"Autentificare", nil] show];
         return;
     }
+    
     SendFeedbackVC *sendfeedback = [[SendFeedbackVC alloc] init];
     [sendfeedback setEvent:self.event];
     [self.navigationController pushViewController:sendfeedback animated:YES];
@@ -112,19 +108,30 @@ BOOL isCheckingOnlineForFeedback;
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.feedbackArray count];
+    return [self.feedbackArray count] ? [self.feedbackArray count] : 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"FeedbackTVC";
-    FeedbackTVC *cell = [self dequeCellIdentifier:cellIdentifier];
-    [cell setFeedback:self.feedbackArray[indexPath.row]];
+    static NSString *noCellIdentifier = @"MessageTVC";
+    id cell;
+    
+    if ([self.feedbackArray count]) {
+        
+        cell = [self dequeCellIdentifier:cellIdentifier];
+        [cell setFeedback:self.feedbackArray[indexPath.row]];
+        
+    } else {
+        
+        cell = [self dequeCellIdentifier:noCellIdentifier];
+        [cell setMessageTVCType:MessageTVCType_NoFeedback];
+    }
     
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     self.footerView = [[FeedbackFooterView alloc] init];
     self.footerView.delegate = self;
     return self.footerView;
@@ -132,12 +139,16 @@ BOOL isCheckingOnlineForFeedback;
 
 #pragma mark - Table view delegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return [FeedbackFooterView height];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [FeedbackTVC getCellHeightWithText:[self.feedbackArray[indexPath.row] message]];
+    if ([self.feedbackArray count]) {
+        return [FeedbackTVC getCellHeightWithText:[self.feedbackArray[indexPath.row] message]];
+    } else {
+        return [MessageTVC height];
+    }
 }
 
 @end

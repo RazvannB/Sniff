@@ -7,6 +7,7 @@
 //
 
 #import "FeedbackFooterView.h"
+#import "EventsController.h"
 
 @implementation FeedbackFooterView
 
@@ -17,6 +18,14 @@
     return self;
 }
 
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    [self.layer addSublayer:[EventsController drawMaskForSendFeedbackView:self]];
+    
+    [self bringSubviewToFront:self.sendFeedbackButton];
+}
+
 - (IBAction)feedbackButtonTouched:(id)sender {
     if ([self.delegate respondsToSelector:@selector(feedbackFooterOpenSendPage)]) {
         [self.delegate feedbackFooterOpenSendPage];
@@ -24,7 +33,7 @@
 }
 
 + (CGFloat)height {
-    return 47;
+    return 56;
 }
 
 @end

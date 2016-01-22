@@ -19,21 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.title = @"Trimite Feedback";
-    self.sendButton.layer.cornerRadius = 5;
-    self.nameLabel.layer.cornerRadius = 5;
-    self.comment.layer.cornerRadius = 5;
-    self.checkmark.layer.cornerRadius = 5;
     
     [self setSendFeedbackVCType:SendFeedbackVCType_Name];
-    self.previousRect = CGRectZero;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.previousRect = self.comment.frame;
+    [self.comment becomeFirstResponder];
+    
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDismiss)]];
 }
 
 - (void)setSendFeedbackVCType:(SendFeedbackVCType)sendFeedbackVCType {
@@ -43,12 +36,14 @@
         case SendFeedbackVCType_Name:
             [self.checkmark setBackgroundImage:[UIImage imageNamed:@"checkmark"] forState:UIControlStateNormal];
             self.nameLabel.text = [AuthenticationController sharedInstance].loggedUser.fullname;
+            self.nameLabel.font = [UIFont systemFontOfSize:16.0];
             self.nameLabel.backgroundColor = [UIColor whiteColor];
             break;
             
         case SendFeedbackVCType_Anonim:
             [self.checkmark setBackgroundImage:nil forState:UIControlStateNormal];
             self.nameLabel.text = @"Anonim";
+            self.nameLabel.font = [UIFont systemFontOfSize:16.0];
             self.nameLabel.backgroundColor = [UIColor lightGrayColor];
             break;
             
@@ -73,6 +68,17 @@
 }
 
 - (IBAction)sendFeedbackTouched:(id)sender {
+    
+    if (![self.comment.text length]) {
+        [[[UIAlertView alloc] initWithTitle:@"Nu se poate trimite"
+                                    message:@"Mesajul este gol"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        
+        return;
+    }
+    
     MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     progressHud.labelText = @"Se trimite feedback-ul...";
     
@@ -92,18 +98,29 @@
                                                  }];
 }
 
+- (void)keyboardDismiss {
+    [self.comment resignFirstResponder];
+}
+
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
-    UITextPosition *pos = self.comment.endOfDocument;
     
-    CGRect currentRect = [self.comment caretRectForPosition:pos];
-    if (currentRect.origin.y > self.previousRect.origin.y) {
-        self.commentHeightConstraint.constant += currentRect.size.height;
-        [self.view layoutIfNeeded];
+    if (CGRectGetHeight(self.comment.frame) > 200.0f) {
+        return;
     }
     
-    self.previousRect = currentRect;
+    CGFloat fixedWidth = textView.frame.size.width;
+    CGSize newSize = [textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = textView.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    textView.frame = newFrame;
+    self.commentHeightConstraint.constant = CGRectGetHeight(newFrame);
+    
+    CGRect newButtonFrame = CGRectMake(CGRectGetMinX(self.sendButton.frame), CGRectGetMaxY(newFrame) + 8, CGRectGetWidth(self.sendButton.frame), CGRectGetHeight(self.sendButton.frame));
+    self.sendButton.frame = newButtonFrame;
+    
+    self.previousRect = newFrame;
 }
 
 @end

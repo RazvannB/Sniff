@@ -21,6 +21,8 @@ typedef void(^AuthenticationControllerCompletionHandler)(BOOL success, NSString 
 @property (nonatomic, strong) NSArray *favoriteEventsArray;
 
 + (instancetype)sharedInstance;
++ (NSString *)uuid;
++ (NSString *)hashString:(NSString *)string withKey:(NSString *)key;
 
 #pragma mark - User methods
 
