@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "Event.h"
+#import <EventKit/EventKit.h>
 
 @class EventsController;
 
@@ -22,6 +23,7 @@ typedef void(^EventsControllerCompletionHandler)(BOOL success, NSString *message
 @property (nonatomic, strong) NSDictionary *infoDictionary;
 @property (nonatomic, strong) NSArray *feedbackArray;
 @property (nonatomic, strong) NSArray *scheduleArray;
+@property (nonatomic, strong) EKEventStore *eventStore;
 
 + (instancetype)sharedInstance;
 
@@ -36,6 +38,8 @@ typedef void(^EventsControllerCompletionHandler)(BOOL success, NSString *message
 - (void)searchEventsWithTerm:(NSString *)term completion:(EventsControllerCompletionHandler)completion;
 - (void)addOrRemoveEvent:(Event *)event fromFavoritesWithCompletion:(EventsControllerCompletionHandler)completion;
 - (void)checkIfEvent:(Event *)event isFavoriteWithCompletion:(EventsControllerCompletionHandler)completion;
+
+- (void)saveEventInCalendar:(Event *)event completion:(EventsControllerCompletionHandler)completion;
 
 #pragma mark - Favorite events methods
 

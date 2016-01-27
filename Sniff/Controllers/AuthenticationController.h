@@ -23,6 +23,7 @@ typedef void(^AuthenticationControllerCompletionHandler)(BOOL success, NSString 
 + (instancetype)sharedInstance;
 + (NSString *)uuid;
 + (NSString *)hashString:(NSString *)string withKey:(NSString *)key;
++ (BOOL)verifyEmail:(NSString *)email;
 
 #pragma mark - User methods
 

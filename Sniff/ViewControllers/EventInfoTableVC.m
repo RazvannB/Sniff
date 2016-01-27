@@ -153,15 +153,30 @@ BOOL isCheckingOnlineForInfo;
     switch (alertView.tag) {
             
         case 0:
-            //  Date
             if (buttonIndex == 1) {
                 //  Save date to local calendar
+                [[EventsController sharedInstance] saveEventInCalendar:self.event completion:^(BOOL success, NSString *message, EventsController *completion) {
+                    if (success) {
+                        
+                        message = @"Evenimentul a fost salvat!";
+                    }
+                    
+                    [self performSelectorOnMainThread:@selector(showAlertViewWithMessage:) withObject:message waitUntilDone:YES];
+                }];
             }
             break;
             
         default:
             break;
     }
+}
+
+- (void)showAlertViewWithMessage:(NSString *)message {
+    [[[UIAlertView alloc] initWithTitle:@""
+                                message:message
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles: nil] show];
 }
 
 #pragma mark - UIActionSheetDelegate

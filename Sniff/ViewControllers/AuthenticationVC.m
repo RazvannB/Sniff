@@ -232,9 +232,16 @@
             
         case AuthenticationVCType_Register:
             if (![self.user.email length] || ![self.user.first_name length] || ![self.user.last_name length] || ![self.user.password length]) {
-                [self showAlertViewWithMessage:@"Informatii insuficiente. Va rugam sa completati toate campurile"];
+                [self showAlertViewWithMessage:@"Informatii insuficiente. Va rugam sa completati toate campurile!"];
             } else if (![self.user.password isEqualToString:self.confirmPassword.text]) {
-                [self showAlertViewWithMessage:@"Cele doua parole nu corespund"];
+                [self showAlertViewWithMessage:@"Cele doua parole nu corespund!"];
+                self.confirmPassword.text = @"";
+            } else if (![AuthenticationController verifyEmail:self.user.email]) {
+                [self showAlertViewWithMessage:@"Adresa de email este invalida!"];
+            } else if ([self.user.password length] < 8) {
+                [self showAlertViewWithMessage:@"Parola trebuie sa contina minim 8 caractere!"];
+                self.password.text = @"";
+                self.confirmPassword.text = @"";
             }
             break;
             

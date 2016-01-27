@@ -181,6 +181,81 @@
     }];
 }
 
+- (void)saveEventInCalendar:(Event *)event completion:(EventsControllerCompletionHandler)completion {
+    self.eventStore = [[EKEventStore alloc] init];
+    __block EKCalendar *homeCalendar = nil;
+    
+    [self.eventStore
+     requestAccessToEntityType:EKEntityTypeEvent
+     completion:^(BOOL granted, NSError * _Nullable error) {
+         
+         if (granted && !error) {
+             NSArray *allCalendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+             for (EKCalendar *calendar in allCalendars) {
+                 if ([calendar.title isEqualToString:@"Home"]) {
+                     homeCalendar = calendar;
+                 }
+             }
+             
+             NSString *errorMessage;
+             if (homeCalendar) {
+                 
+                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                 [formatter setDateFormat:@"yyyy-MM-dd"];
+                 
+                 EKEvent *newEvent = [EKEvent eventWithEventStore:self.eventStore];
+                 newEvent.calendar = homeCalendar;
+                 newEvent.title = event.project_name;
+                 newEvent.startDate = [formatter dateFromString:event.start_date];
+                 newEvent.endDate = [formatter dateFromString:event.end_date];
+                 
+                 if ([self checkEvent:newEvent localCalendar:homeCalendar]) {
+                     
+                     errorMessage = @"Evenimentul exista deja in calendarul dumneavoastra!";
+                     
+                 } else {
+                     
+                     NSError *newEventError;
+                     if ([self.eventStore saveEvent:newEvent span:EKSpanFutureEvents commit:YES error:&newEventError]) {
+                         
+                         NSLog(@"Eveniment salvat: %@", newEvent.title);
+                         errorMessage = @"";
+                         
+                     } else {
+                         
+                         NSLog(@"Eroare salvare eveniment: %@", [error localizedDescription]);
+                         errorMessage = @"A aparut o problema. Evenimentul nu a putut fi salvat!";
+                         
+                     }
+                 }
+                 
+             } else {
+                 
+                 errorMessage = @"A aparut o problema. Evenimentul nu a putut fi salvat!";
+             }
+             
+             if (completion) {
+                 completion([errorMessage length] ? NO : YES, errorMessage, self);
+             }
+         }
+     }];
+}
+
+- (BOOL)checkEvent:(EKEvent *)event localCalendar:(EKCalendar *)calendar {
+    
+    int yearSeconds = 365 * (60 * 60 * 24);
+    NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:[NSDate dateWithTimeIntervalSinceNow:-yearSeconds]
+                                                                      endDate:[NSDate dateWithTimeIntervalSinceNow:yearSeconds]
+                                                                    calendars:@[calendar]];
+    
+    NSArray *localEventsArray = [self.eventStore eventsMatchingPredicate:predicate];
+    if ([[localEventsArray valueForKey:@"title"] containsObject:event.title]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 #pragma mark - Favorite events methods
 
 - (void)addEventToFavorites:(Event *)event {
