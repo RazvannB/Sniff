@@ -14,5 +14,6 @@
 @property (nonatomic, strong) MenuView *menuView;
 @property (nonatomic, strong) UIBarButtonItem *menuButton;
 @property (nonatomic, assign) BOOL showingSideMenu;
+@property (nonatomic, strong) UIView *currentResponder;
 
 @end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpa-bE-Bk5">
-                    <rect key="frame" x="544" y="55" width="24" height="24"/>
+                    <rect key="frame" x="544" y="123" width="24" height="24"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="ciu-F0-mSB"/>
@@ -42,7 +42,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghm-Hz-mac">
-                    <rect key="frame" x="24" y="137" width="552" height="40"/>
+                    <rect key="frame" x="24" y="205" width="552" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="W2h-PV-JRi"/>
@@ -62,7 +62,7 @@
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Razvan Balint" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sv-J2-muB">
-                    <rect key="frame" x="24" y="50" width="504" height="36"/>
+                    <rect key="frame" x="24" y="118" width="504" height="36"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="djR-71-acY"/>
@@ -76,7 +76,7 @@
                     </userDefinedRuntimeAttributes>
                 </textView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0L-J2-1T1">
-                    <rect key="frame" x="24" y="93" width="552" height="36"/>
+                    <rect key="frame" x="24" y="161" width="552" height="36"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="CHR-mV-1Kj"/>
@@ -92,13 +92,27 @@
                         <outlet property="delegate" destination="-1" id="T4L-cK-8Dm"/>
                     </connections>
                 </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8E-CX-lQD">
+                    <rect key="frame" x="24" y="32" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="9LX-7y-31c"/>
+                        <constraint firstAttribute="width" constant="36" id="IRu-Ht-fiE"/>
+                        <constraint firstAttribute="width" secondItem="r8E-CX-lQD" secondAttribute="height" multiplier="1:1" id="RqK-7k-tOO"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_arrow"/>
+                    <connections>
+                        <action selector="backButtonTouched:" destination="-1" eventType="touchUpInside" id="Lno-Mn-3fU"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ghm-Hz-mac" secondAttribute="trailing" constant="24" id="A2R-oh-ZJq"/>
                 <constraint firstAttribute="trailing" secondItem="w0L-J2-1T1" secondAttribute="trailing" constant="24" id="As6-U9-v76"/>
-                <constraint firstItem="1sv-J2-muB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="GbI-zO-hwg"/>
-                <constraint firstItem="vpa-bE-Bk5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="55" id="VKp-7I-qfG"/>
+                <constraint firstItem="r8E-CX-lQD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="32" id="CSZ-qZ-9xq"/>
+                <constraint firstItem="1sv-J2-muB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="118" id="GbI-zO-hwg"/>
+                <constraint firstItem="r8E-CX-lQD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="RqK-gs-zgz"/>
+                <constraint firstItem="vpa-bE-Bk5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="123" id="VKp-7I-qfG"/>
                 <constraint firstItem="vpa-bE-Bk5" firstAttribute="leading" secondItem="1sv-J2-muB" secondAttribute="trailing" constant="16" id="WAa-1N-Yjb"/>
                 <constraint firstItem="w0L-J2-1T1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="ZIZ-18-Asf"/>
                 <constraint firstItem="1sv-J2-muB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="a36-N6-YOr"/>
@@ -111,6 +125,7 @@
         </view>
     </objects>
     <resources>
+        <image name="back_arrow" width="24" height="24"/>
         <image name="checkmark" width="24" height="24"/>
     </resources>
 </document>

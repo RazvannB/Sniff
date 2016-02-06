@@ -92,10 +92,18 @@
                                                                                     delegate:nil
                                                                            cancelButtonTitle:@"OK"
                                                                            otherButtonTitles: nil] show];
-                                                         [self.navigationController popViewControllerAnimated:YES];
+                                                         
+                                                         [self backButtonTouched:nil];
                                                      }
                                                      [progressHud hide:YES];
                                                  }];
+}
+
+- (IBAction)backButtonTouched:(id)sender {
+    [self.view endEditing:YES];
+    if ([self.delegate respondsToSelector:@selector(sendFeedbackVC:backButtonTouched:)]) {
+        [self.delegate sendFeedbackVC:self backButtonTouched:sender];
+    }
 }
 
 - (void)keyboardDismiss {

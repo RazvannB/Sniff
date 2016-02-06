@@ -13,7 +13,8 @@ typedef enum {
     AuthenticationVCType_Login,
     AuthenticationVCType_Register,
     AuthenticationVCType_ForgotPassword,
-    AuthenticationVCType_ResetPassword
+    AuthenticationVCType_ResetPassword,
+    AuthenticationVCType_Settings
 } AuthenticationVCType;
 
 @class AuthenticationVC;
@@ -40,6 +41,7 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet UITextField *confirmPassword;
 @property (nonatomic, weak) IBOutlet UIButton *authButton;
 @property (nonatomic, weak) IBOutlet UIButton *forgotButton;
+@property (nonatomic, weak) IBOutlet UIButton *backButton;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *emailHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *emailWidthConstraint;

@@ -15,6 +15,7 @@
 
 #import "AuthenticationVC.h"
 #import "AuthenticationController.h"
+#import "EventsController.h"
 #import "Macros.h"
 #import "Colors.h"
 
@@ -31,7 +32,6 @@
     [super viewDidLoad];
     shouldRaiseFields = YES;
     
-    [AuthenticationController addBlackTransluscentEffectOnView:self.view];
     [self setAuthType:self.authType];
     [self setDeviceDimensions];
     [self setButtonsLayout];
@@ -47,6 +47,8 @@
     
     switch (authType) {
         case AuthenticationVCType_Login:
+            [AuthenticationController addBlackTransluscentEffectOnView:self.view];
+            
             [self.authButton setTitle:@"Autentifica-te" forState:UIControlStateNormal];
             
             self.firstNameHeightConstraint.constant = 0;
@@ -70,6 +72,8 @@
             break;
             
         case AuthenticationVCType_Register:
+            [AuthenticationController addBlackTransluscentEffectOnView:self.view];
+            
             [self.authButton setTitle:@"Creeaza cont" forState:UIControlStateNormal];
             
             self.firstNameBottomConstraint.constant = spaceHeight;
@@ -86,6 +90,40 @@
             self.password.returnKeyType = UIReturnKeyNext;
             
             [self.firstName becomeFirstResponder];
+            
+            break;
+            
+        case AuthenticationVCType_Settings:
+            [EventsController makeNavigationBarBackToDefault:self.navigationController.navigationBar];
+            
+            self.extendedLayoutIncludesOpaqueBars = YES;
+            self.automaticallyAdjustsScrollViewInsets = YES;
+            
+            self.firstNameBottomConstraint.constant = spaceHeight;
+            self.lastNameBottomConstraint.constant = spaceHeight;
+            
+            self.lineHeightConstraint.constant = 0;
+            self.lineBottomConstraint.constant = 0;
+            
+            self.forgotHeightConstraint.constant = 0;
+            self.forgotBottomConstraint.constant = 0;
+            self.forgotButton.alpha = 0;
+            
+            self.confirmPassword.tag = 4;
+            self.password.returnKeyType = UIReturnKeyNext;
+            
+            [self.firstName becomeFirstResponder];
+            
+            self.backButton.hidden = YES;
+            self.view.backgroundColor = [Colors customGrayColor];
+            
+            self.title = @"Setari";
+            [self.authButton setTitle:@"Salveaza modificarile" forState:UIControlStateNormal];
+            self.firstName.text = [AuthenticationController sharedInstance].loggedUser.first_name;
+            self.lastName.text = [AuthenticationController sharedInstance].loggedUser.last_name;
+            self.email.text = [AuthenticationController sharedInstance].loggedUser.email;
+            self.password.text = @"Sample Pass";
+            self.confirmPassword.text = @"Sample Pass";
             break;
             
         case AuthenticationVCType_ForgotPassword:
@@ -122,7 +160,7 @@
         if (self.authType == AuthenticationVCType_Login) {
             self.passwordWidthConstraint.constant = buttonWidthSmallDevice;
             
-        } else if (self.authType == AuthenticationVCType_Register) {
+        } else {
             self.passwordWidthConstraint.constant = buttonWidthSmallDevice/2 - 4;
             self.confirmPasswordWidthConstraint.constant = buttonWidthSmallDevice/2 - 4;
         }
@@ -140,7 +178,7 @@
         if (self.authType == AuthenticationVCType_Login) {
             self.passwordWidthConstraint.constant = buttonWidthSmallDevice;
             
-        } else if (self.authType == AuthenticationVCType_Register) {
+        } else {
             self.passwordWidthConstraint.constant = buttonWidthSmallDevice/2 - 4;
             self.confirmPasswordWidthConstraint.constant = buttonWidthSmallDevice/2 - 4;
         }
@@ -149,7 +187,7 @@
         if (self.authType == AuthenticationVCType_Login) {
             self.passwordWidthConstraint.constant = buttonWidthBigDevice;
             
-        } else if (self.authType == AuthenticationVCType_Register) {
+        } else {
             self.passwordWidthConstraint.constant = buttonWidthBigDevice/2 - 4;
             self.confirmPasswordWidthConstraint.constant = buttonWidthBigDevice/2 - 4;
         }
@@ -245,6 +283,9 @@
             }
             break;
             
+        case AuthenticationVCType_Settings:
+            break;
+            
         case AuthenticationVCType_ForgotPassword:
             break;
             
@@ -270,6 +311,7 @@
 
 - (void)backButtonTouched:(id)sender {
     [self.view endEditing:YES];
+    
     if ([self.delegate respondsToSelector:@selector(authenticationVC:backButtonTouched:)]) {
         [self.delegate authenticationVC:self backButtonTouched:sender];
     }

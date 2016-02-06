@@ -141,8 +141,14 @@
      }];
 }
 
-- (void)logout {
+- (void)editUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion {
     
+}
+
+- (void)logout {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"loggedUserKey"];
+    [defaults synchronize];
 }
 
 #pragma mark - AuthenticationVC methods

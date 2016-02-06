@@ -29,7 +29,8 @@ typedef void(^AuthenticationControllerCompletionHandler)(BOOL success, NSString 
 
 - (void)setLoggedUserWithObject:(id)object;
 - (void)registerUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion;
-- (void)loginUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler) completion;
+- (void)loginUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion;
+- (void)editUser:(User *)user withCompletion:(AuthenticationControllerCompletionHandler)completion;
 - (void)logout;
 
 #pragma mark - AuthenticationVC methods

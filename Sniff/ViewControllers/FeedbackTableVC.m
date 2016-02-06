@@ -16,7 +16,7 @@
 #import "LoginVC.h"
 #import "MessageTVC.h"
 
-@interface FeedbackTableVC () <FeedbackFooterViewDelegate, UIAlertViewDelegate> 
+@interface FeedbackTableVC () <FeedbackFooterViewDelegate, UIAlertViewDelegate, SendFeedbackVCDelegate>
 
 @end
 
@@ -79,6 +79,12 @@ BOOL isCheckingOnlineForFeedback;
     return cell;
 }
 
+#pragma mark - SendFeedbackVCDelegate
+
+- (void)sendFeedbackVC:(SendFeedbackVC *)sendFeedbackVC backButtonTouched:(id)sender {
+    [sendFeedbackVC dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -102,7 +108,8 @@ BOOL isCheckingOnlineForFeedback;
     
     SendFeedbackVC *sendfeedback = [[SendFeedbackVC alloc] init];
     [sendfeedback setEvent:self.event];
-    [self.navigationController pushViewController:sendfeedback animated:YES];
+    sendfeedback.delegate = self;
+    [self presentViewController:sendfeedback animated:YES completion:nil];
 }
 
 #pragma mark - Table view data source

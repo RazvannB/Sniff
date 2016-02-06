@@ -6,13 +6,20 @@
 //  Copyright (c) 2015 Razvan Balint. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import "Event.h"
+
 typedef enum {
     SendFeedbackVCType_Name,
     SendFeedbackVCType_Anonim
 } SendFeedbackVCType;
 
-#import <UIKit/UIKit.h>
-#import "Event.h"
+@class SendFeedbackVC;
+@protocol SendFeedbackVCDelegate <NSObject>
+
+- (void)sendFeedbackVC:(SendFeedbackVC *)sendFeedbackVC backButtonTouched:(id)sender;
+
+@end
 
 @interface SendFeedbackVC : UIViewController
 
@@ -26,6 +33,9 @@ typedef enum {
 @property (nonatomic) NSInteger numberOfRows;
 
 @property (nonatomic) SendFeedbackVCType sendFeedbackVCType;
+
+@property (nonatomic, strong) id<SendFeedbackVCDelegate> delegate;
+
 - (IBAction)sendFeedbackTouched:(id)sender;
 
 @end

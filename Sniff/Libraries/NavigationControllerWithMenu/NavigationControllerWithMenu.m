@@ -10,6 +10,8 @@
 #import "LoginVC.h"
 #import "EventsTableVC.h"
 #import "EventsController.h"
+#import "AuthenticationController.h"
+#import "AuthenticationVC.h"
 
 @interface NavigationControllerWithMenu () <MenuViewDelegate, LoggedUserViewDelegate> {
     NSString *currentViewTitle;
@@ -57,8 +59,11 @@
 - (void)menuButtonPressed:(id)sender {
     self.showingSideMenu = YES;
     [self.menuView presentWithAnimation];
-    UIViewController *viewController = self.viewControllers[0];
+    UIViewController *viewController = [self.viewControllers firstObject];
     currentViewTitle = self.navigationItem.title;
+    
+    self.currentResponder = [self findFirstResponder];
+    [viewController.view endEditing:YES];
 
     [UIView animateWithDuration:0.2
                      animations:^{
@@ -68,7 +73,13 @@
 }
 
 - (void)menuViewDidDismiss {
-    UIViewController *viewController = self.viewControllers[0];
+    UIViewController *viewController = [self.viewControllers firstObject];
+    
+    if (self.currentResponder) {
+        [self setFirstResponder:self.currentResponder];
+        self.currentResponder = nil;
+    }
+    
     [UIView animateWithDuration:0.1
                      animations:^{
                          [viewController.view setFrame:CGRectMake(0, 0, viewController.view.frame.size.width, viewController.view.frame.size.height)];
@@ -78,7 +89,7 @@
 
 - (void)loginButtonPressed {
     [self.menuView dismissMenuView];
-    if ([self.viewControllers[0] isKindOfClass:[LoginVC class]]) {
+    if ([[self.viewControllers firstObject] isKindOfClass:[LoginVC class]]) {
         return;
     }
 
@@ -91,6 +102,23 @@
     [self setViewControllers:@[events] animated:YES];
     self.menuView = nil;
     [self.menuView reloadInputViews];
+}
+
+- (id)findFirstResponder {
+    for (UIView *subView in self.viewControllers.firstObject.view.subviews) {
+        if ([subView isFirstResponder]) {
+            return subView;
+        }
+    }
+    return nil;
+}
+
+- (void)setFirstResponder:(UIView *)view {
+    for (UIView *subView in self.viewControllers.firstObject.view.subviews) {
+        if (subView == view) {
+            [subView becomeFirstResponder];
+        }
+    }
 }
 
 #pragma mark - MenuViewDelegate
@@ -119,12 +147,21 @@
             break;
         }
             
-        case 3: {
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:nil forKey:@"loggedUserKey"];
-            [defaults synchronize];
-            [EventsController sharedInstance].favoriteEventsArray = nil;
+        case 2: {
+            if ([[self.viewControllers firstObject] isKindOfClass:[AuthenticationVC class]]) {
+                break;
+            }
+            AuthenticationVC *auth = [[AuthenticationVC alloc] init];
+            [auth setAuthType:AuthenticationVCType_Settings];
+            auth.navigationItem.leftBarButtonItem = self.menuButton;
             
+            [self setViewControllers:@[auth] animated:YES];
+            break;
+        }
+            
+        case 3: {
+            [[AuthenticationController sharedInstance] logout];
+            [EventsController sharedInstance].favoriteEventsArray = nil;
             [self setViewControllers:@[[[LoginVC alloc] init]] animated:YES];
             self.menuView = nil;
             break;
