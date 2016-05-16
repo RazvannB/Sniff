@@ -41,7 +41,6 @@
 		E54D44AF1B5EDEE20066231E /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E54D44AE1B5EDEE20066231E /* ServerRequest.m */; };
 		E55D13381BAF3D9000FF1526 /* JoinButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E55D13371BAF3D9000FF1526 /* JoinButtonsView.m */; };
 		E55D133A1BAF3DD900FF1526 /* JoinButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E55D13391BAF3DD900FF1526 /* JoinButtonsView.xib */; };
-		E568BF3B1C666AD100CE2478 /* Crittercism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E568BF3A1C666AD000CE2478 /* Crittercism.framework */; };
 		E568BF3D1C666AF300CE2478 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E568BF3C1C666AF300CE2478 /* SystemConfiguration.framework */; };
 		E56AE0C71C29F716007D5265 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E56AE0A71C29F716007D5265 /* MKAnnotationView+WebCache.m */; };
 		E56AE0C81C29F716007D5265 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = E56AE0A91C29F716007D5265 /* NSData+ImageContentType.m */; };
@@ -70,6 +69,8 @@
 		E59DE9991C1CB68100FE12BB /* CustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E59DE9981C1CB68100FE12BB /* CustomNavigationBar.m */; };
 		E5AC87891BADB1AF00B1BEF7 /* SendFeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC87871BADB1AF00B1BEF7 /* SendFeedbackVC.m */; };
 		E5AC878A1BADB1AF00B1BEF7 /* SendFeedbackVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5AC87881BADB1AF00B1BEF7 /* SendFeedbackVC.xib */; };
+		E5CEE8061CEA18B100B17FCC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5CEE8041CEA18B100B17FCC /* Fabric.framework */; };
+		E5CEE8071CEA18B100B17FCC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5CEE8051CEA18B100B17FCC /* Crashlytics.framework */; };
 		E5D7262F1C52399B001F9055 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D7262E1C52399B001F9055 /* FBSDKCoreKit.framework */; };
 		E5D726311C523CAD001F9055 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D726301C523CAD001F9055 /* FBSDKLoginKit.framework */; };
 		E5D726331C52E6CA001F9055 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D726321C52E6CA001F9055 /* EventKit.framework */; };
@@ -166,7 +167,6 @@
 		E55D13361BAF3D8F00FF1526 /* JoinButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JoinButtonsView.h; path = Views/JoinButtonsView.h; sourceTree = "<group>"; };
 		E55D13371BAF3D9000FF1526 /* JoinButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JoinButtonsView.m; path = Views/JoinButtonsView.m; sourceTree = "<group>"; };
 		E55D13391BAF3DD900FF1526 /* JoinButtonsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JoinButtonsView.xib; path = Views/JoinButtonsView.xib; sourceTree = "<group>"; };
-		E568BF3A1C666AD000CE2478 /* Crittercism.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crittercism.framework; sourceTree = "<group>"; };
 		E568BF3C1C666AF300CE2478 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E56AE0A61C29F716007D5265 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		E56AE0A71C29F716007D5265 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -220,6 +220,8 @@
 		E5AC87861BADB1AF00B1BEF7 /* SendFeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedbackVC.h; path = ViewControllers/SendFeedbackVC.h; sourceTree = "<group>"; };
 		E5AC87871BADB1AF00B1BEF7 /* SendFeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendFeedbackVC.m; path = ViewControllers/SendFeedbackVC.m; sourceTree = "<group>"; };
 		E5AC87881BADB1AF00B1BEF7 /* SendFeedbackVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SendFeedbackVC.xib; path = ViewControllers/SendFeedbackVC.xib; sourceTree = "<group>"; };
+		E5CEE8041CEA18B100B17FCC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
+		E5CEE8051CEA18B100B17FCC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		E5D7262E1C52399B001F9055 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E5D726301C523CAD001F9055 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E5D726321C52E6CA001F9055 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -264,8 +266,9 @@
 				E568BF3D1C666AF300CE2478 /* SystemConfiguration.framework in Frameworks */,
 				E5D726331C52E6CA001F9055 /* EventKit.framework in Frameworks */,
 				E5D726311C523CAD001F9055 /* FBSDKLoginKit.framework in Frameworks */,
-				E568BF3B1C666AD100CE2478 /* Crittercism.framework in Frameworks */,
 				E5D7262F1C52399B001F9055 /* FBSDKCoreKit.framework in Frameworks */,
+				E5CEE8061CEA18B100B17FCC /* Fabric.framework in Frameworks */,
+				E5CEE8071CEA18B100B17FCC /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,8 +548,9 @@
 		E5D724521C52392F001F9055 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5CEE8041CEA18B100B17FCC /* Fabric.framework */,
+				E5CEE8051CEA18B100B17FCC /* Crashlytics.framework */,
 				E568BF3C1C666AF300CE2478 /* SystemConfiguration.framework */,
-				E568BF3A1C666AD000CE2478 /* Crittercism.framework */,
 				E5D726321C52E6CA001F9055 /* EventKit.framework */,
 				E5D726301C523CAD001F9055 /* FBSDKLoginKit.framework */,
 				E5D7262E1C52399B001F9055 /* FBSDKCoreKit.framework */,
@@ -583,6 +587,7 @@
 				E521F68B1B5DA9E4006AA29B /* Sources */,
 				E521F68C1B5DA9E4006AA29B /* Frameworks */,
 				E521F68D1B5DA9E4006AA29B /* Resources */,
+				E5CEE8031CEA186100B17FCC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -685,6 +690,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E5CEE8031CEA186100B17FCC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 0a5cb9f2f98cd4eee03acffe6af5468ba5d4db99 f8a506776e39a3b3bd555070238accfe1b18a0684e1ca0e6d19fe1bae461e873";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E521F68B1B5DA9E4006AA29B /* Sources */ = {
@@ -864,6 +885,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sniff/Frameworks",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sniff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -882,6 +904,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sniff/Frameworks",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sniff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

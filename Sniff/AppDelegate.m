@@ -8,10 +8,9 @@
 
 #import "AppDelegate.h"
 #import "NavigationControllerWithMenu.h"
-#import "AuthenticationController.h"
-#import "CustomNavigationBar.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <Crittercism/Crittercism.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -24,21 +23,13 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
-    [Crittercism enableWithAppID:@"56b6323313306f1000698f26"];
+    [Fabric with:@[[Crashlytics class]]];
     
-    if ([AuthenticationController sharedInstance].loggedUser) {
-        self.eventsViewController = [[EventsTableVC alloc] init];
-        self.viewController = self.eventsViewController;
-    } else {
-        self.loginViewController = [[LoginVC alloc] init];
-        self.viewController = self.loginViewController;
-    }
-    
-    NavigationControllerWithMenu *navController = [[NavigationControllerWithMenu alloc] init];
-    navController = [navController initWithRootViewController:self.viewController];
+    self.eventsViewController = [[EventsTableVC alloc] init];
+    NavigationControllerWithMenu *navController = [[NavigationControllerWithMenu alloc]
+                                                   initWithRootViewController: self.eventsViewController];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navController;
-    self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
     [self.window makeKeyAndVisible];
     
     return YES;

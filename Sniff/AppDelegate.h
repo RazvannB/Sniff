@@ -13,8 +13,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UIViewController *viewController;
-@property (strong, nonatomic) LoginVC *loginViewController;
 @property (strong, nonatomic) EventsTableVC *eventsViewController;
 
 @end
