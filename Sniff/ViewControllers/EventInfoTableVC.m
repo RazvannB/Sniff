@@ -248,7 +248,7 @@ BOOL isCheckingOnlineForInfo;
                 
             case 0:
                 cell = [self dequeCellIdentifier:@"EventTextTVC"];
-                [cell setEventTextType:EventTextType_Organiser info:self.infoDictionary cellType:EventTextCellType_Arrow];
+                [cell setEventTextType:EventTextType_Organiser info:self.infoDictionary cellType:EventTextCellType_Default];
                 break;
                 
             case 1:

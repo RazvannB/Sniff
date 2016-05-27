@@ -14,6 +14,10 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) EventsTableVC *eventsViewController;
+@property(nonatomic, readonly, strong) NSString *registrationKey;
+@property(nonatomic, readonly, strong) NSString *messageKey;
+@property(nonatomic, readonly, strong) NSString *gcmSenderID;
+@property(nonatomic, readonly, strong) NSDictionary *registrationOptions;
 
 @end
 

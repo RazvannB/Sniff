@@ -326,4 +326,8 @@
     [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
 }
 
+- (void)authenticationVC:(AuthenticationVC *)authVC forgotPasswordButtonTouched:(id)sender {
+    
+}
+
 @end

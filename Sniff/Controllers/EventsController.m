@@ -249,11 +249,7 @@
                                                                     calendars:@[calendar]];
     
     NSArray *localEventsArray = [self.eventStore eventsMatchingPredicate:predicate];
-    if ([[localEventsArray valueForKey:@"title"] containsObject:event.title]) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return [[localEventsArray valueForKey:@"title"] containsObject:event.title];
 }
 
 #pragma mark - Favorite events methods

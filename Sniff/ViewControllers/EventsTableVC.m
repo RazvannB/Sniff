@@ -250,14 +250,10 @@ BOOL isCheckingOnlineForEvents;
 #pragma mark - FilterEventsVCDelegate
 
 - (void)filterEventsVC:(FilterEventsVC *)filterEventsVC dismissViewWithValue:(NSInteger)index {
-    
     [self setTypeSelected:index];
     
     [UIView animateWithDuration:0.2 animations:^{
-        
         self.view.alpha = 1;
-        
-        [self dismissViewControllerAnimated:filterEventsVC completion:nil];
     }];
 }
 
@@ -268,7 +264,6 @@ BOOL isCheckingOnlineForEvents;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     id cell;
     static NSString *cellIdentifier = @"EventsListTVC";
     static NSString *noCellIdentifier = @"MessageTVC";

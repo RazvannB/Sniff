@@ -12,6 +12,7 @@
 #import "EventsController.h"
 #import "AuthenticationController.h"
 #import "AuthenticationVC.h"
+#import "AppDelegate.h"
 
 @interface NavigationControllerWithMenu () <MenuViewDelegate, LoggedUserViewDelegate> {
     NSString *currentViewTitle;
@@ -54,6 +55,12 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginButtonPressed) name:@"LoginButtonPressedNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn) name:@"UserSuccessfullyLoggedInNotification" object:nil];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showReceivedMessage:)
+                                                 name:appDelegate.messageKey
+                                               object:nil];
 }
 
 - (void)menuButtonPressed:(id)sender {
@@ -119,6 +126,28 @@
             [subView becomeFirstResponder];
         }
     }
+}
+
+- (void) showReceivedMessage:(NSNotification *) notification {
+    NSString *title = notification.userInfo[@"title"];
+    NSString *message = notification.userInfo[@"text"];
+    [self showAlert:title withMessage:message];
+}
+
+- (void)showAlert:(NSString *)title withMessage:(NSString *) message{
+
+    //iOS 8 or later
+    UIAlertController *alert =
+    [UIAlertController alertControllerWithTitle:title
+                                        message:message
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss"
+                                                            style:UIAlertActionStyleDestructive
+                                                          handler:nil];
+    
+    [alert addAction:dismissAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - MenuViewDelegate

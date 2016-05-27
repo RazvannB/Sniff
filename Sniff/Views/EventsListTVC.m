@@ -23,16 +23,21 @@
     self.favoriteButton.hidden = !currentEventIsFavourite;
     
     switch ([event.DiffDate intValue]) {
+        case 1:
+            self.organiserLabel.text = @"Va avea loc maine";
+            break;
         case 0:
-            self.organiserLabel.text = @"Astazi";
+            self.organiserLabel.text = @"Are loc astazi";
             break;
-            
         case -1:
-            self.organiserLabel.text = [NSString stringWithFormat:@"A mai ramas %d zi", abs([event.DiffDate intValue])];
+            self.organiserLabel.text = @"A avut loc ieri";
             break;
-            
         default:
-            self.organiserLabel.text = [NSString stringWithFormat:@"Au mai ramas %d zile", abs([event.DiffDate intValue])];
+            if ([event.DiffDate intValue] < 0) {
+                self.organiserLabel.text = [NSString stringWithFormat:@"A avut loc acum %d zile", abs([event.DiffDate intValue])];
+            } else {
+                self.organiserLabel.text = [NSString stringWithFormat:@"Au mai ramas %d zile", [event.DiffDate intValue]];
+            }
             break;
     }
     

@@ -37,6 +37,9 @@
 - (void)dismissView {
     if ([self.delegate respondsToSelector:@selector(filterEventsVC:dismissViewWithValue:)]) {
         [self.delegate filterEventsVC:self dismissViewWithValue:self.selectedValue];
+        [UIView animateWithDuration:0.2 animations:^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
     }
 }
 
