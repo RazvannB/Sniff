@@ -37,7 +37,7 @@
 }
 
 - (void)post:(ServerRequestCompletion)completion {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -45,7 +45,8 @@
     
     [manager POST:self.functionURL
        parameters:self.parameters
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
               
               if ([responseObject isKindOfClass:[NSDictionary class]]) {
                   self.responseData = responseObject;
@@ -58,24 +59,62 @@
                   self.response = nil;
                   self.responseData = nil;
               }
-              if (completion){
+              if (completion) {
                   completion(self);
               }
           }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              if ([error.localizedDescription isEqualToString:@"The data couldn’t be read because it isn’t in the correct format."]) {
+                  [self postHTTP:completion];
+                  return;
+              }
               self.responseData = nil;
               self.response = nil;
               self.responseMessage = [NSString stringWithFormat:@"Request failed! %@", error.localizedDescription];
               
-              if (completion){
+              if (completion) {
                   completion(self);
               }
           }
      ];
 }
 
+- (void)postHTTP:(ServerRequestCompletion)completion {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text", nil];
+    
+    [manager POST:self.functionURL
+       parameters:self.parameters
+         progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              
+              if (responseObject && [responseObject isKindOfClass:[NSData class]]) {
+                  self.responseMessage = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                  self.response = nil;
+                  self.responseData = nil;
+              }
+              if (completion) {
+                  completion(self);
+              }
+          }
+          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              self.responseData = nil;
+              self.response = nil;
+              self.responseMessage = [NSString stringWithFormat:@"Request failed! %@", error.localizedDescription];
+              
+              if (completion) {
+                  completion(self);
+              }
+          }
+     ];
+}
+
+
 - (void)get:(ServerRequestCompletion)completion {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
@@ -83,7 +122,8 @@
     
     [manager GET:self.functionURL
       parameters:self.parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        progress:nil
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              if ([responseObject isKindOfClass:[NSDictionary class]]) {
                  self.responseData = responseObject;
              } else if ([responseObject isKindOfClass:[NSArray class]]) {
@@ -98,7 +138,7 @@
              }
 
          }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              self.responseData = nil;
              self.response = nil;
              self.responseMessage = [NSString stringWithFormat:@"Request failed! %@", error.localizedDescription];

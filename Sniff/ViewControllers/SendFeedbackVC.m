@@ -94,6 +94,12 @@
                                                                            otherButtonTitles: nil] show];
                                                          
                                                          [self backButtonTouched:nil];
+                                                     } else {
+                                                         [[[UIAlertView alloc] initWithTitle:nil
+                                                                                     message:message
+                                                                                    delegate:nil
+                                                                           cancelButtonTitle:@"OK"
+                                                                           otherButtonTitles: nil] show];
                                                      }
                                                      [progressHud hide:YES];
                                                  }];

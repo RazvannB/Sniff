@@ -23,6 +23,7 @@
 @implementation EventsTableVC
 
 BOOL isCheckingOnlineForEvents;
+NSString *searchText;
 
 - (instancetype)initWithType:(EventsTableVCType)eventsType {
     if (self = [super init]) {
@@ -101,7 +102,13 @@ BOOL isCheckingOnlineForEvents;
     
     if (shouldFilter) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName contains %@", [EventsController getPredicateTermWithIndex:typeSelected]];
-        _eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
+        if ([searchText length] > 0) {
+            NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"project_name contains @%", searchText];
+            _eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate2] mutableCopy];
+            _eventsArray = [[_eventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
+        } else {
+            _eventsArray = [[self.allEventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
+        }
         
         if (typeSelected == 0) {
             _eventsArray = nil;
@@ -195,6 +202,7 @@ BOOL isCheckingOnlineForEvents;
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [self.view endEditing:YES];
+    searchText = nil;
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 
@@ -218,16 +226,24 @@ BOOL isCheckingOnlineForEvents;
         return;
     }
     
-    [[EventsController sharedInstance] searchEventsWithTerm:searchText
-                                                 completion:^(BOOL success, NSString *message, EventsController *completion) {
-                                                     
-                                                     if (success) {
-                                                         self.eventsArray = completion.searchArray;
-                                                     }
-                                                     
-                                                     [self.tableView reloadData];
-                                                     
-                                                 }];
+    [self setTypeSelected:_typeSelected];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"project_name contains %@", searchText];
+    _eventsArray = [[_eventsArray filteredArrayUsingPredicate:predicate] mutableCopy];
+    
+    [self sortEvents];
+    [self.tableView reloadData];
+    
+    //  Server side not working
+//    [[EventsController sharedInstance] searchEventsWithTerm:searchText
+//                                                 completion:^(BOOL success, NSString *message, EventsController *completion) {
+//                                                     
+//                                                     if (success) {
+//                                                         self.eventsArray = completion.searchArray;
+//                                                     }
+//                                                     
+//                                                     [self.tableView reloadData];
+//                                                     
+//                                                 }];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {

@@ -112,11 +112,18 @@
     [request addValue:user.email forParameter:@"email"];
     [request addValue:user.password forParameter:@"pass1"];
     
-    [request post:^(ServerRequest *serverRequest) {
-        [[AuthenticationController sharedInstance] setLoggedUserWithObject:user];
-        
+    [request postHTTP:^(ServerRequest *serverRequest) {
         if (serverRequest.response) {
+            [[AuthenticationController sharedInstance] setLoggedUserWithObject:user];
             completion(YES, @"Inregistrare cu succes", self);
+        } else {
+            if ([serverRequest.responseMessage isEqualToString:@"mobile_user_success"]) {
+                completion(YES, @"Inregistrare cu success", self);
+            } else if ([serverRequest.responseMessage isEqualToString:@"Exista"]) {
+                completion(NO, @"Exista deja un cont cu aceasta adresa de email", self);
+            } else {
+                completion(NO, @"A aparut o eroare", self);
+            }
         }
     }];
 }
@@ -133,8 +140,10 @@
             if (completion) {
                 completion(YES, @"Autentificare cu succes", self);
             }
-        } else {
-            if (completion) {
+        } else if (completion) {
+            if ([serverRequest.responseMessage isEqualToString:@"no_pass"] || [serverRequest.responseMessage isEqualToString:@"no_user"]) {
+                completion(NO, @"Emailul sau parola sunt gresite", self);
+            } else {
                 completion(NO, @"A aparut o eroare. Incercati din nou", self);
             }
         }

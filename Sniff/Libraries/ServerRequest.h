@@ -43,5 +43,6 @@ typedef void(^ServerRequestCompletion)(ServerRequest *serverRequest);
 - (BOOL)addValue:(id)value forParameter:(NSString *)parameter;
 - (void)get:(ServerRequestCompletion)completion;
 - (void)post:(ServerRequestCompletion)completion;
+- (void)postHTTP:(ServerRequestCompletion)completion;
 
 @end

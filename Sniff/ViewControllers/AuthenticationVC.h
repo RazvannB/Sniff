@@ -22,7 +22,6 @@ typedef enum {
 
 - (void)authenticationVC:(AuthenticationVC*)authVC authenticationButtonTouched:(id)sender user:(User*)user;
 - (void)authenticationVC:(AuthenticationVC*)authVC forgotPasswordButtonTouched:(id)sender;
-- (void)authenticationVC:(AuthenticationVC*)authVC backButtonTouched:(id)sender;
 
 @end
 
@@ -73,6 +72,7 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *forgotBottomConstraint;
 
 - (void)setAuthType:(AuthenticationVCType)authType;
+- (void)dismissViewController;
 
 - (IBAction)authButtonTouched:(id)sender;
 - (IBAction)forgotButtonTouched:(id)sender;

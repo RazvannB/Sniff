@@ -8,7 +8,8 @@ target 'Sniff' do
   # Pods for Sniff
  
   pod 'Google/CloudMessaging'
- 
+  pod 'AFNetworking', '~> 3.0'
+
   target 'SniffTests' do
     inherit! :search_paths
     # Pods for testing

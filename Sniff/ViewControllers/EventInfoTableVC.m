@@ -21,7 +21,7 @@
 #import <MapKit/MapKit.h>
 #import "AuthenticationController.h"
 
-@interface EventInfoTableVC () <ButtonsTVCDelegate, UIActionSheetDelegate, JoinButtonsView, UIAlertViewDelegate> {
+@interface EventInfoTableVC () <ButtonsTVCDelegate, JoinButtonsView, UIAlertViewDelegate> {
     BOOL isFavourite;
 }
 
@@ -179,42 +179,6 @@ BOOL isCheckingOnlineForInfo;
                       otherButtonTitles: nil] show];
 }
 
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    CLLocationCoordinate2D eventLocation =
-    CLLocationCoordinate2DMake([self.infoDictionary[@"location_x"] doubleValue],
-                               [self.infoDictionary[@"location_y"] doubleValue]);
-    
-    switch (buttonIndex) {
-        case 0: {
-            //Apple Maps, using the MKMapItem
-            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:eventLocation addressDictionary:nil];
-            MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
-            item.name = self.infoDictionary[@"project_name"];
-            [item openInMapsWithLaunchOptions:nil];
-            break;
-        }
-            
-        case 1: {
-            //Google Maps
-            //construct a URL using the comgooglemaps schema
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f",eventLocation.latitude,eventLocation.longitude]];
-            if (![[UIApplication sharedApplication] canOpenURL:url]) {
-                NSLog(@"Google Maps app is not installed. Will open website");
-                url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/maps/@%f,%f,18z",eventLocation.latitude,eventLocation.longitude]];
-                [[UIApplication sharedApplication] openURL:url];
-            } else {
-                [[UIApplication sharedApplication] openURL:url];
-            }
-            break;
-        }
-            
-        default:
-            break;
-    }
-}
-
 #pragma mark - ButtonsTVCDelegate
 
 - (void)scheduleButtonPressed {
@@ -312,12 +276,31 @@ BOOL isCheckingOnlineForInfo;
         }
             
         case 2: {
-            [[[UIActionSheet alloc] initWithTitle:@"Alege o harta"
-                                         delegate:self
-                                cancelButtonTitle:@"Inapoi"
-                           destructiveButtonTitle:nil
-                                otherButtonTitles:@"Apple Maps", @"Google Maps", nil] showInView:self.view];
-
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alege o harta" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            CLLocationCoordinate2D eventLocation =
+            CLLocationCoordinate2DMake([self.infoDictionary[@"location_x"] doubleValue],
+                                       [self.infoDictionary[@"location_y"] doubleValue]);
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Apple Maps" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //Apple Maps, using the MKMapItem
+                MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:eventLocation addressDictionary:nil];
+                MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
+                item.name = self.infoDictionary[@"project_name"];
+                [item openInMapsWithLaunchOptions:nil];
+            }]];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Google Maps" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //Google Maps
+                //construct a URL using the comgooglemaps schema
+                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f",eventLocation.latitude,eventLocation.longitude]];
+                if (![[UIApplication sharedApplication] canOpenURL:url]) {
+                    NSLog(@"Google Maps app is not installed. Will open website");
+                    url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/maps/@%f,%f,18z",eventLocation.latitude,eventLocation.longitude]];
+                    [[UIApplication sharedApplication] openURL:url];
+                } else {
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+            }]];
             break;
         }
             

@@ -244,7 +244,7 @@
              withCompletion:^(BOOL success, NSString *message, AuthenticationController *completion) {
                  if (success) {
                      [authVC resignFirstResponder];
-                     [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
+                     [authVC dismissViewController];
                      
                      [progressHud hide:YES];
                      if (shouldReturnToEvent) {
@@ -285,7 +285,7 @@
                           if (success) {
                               if (authVC) {
                                   [authVC resignFirstResponder];
-                                  [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
+                                  [authVC dismissViewController];
                               }
                               
                               [progressHud hide:YES];
@@ -310,6 +310,11 @@
                           }
                       }];
                  } else {
+                     [[[UIAlertView alloc] initWithTitle:nil
+                                                 message:message
+                                                delegate:nil
+                                       cancelButtonTitle:@"OK"
+                                       otherButtonTitles: nil] show];
                      [progressHud hide:YES];
                  }
              }];
@@ -320,10 +325,6 @@
         default:
             break;
     }
-}
-
-- (void)authenticationVC:(AuthenticationVC *)authVC backButtonTouched:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:authVC completion:nil];
 }
 
 - (void)authenticationVC:(AuthenticationVC *)authVC forgotPasswordButtonTouched:(id)sender {

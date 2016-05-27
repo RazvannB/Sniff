@@ -248,6 +248,10 @@
     validationPassed = FALSE;
 }
 
+- (void)dismissViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Delegate Methods
 
 - (void)authButtonTouched:(id)sender {
@@ -284,6 +288,11 @@
             break;
             
         case AuthenticationVCType_Settings:
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:@"A aparut o eroare. Incercati mai tarziu"
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles: nil] show];
             break;
             
         case AuthenticationVCType_ForgotPassword:
@@ -311,10 +320,7 @@
 
 - (void)backButtonTouched:(id)sender {
     [self.view endEditing:YES];
-    
-    if ([self.delegate respondsToSelector:@selector(authenticationVC:backButtonTouched:)]) {
-        [self.delegate authenticationVC:self backButtonTouched:sender];
-    }
+    [self dismissViewController];
 }
 
 #pragma mark - UITextFieldDelegate

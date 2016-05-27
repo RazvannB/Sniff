@@ -115,6 +115,8 @@
         
         if (serverRequest.response) {
             completion(YES, @"Event feedback sent", self);
+        } else {
+            completion(NO, @"A aparut o eroare. Incercati mai tarziu", self);
         }
     }];
 }
