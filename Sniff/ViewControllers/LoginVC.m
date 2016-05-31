@@ -328,7 +328,11 @@
 }
 
 - (void)authenticationVC:(AuthenticationVC *)authVC forgotPasswordButtonTouched:(id)sender {
-    
+    [[[UIAlertView alloc] initWithTitle:nil
+                                message:@"A aparut o eroare. Incercati mai tarziu"
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles: nil] show];
 }
 
 @end

@@ -46,7 +46,7 @@ BOOL isCheckingOnlineForFeedback;
     MBProgressHUD *progressHud;
     if (indicator) {
         progressHud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-        progressHud.labelText = @"Se descarca feeddback-ul...";
+        progressHud.labelText = @"Se descarca feedback-ul...";
     }
     
     [[EventsController sharedInstance] getFeedbackForEvent:self.event

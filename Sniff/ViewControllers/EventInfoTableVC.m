@@ -281,7 +281,7 @@ BOOL isCheckingOnlineForInfo;
             CLLocationCoordinate2DMake([self.infoDictionary[@"location_x"] doubleValue],
                                        [self.infoDictionary[@"location_y"] doubleValue]);
             
-            [alertController addAction:[UIAlertAction actionWithTitle:@"Apple Maps" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Maps" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 //Apple Maps, using the MKMapItem
                 MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:eventLocation addressDictionary:nil];
                 MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
@@ -301,6 +301,12 @@ BOOL isCheckingOnlineForInfo;
                     [[UIApplication sharedApplication] openURL:url];
                 }
             }]];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Anuleaza" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alertController dismissViewControllerAnimated:YES completion:nil];
+            }]];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
             break;
         }
             

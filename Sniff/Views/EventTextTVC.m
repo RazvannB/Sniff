@@ -42,10 +42,10 @@
     
     switch (eventTextType) {
         case EventTextType_Organiser: {
+            self.titleLabel.text = @"Organizator";
             if ([self.infoDictionary[@"org_name"] class] != [NSNull class] &&
                 [self.infoDictionary[@"org_name"] length]) {
                 
-                self.titleLabel.text = @"Organizator";
                 [self setMessage:self.infoDictionary[@"org_name"]];
             } else {
                 [self setMessage:@"Anonim"];
@@ -54,10 +54,10 @@
         }
             
         case EventTextType_Date: {
+            self.titleLabel.text = @"Data";
             if ([self.infoDictionary[@"start_date"] class] != [NSNull class] &&
                 [self.infoDictionary[@"start_date"] length]) {
                 
-                self.titleLabel.text = @"Data";
                 [self setMessage:[EventsController changeTextCellDateFormatFrom:self.infoDictionary[@"start_date"]]];
             } else {
                 [self setMessage:@"Nicio data disponibila momentan"];
@@ -66,10 +66,10 @@
         }
             
         case EventTextType_Location:
+            self.titleLabel.text = @"Locatie";
             if ([self.infoDictionary[@"address"] class] != [NSNull class] &&
                 [self.infoDictionary[@"address"] length]) {
                 
-                self.titleLabel.text = @"Locatie";
                 [self setMessage:self.infoDictionary[@"address"]];
             } else {
                 [self setMessage:@"Nicio locatie disponibila momentan"];
@@ -77,10 +77,10 @@
             break;
             
         case EventTextType_Description:
+            self.titleLabel.text = @"Descriere";
             if ([self.infoDictionary[@"description"] class] != [NSNull class] &&
                 [self.infoDictionary[@"description"] length]) {
                 
-                self.titleLabel.text = @"Descriere";
                 [self setMessage:self.infoDictionary[@"description"]];
             } else {
                 [self setMessage:@"Nicio descriere disponibila momentan"];
@@ -88,10 +88,10 @@
             break;
             
         case EventTextType_FBPage:
+            self.titleLabel.text = @"Link";
             if ([self.infoDictionary[@"FbPage"] class] != [NSNull class] &&
                 [self.infoDictionary[@"FbPage"] length]) {
                 
-                self.titleLabel.text = @"Link";
                 [self setMessage:self.infoDictionary[@"FbPage"]];
             } else {
                 [self setMessage:@"Niciun link disponibil momentan"];
